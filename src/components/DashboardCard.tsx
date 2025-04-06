@@ -19,7 +19,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   footer
 }) => {
   return (
-    <Card className={cn('border-white/5 bg-card overflow-hidden', className)}>
+    <Card className={cn('border-white/5 bg-card overflow-hidden hover:border-walker-DEFAULT/30 transition-colors duration-300 animate-fade-in', className)}>
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium flex items-center gap-2">
@@ -27,10 +27,10 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
             {title}
           </h3>
         </div>
-        <div>{children}</div>
+        <div className="animate-fade-in">{children}</div>
       </div>
       {footer && (
-        <div className="border-t border-white/5 bg-black/20 p-4">
+        <div className="border-t border-white/5 bg-black/20 p-4 animate-fade-in">
           {footer}
         </div>
       )}

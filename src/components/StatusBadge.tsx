@@ -1,15 +1,16 @@
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type StatusType = 'safe' | 'maintenance' | 'danger' | 'warning';
+export type StatusType = 'safe' | 'maintenance' | 'danger' | 'warning';
 
-interface StatusBadgeProps {
+export interface StatusBadgeProps {
   status: StatusType;
   className?: string;
+  children?: ReactNode;
 }
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className }) => {
+const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className, children }) => {
   const getStatusStyles = () => {
     switch (status) {
       case 'safe':
@@ -37,7 +38,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className }) => {
       className
     )}>
       <span className={`h-2 w-2 rounded-full mr-1.5 ${getPulsingEffect()}`} style={{ backgroundColor: 'currentColor' }}></span>
-      <span className="capitalize">{status}</span>
+      <span className="capitalize">{children || status}</span>
     </div>
   );
 };

@@ -3,7 +3,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import FloatingNavBar from "./components/FloatingNavBar";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -12,8 +14,60 @@ import Redeem from "./pages/Redeem";
 import Downloads from "./pages/Downloads";
 import Guides from "./pages/Guides";
 import NotFound from "./pages/NotFound";
+import { useAuth } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
+
+// Protected route component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { currentUser, loading } = useAuth();
+  
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+  
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
+  
+  return <>{children}</>;
+};
+
+// Auth routes wrapper
+const AuthRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      } />
+      <Route path="/store" element={
+        <ProtectedRoute>
+          <Store />
+        </ProtectedRoute>
+      } />
+      <Route path="/redeem" element={
+        <ProtectedRoute>
+          <Redeem />
+        </ProtectedRoute>
+      } />
+      <Route path="/downloads" element={
+        <ProtectedRoute>
+          <Downloads />
+        </ProtectedRoute>
+      } />
+      <Route path="/guides" element={
+        <ProtectedRoute>
+          <Guides />
+        </ProtectedRoute>
+      } />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -21,16 +75,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/redeem" element={<Redeem />} />
-          <Route path="/downloads" element={<Downloads />} />
-          <Route path="/guides" element={<Guides />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <FloatingNavBar />
+          <AuthRoutes />
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

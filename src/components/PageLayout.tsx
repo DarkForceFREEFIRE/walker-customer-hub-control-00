@@ -1,6 +1,5 @@
 
 import React from 'react';
-import NavBar from './NavBar';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -15,11 +14,9 @@ const PageLayout: React.FC<PageLayoutProps> = ({
 }) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <NavBar />
-      
       <main className="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {(title || subtitle) && (
-          <div className="mb-8 text-center">
+          <div className="mb-8 text-center animate-fade-in">
             {title && <h1 className="text-3xl font-bold text-white mb-2">{title}</h1>}
             {subtitle && <p className="text-gray-400">{subtitle}</p>}
           </div>
