@@ -2,7 +2,7 @@
 import React, { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-export type StatusType = 'safe' | 'maintenance' | 'danger' | 'warning';
+export type StatusType = 'safe' | 'maintenance' | 'danger' | 'warning' | 'risk';
 
 export interface StatusBadgeProps {
   status: StatusType;
@@ -21,6 +21,8 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className, children }
         return 'bg-red-500/15 text-red-400 border-red-500/20';
       case 'warning':
         return 'bg-yellow-500/15 text-yellow-400 border-yellow-500/20';
+      case 'risk':
+        return 'bg-red-600/20 text-red-500 border-red-600/30';
       default:
         return 'bg-gray-500/15 text-gray-400 border-gray-500/20';
     }
@@ -28,12 +30,13 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className, children }
 
   const getPulsingEffect = () => {
     if (status === 'safe') return 'animate-pulse';
+    if (status === 'risk') return 'animate-pulse';
     return '';
   };
 
   return (
     <div className={cn(
-      'inline-flex items-center px-2.5 py-1 rounded-md border text-xs font-medium',
+      'inline-flex items-center px-2.5 py-1 rounded-md border text-xs font-medium backdrop-blur-sm',
       getStatusStyles(),
       className
     )}>

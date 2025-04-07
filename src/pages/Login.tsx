@@ -41,27 +41,27 @@ const Login = () => {
             <div className="mx-auto w-16 h-16 mb-4 rounded-full bg-gradient-to-br from-walker-DEFAULT to-purple-800 flex items-center justify-center animate-scale-in">
               <span className="text-3xl font-bold text-white">W</span>
             </div>
-            <h1 className="text-3xl font-bold">Welcome Back</h1>
+            <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
             <p className="text-gray-400 mt-2">Sign in to access your Walker Regedits account</p>
           </div>
           
-          <Card className="border-white/5 bg-card overflow-hidden animate-fade-in">
+          <Card className="border-white/5 bg-[#1A1922]/90 backdrop-blur-lg overflow-hidden animate-fade-in shadow-lg">
             <form onSubmit={handleLogin} className="p-6 space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username" className="text-gray-300">Username</Label>
                 <Input
                   id="username"
                   placeholder="Enter your username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="bg-walker-dark border-white/10"
+                  className="bg-[#28262f] border-white/10 focus:border-walker-DEFAULT/70 focus:ring-walker-DEFAULT/30"
                   disabled={loading}
                 />
               </div>
               
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" className="text-gray-300">Password</Label>
                 </div>
                 <Input
                   id="password"
@@ -69,14 +69,14 @@ const Login = () => {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="bg-walker-dark border-white/10"
+                  className="bg-[#28262f] border-white/10 focus:border-walker-DEFAULT/70 focus:ring-walker-DEFAULT/30"
                   disabled={loading}
                 />
               </div>
               
               <Button 
                 type="submit" 
-                className="w-full bg-walker-DEFAULT hover:bg-walker-hover"
+                className="w-full bg-walker-DEFAULT hover:bg-walker-hover transition-all duration-300"
                 disabled={loading}
               >
                 {loading ? 'Signing in...' : 'Sign In'}
@@ -93,6 +93,9 @@ const Login = () => {
             </form>
           </Card>
 
+          <div className="text-center mt-6 text-sm text-gray-400 animate-fade-in">
+            <p>Demo username: Walker | password: test</p>
+          </div>
 
         </div>
       </div>

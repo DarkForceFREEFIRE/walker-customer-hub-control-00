@@ -61,12 +61,12 @@ const FloatingNavBar: React.FC = () => {
         className={({ isActive }) => 
           `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-200 ${
             isActive 
-              ? "bg-walker-DEFAULT text-white font-medium" 
-              : "text-gray-300 hover:bg-walker-DEFAULT/10"
+              ? "bg-walker-DEFAULT text-white font-medium shadow-lg shadow-walker-DEFAULT/20" 
+              : "text-gray-300 hover:bg-walker-DEFAULT/10 hover:text-walker-DEFAULT"
           }`
         }
       >
-        <div className="transition-colors duration-200">
+        <div className="transition-transform duration-200 group-hover:scale-110">
           {icon}
         </div>
         <span className="transition-transform duration-200">{label}</span>
@@ -77,8 +77,8 @@ const FloatingNavBar: React.FC = () => {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 z-50 transition-all duration-300 border-b border-white/5 backdrop-blur-lg",
-        isScrolled ? "bg-walker-dark/80" : "bg-walker-dark/50",
+        "fixed inset-x-0 z-50 transition-all duration-300 backdrop-blur-xl",
+        isScrolled ? "bg-[#1A1922]/80 border-b border-white/5 shadow-lg shadow-black/20" : "bg-[#1A1922]/50",
         isVisible ? "top-0" : "-top-20", // Hide nav by sliding up
         "animate-fade-in"
       )}
@@ -87,19 +87,19 @@ const FloatingNavBar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo and brand */}
           <div className="flex items-center">
-            <NavLink to="/" className="flex items-center">
+            <NavLink to="/" className="flex items-center group">
               <div className="flex-shrink-0 mr-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-walker-DEFAULT to-purple-800 flex items-center justify-center text-white font-bold">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-walker-DEFAULT to-purple-800 flex items-center justify-center text-white font-bold shadow-lg shadow-purple-800/30 transition-all duration-300 group-hover:scale-110">
                   W
                 </div>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-walker-light to-walker-DEFAULT text-transparent bg-clip-text">Walker Regedits</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-walker-light to-walker-DEFAULT text-transparent bg-clip-text transition-all duration-300 group-hover:from-walker-DEFAULT group-hover:to-purple-500">Walker Regedits</span>
             </NavLink>
           </div>
 
           {/* Desktop navigation */}
           <div className="hidden md:block">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1">
               {currentUser ? (
                 <>
                   {navItems.map((item) => (
@@ -112,7 +112,7 @@ const FloatingNavBar: React.FC = () => {
                   ))}
                   <Button 
                     variant="outline" 
-                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white"
+                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white transition-all duration-300"
                     onClick={logout}
                   >
                     Logout
@@ -120,7 +120,10 @@ const FloatingNavBar: React.FC = () => {
                 </>
               ) : (
                 <NavLink to="/login">
-                  <Button variant="outline" className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white">
+                  <Button 
+                    variant="outline" 
+                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white transition-all duration-300 shadow-lg shadow-walker-DEFAULT/10 hover:shadow-walker-DEFAULT/30"
+                  >
                     Login
                   </Button>
                 </NavLink>
@@ -147,8 +150,10 @@ const FloatingNavBar: React.FC = () => {
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden ${isMobileMenuOpen ? "block animate-fade-in" : "hidden animate-fade-out"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-walker-dark/95 backdrop-blur-lg border-b border-white/5 shadow-lg">
+      <div 
+        className={`md:hidden transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+      >
+        <div className="px-2 pt-2 pb-3 space-y-1 bg-[#1A1922]/95 backdrop-blur-lg border-b border-white/5 shadow-lg">
           {currentUser ? (
             <>
               {navItems.map((item) => (

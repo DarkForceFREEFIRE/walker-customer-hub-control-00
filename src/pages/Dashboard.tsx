@@ -7,7 +7,8 @@ import { Separator } from '@/components/ui/separator';
 import PageLayout from '@/components/PageLayout';
 import DashboardCard from '@/components/DashboardCard';
 import StatusBadge from '@/components/StatusBadge';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import HWIDResetProgress from '@/components/HWIDResetProgress';
+import PasswordConfirmDialog from '@/components/PasswordConfirmDialog';
 import { toast } from 'sonner';
 import { supabase, ProductSafetyStatus } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
@@ -15,6 +16,9 @@ import { useAuth } from '@/contexts/AuthContext';
 const Dashboard = () => {
   const { currentUser, resetHWID, deleteAccount } = useAuth();
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isHWIDDialogOpen, setIsHWIDDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   
   // Query for fetching safety status data
   const { data: safetyStatusData, refetch: refetchSafetyStatus } = useQuery({
@@ -55,16 +59,38 @@ const Dashboard = () => {
     }
   };
   
-  const handleHWIDReset = async () => {
-    await resetHWID();
+  const handleHWIDResetConfirm = async (password: string) => {
+    setIsProcessing(true);
+    try {
+      // In a real implementation, you would verify the password server-side
+      await resetHWID();
+      setIsHWIDDialogOpen(false);
+      toast.success('HWID reset successful');
+    } catch (error) {
+      console.error('HWID reset error:', error);
+      toast.error('Failed to reset HWID');
+    } finally {
+      setIsProcessing(false);
+    }
   };
   
-  const handleDeleteAccount = async () => {
-    await deleteAccount();
+  const handleDeleteAccountConfirm = async (password: string) => {
+    setIsProcessing(true);
+    try {
+      // In a real implementation, you would verify the password server-side
+      await deleteAccount();
+      toast.success('Account deleted successfully');
+      // Navigation is handled in the deleteAccount function
+    } catch (error) {
+      console.error('Delete account error:', error);
+      toast.error('Failed to delete account');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (!currentUser) {
-    return <div className="min-h-screen flex items-center justify-center">Loading user data...</div>;
+    return <div className="min-h-screen flex items-center justify-center bg-[#15141B]">Loading user data...</div>;
   }
 
   return (
@@ -104,9 +130,7 @@ const Dashboard = () => {
             </div>
             <div>
               <p className="text-sm text-gray-400">HWID Resets</p>
-              <p className="font-medium">
-                {currentUser.hwid_resets_used} / {currentUser.max_hwid_resets}
-              </p>
+              <HWIDResetProgress used={currentUser.hwid_resets_used} max={currentUser.max_hwid_resets} />
             </div>
             <div>
               <p className="text-sm text-gray-400">Created Date</p>
@@ -130,7 +154,7 @@ const Dashboard = () => {
                 variant="outline" 
                 onClick={handleRefresh}
                 disabled={isRefreshing}
-                className="text-sm hover:bg-walker-DEFAULT hover:text-white"
+                className="text-sm hover:bg-walker-DEFAULT hover:text-white transition-all duration-300"
               >
                 <RefreshCw size={16} className={`mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
                 {isRefreshing ? 'Refreshing...' : 'Refresh Status'}
@@ -173,8 +197,8 @@ const Dashboard = () => {
                 You have {currentUser.max_hwid_resets - currentUser.hwid_resets_used} resets remaining.
               </p>
               <Button 
-                onClick={handleHWIDReset}
-                className="bg-walker-DEFAULT hover:bg-walker-hover"
+                onClick={() => setIsHWIDDialogOpen(true)}
+                className="bg-walker-DEFAULT hover:bg-walker-hover transition-all duration-300"
                 disabled={currentUser.hwid_resets_used >= currentUser.max_hwid_resets}
               >
                 Reset HWID
@@ -186,32 +210,38 @@ const Dashboard = () => {
               <p className="text-sm text-gray-400 mb-4">
                 Permanently delete your account and all associated data. This action cannot be undone.
               </p>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="destructive">
-                    Delete Account
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="bg-walker-dark border-white/10">
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete your
-                      account and remove all data from our servers.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleDeleteAccount} className="bg-red-600 hover:bg-red-700">
-                      Delete
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <Button 
+                variant="destructive"
+                onClick={() => setIsDeleteDialogOpen(true)}
+                className="transition-all duration-300"
+              >
+                Delete Account
+              </Button>
             </div>
           </div>
         </DashboardCard>
       </div>
+      
+      {/* Password confirmation dialogs */}
+      <PasswordConfirmDialog
+        open={isHWIDDialogOpen}
+        onOpenChange={setIsHWIDDialogOpen}
+        onConfirm={handleHWIDResetConfirm}
+        title="Reset Hardware ID"
+        description="Please enter your password to confirm HWID reset."
+        actionLabel="Reset HWID"
+        isLoading={isProcessing}
+      />
+      
+      <PasswordConfirmDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        onConfirm={handleDeleteAccountConfirm}
+        title="Delete Account"
+        description="This action cannot be undone. Please enter your password to delete your account."
+        actionLabel="Delete Account"
+        isLoading={isProcessing}
+      />
     </PageLayout>
   );
 };
