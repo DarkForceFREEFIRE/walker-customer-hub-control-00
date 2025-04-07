@@ -15,7 +15,7 @@ const HWIDResetProgress: React.FC<HWIDResetProgressProps> = ({ used, max }) => {
   // Determine the gradient colors based on usage
   const getProgressGradient = () => {
     if (isLow) {
-      return 'bg-gradient-to-r from-red-500 via-red-400 to-red-300';
+      return 'bg-gradient-to-r from-red-600 via-red-500 to-orange-400';
     } else if (used > max / 2) {
       return 'bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300';
     } else {
@@ -31,7 +31,7 @@ const HWIDResetProgress: React.FC<HWIDResetProgressProps> = ({ used, max }) => {
           {used} / {max}
         </span>
       </div>
-      <div className="relative h-2 w-full rounded-full bg-gray-700/50 overflow-hidden">
+      <div className="relative h-2 w-full rounded-full bg-gray-800/50 overflow-hidden backdrop-blur-sm">
         <div 
           className={`absolute top-0 left-0 h-full ${getProgressGradient()} animate-pulse transition-all duration-300 rounded-full`}
           style={{ width: `${percentage}%` }}

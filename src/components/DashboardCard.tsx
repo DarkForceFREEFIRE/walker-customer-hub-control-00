@@ -22,17 +22,17 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
 }) => {
   return (
     <Card className={cn(
-      'border-white/5 overflow-hidden hover:border-walker-DEFAULT/30 transition-colors duration-300 animate-fade-in shadow-xl shadow-black/40',
+      'border-white/5 overflow-hidden backdrop-blur-sm hover:border-walker-DEFAULT/30 transition-colors duration-300 animate-fade-in shadow-xl shadow-black/40 bg-gradient-to-br from-[#1d1a24]/70 to-[#15141B]/70',
       className
     )}>
       <div className={cn(
-        'py-4 px-6 border-b border-white/5',
+        'py-4 px-6 border-b border-white/5 bg-black/20',
         headerClassName
       )}>
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-medium flex items-center gap-2">
             {icon && <span className="text-walker-DEFAULT">{icon}</span>}
-            <span className="bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">{title}</span>
+            <span className="bg-gradient-to-r from-blue-300 via-purple-200 to-violet-300 bg-clip-text text-transparent">{title}</span>
           </h3>
         </div>
       </div>
