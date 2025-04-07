@@ -38,14 +38,14 @@ const Login = () => {
       <div className="flex justify-center items-center min-h-[80vh]">
         <div className="w-full max-w-md">
           <div className="text-center mb-8 animate-fade-in">
-            <div className="mx-auto w-16 h-16 mb-4 rounded-full bg-gradient-to-br from-walker-DEFAULT to-purple-800 flex items-center justify-center animate-scale-in">
+            <div className="mx-auto w-16 h-16 mb-4 rounded-full bg-gradient-to-br from-blue-600 via-walker-DEFAULT to-violet-600 flex items-center justify-center shadow-lg shadow-purple-600/30 animate-scale-in">
               <span className="text-3xl font-bold text-white">W</span>
             </div>
-            <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
+            <h1 className="text-3xl font-bold text-gradient-purple">Welcome Back</h1>
             <p className="text-gray-400 mt-2">Sign in to access your Walker Regedits account</p>
           </div>
           
-          <Card className="border-white/5 bg-[#1A1922]/90 backdrop-blur-lg overflow-hidden animate-fade-in shadow-lg">
+          <Card className="border-white/5 bg-gradient-to-br from-[#1d1a24]/70 to-[#15141B]/70 backdrop-blur-lg overflow-hidden animate-fade-in shadow-2xl shadow-black/40">
             <form onSubmit={handleLogin} className="p-6 space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="username" className="text-gray-300">Username</Label>
@@ -76,7 +76,7 @@ const Login = () => {
               
               <Button 
                 type="submit" 
-                className="w-full bg-walker-DEFAULT hover:bg-walker-hover transition-all duration-300"
+                className="w-full bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 hover:from-blue-700 hover:via-violet-700 hover:to-purple-700 text-white shadow-lg shadow-purple-700/30 border-0 transition-all duration-300"
                 disabled={loading}
               >
                 {loading ? 'Signing in...' : 'Sign In'}

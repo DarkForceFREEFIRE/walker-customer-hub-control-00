@@ -12,6 +12,17 @@ const HWIDResetProgress: React.FC<HWIDResetProgressProps> = ({ used, max }) => {
   const remaining = max - used;
   const isLow = remaining <= 1;
   
+  // Determine the gradient colors based on usage
+  const getProgressGradient = () => {
+    if (isLow) {
+      return 'bg-gradient-to-r from-red-500 via-red-400 to-red-300';
+    } else if (used > max / 2) {
+      return 'bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-300';
+    } else {
+      return 'bg-gradient-to-r from-blue-500 via-purple-400 to-violet-300';
+    }
+  };
+  
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center mb-1">
@@ -20,14 +31,12 @@ const HWIDResetProgress: React.FC<HWIDResetProgressProps> = ({ used, max }) => {
           {used} / {max}
         </span>
       </div>
-      <Progress 
-        value={percentage} 
-        className="h-2 bg-gray-700/50"
-        // Add custom styling for the progress bar based on remaining resets
-        style={{
-          '--progress-background': isLow ? '#f87171' : '#9b87f5',
-        } as React.CSSProperties}
-      />
+      <div className="relative h-2 w-full rounded-full bg-gray-700/50 overflow-hidden">
+        <div 
+          className={`absolute top-0 left-0 h-full ${getProgressGradient()} animate-pulse transition-all duration-300 rounded-full`}
+          style={{ width: `${percentage}%` }}
+        />
+      </div>
       <p className={`text-xs ${isLow ? 'text-red-400' : 'text-gray-500'}`}>
         {remaining > 0 ? `${remaining} reset${remaining !== 1 ? 's' : ''} remaining` : 'No resets remaining'}
       </p>

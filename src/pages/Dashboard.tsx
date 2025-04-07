@@ -62,7 +62,7 @@ const Dashboard = () => {
   const handleHWIDResetConfirm = async (password: string) => {
     setIsProcessing(true);
     try {
-      // In a real implementation, you would verify the password server-side
+      // The password has already been verified by the PasswordConfirmDialog
       await resetHWID();
       setIsHWIDDialogOpen(false);
       toast.success('HWID reset successful');
@@ -77,7 +77,7 @@ const Dashboard = () => {
   const handleDeleteAccountConfirm = async (password: string) => {
     setIsProcessing(true);
     try {
-      // In a real implementation, you would verify the password server-side
+      // The password has already been verified by the PasswordConfirmDialog
       await deleteAccount();
       toast.success('Account deleted successfully');
       // Navigation is handled in the deleteAccount function
@@ -100,7 +100,8 @@ const Dashboard = () => {
         <DashboardCard 
           title="User Information" 
           icon={<User size={18} />}
-          className="lg:col-span-2"
+          className="lg:col-span-2 bg-gradient-to-br from-[#1d1a24]/70 to-[#15141B]/70"
+          headerClassName="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-violet-500/10"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
             <div>
@@ -147,6 +148,8 @@ const Dashboard = () => {
         <DashboardCard 
           title="Safety Status" 
           icon={<Shield size={18} />}
+          className="bg-gradient-to-br from-[#1d1a24]/70 to-[#15141B]/70"
+          headerClassName="bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10"
           footer={
             <div className="flex justify-end">
               <Button 
@@ -154,7 +157,7 @@ const Dashboard = () => {
                 variant="outline" 
                 onClick={handleRefresh}
                 disabled={isRefreshing}
-                className="text-sm hover:bg-walker-DEFAULT hover:text-white transition-all duration-300"
+                className="text-sm bg-gradient-to-r hover:from-walker-DEFAULT/20 hover:to-purple-500/20 hover:text-white transition-all duration-300 border-white/10"
               >
                 <RefreshCw size={16} className={`mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
                 {isRefreshing ? 'Refreshing...' : 'Refresh Status'}
@@ -165,7 +168,7 @@ const Dashboard = () => {
           <div className="space-y-4">
             {safetyStatusData ? (
               safetyStatusData.map((product) => (
-                <div key={product.id} className="flex justify-between items-center">
+                <div key={product.id} className="flex justify-between items-center p-2 rounded-lg bg-black/20 hover:bg-black/30 transition-all duration-300">
                   <div>
                     <p className="font-medium">{product.product_name}</p>
                     <p className="text-xs text-gray-400">
@@ -187,33 +190,34 @@ const Dashboard = () => {
         <DashboardCard 
           title="Account Configuration" 
           icon={<Settings size={18} />}
-          className="lg:col-span-3"
+          className="lg:col-span-3 bg-gradient-to-br from-[#1d1a24]/70 to-[#15141B]/70"
+          headerClassName="bg-gradient-to-r from-violet-500/10 via-purple-500/10 to-fuchsia-500/10"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="text-lg font-medium mb-2">Reset Hardware ID</h4>
+            <div className="p-4 rounded-lg bg-black/20">
+              <h4 className="text-lg font-medium mb-2 text-gradient-purple">Reset Hardware ID</h4>
               <p className="text-sm text-gray-400 mb-4">
                 Reset your HWID if you've changed your hardware or are using a new device.
                 You have {currentUser.max_hwid_resets - currentUser.hwid_resets_used} resets remaining.
               </p>
               <Button 
                 onClick={() => setIsHWIDDialogOpen(true)}
-                className="bg-walker-DEFAULT hover:bg-walker-hover transition-all duration-300"
+                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:from-blue-700 hover:via-indigo-700 hover:to-violet-700 border-0 text-white shadow-lg shadow-indigo-700/20 transition-all duration-300"
                 disabled={currentUser.hwid_resets_used >= currentUser.max_hwid_resets}
               >
                 Reset HWID
               </Button>
             </div>
             
-            <div>
-              <h4 className="text-lg font-medium mb-2">Delete Account</h4>
+            <div className="p-4 rounded-lg bg-black/20">
+              <h4 className="text-lg font-medium mb-2 text-gradient-red">Delete Account</h4>
               <p className="text-sm text-gray-400 mb-4">
                 Permanently delete your account and all associated data. This action cannot be undone.
               </p>
               <Button 
                 variant="destructive"
                 onClick={() => setIsDeleteDialogOpen(true)}
-                className="transition-all duration-300"
+                className="bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 border-0 shadow-lg shadow-rose-700/20 transition-all duration-300"
               >
                 Delete Account
               </Button>
@@ -231,6 +235,7 @@ const Dashboard = () => {
         description="Please enter your password to confirm HWID reset."
         actionLabel="Reset HWID"
         isLoading={isProcessing}
+        userId={currentUser.id}
       />
       
       <PasswordConfirmDialog
@@ -241,6 +246,7 @@ const Dashboard = () => {
         description="This action cannot be undone. Please enter your password to delete your account."
         actionLabel="Delete Account"
         isLoading={isProcessing}
+        userId={currentUser.id}
       />
     </PageLayout>
   );

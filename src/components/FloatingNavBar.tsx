@@ -59,10 +59,10 @@ const FloatingNavBar: React.FC = () => {
       <NavLink 
         to={to}
         className={({ isActive }) => 
-          `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-200 ${
+          `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${
             isActive 
-              ? "bg-walker-DEFAULT text-white font-medium shadow-lg shadow-walker-DEFAULT/20" 
-              : "text-gray-300 hover:bg-walker-DEFAULT/10 hover:text-walker-DEFAULT"
+              ? "bg-gradient-to-r from-blue-600/80 via-violet-600/80 to-purple-600/80 text-white font-medium shadow-lg shadow-purple-600/20" 
+              : "text-gray-300 hover:bg-white/5 hover:text-walker-DEFAULT"
           }`
         }
       >
@@ -78,7 +78,7 @@ const FloatingNavBar: React.FC = () => {
     <nav
       className={cn(
         "fixed inset-x-0 z-50 transition-all duration-300 backdrop-blur-xl",
-        isScrolled ? "bg-[#1A1922]/80 border-b border-white/5 shadow-lg shadow-black/20" : "bg-[#1A1922]/50",
+        isScrolled ? "bg-[#12101A]/85 border-b border-violet-500/10 shadow-lg shadow-violet-900/10" : "bg-[#12101A]/50",
         isVisible ? "top-0" : "-top-20", // Hide nav by sliding up
         "animate-fade-in"
       )}
@@ -89,11 +89,11 @@ const FloatingNavBar: React.FC = () => {
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center group">
               <div className="flex-shrink-0 mr-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-walker-DEFAULT to-purple-800 flex items-center justify-center text-white font-bold shadow-lg shadow-purple-800/30 transition-all duration-300 group-hover:scale-110">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-purple-800/30 transition-all duration-300 group-hover:scale-110">
                   W
                 </div>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-walker-light to-walker-DEFAULT text-transparent bg-clip-text transition-all duration-300 group-hover:from-walker-DEFAULT group-hover:to-purple-500">Walker Regedits</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 via-walker-DEFAULT to-violet-400 text-transparent bg-clip-text transition-all duration-300 group-hover:from-blue-300 group-hover:to-purple-300">Walker Regedits</span>
             </NavLink>
           </div>
 
@@ -112,7 +112,7 @@ const FloatingNavBar: React.FC = () => {
                   ))}
                   <Button 
                     variant="outline" 
-                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white transition-all duration-300"
+                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-gradient-to-r hover:from-blue-600/80 hover:to-purple-600/80 hover:text-white hover:border-transparent transition-all duration-300 shadow-lg shadow-purple-900/5"
                     onClick={logout}
                   >
                     Logout
@@ -122,7 +122,7 @@ const FloatingNavBar: React.FC = () => {
                 <NavLink to="/login">
                   <Button 
                     variant="outline" 
-                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white transition-all duration-300 shadow-lg shadow-walker-DEFAULT/10 hover:shadow-walker-DEFAULT/30"
+                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-gradient-to-r hover:from-blue-600/80 hover:to-purple-600/80 hover:text-white hover:border-transparent transition-all duration-300 shadow-lg shadow-purple-900/5"
                   >
                     Login
                   </Button>
@@ -153,7 +153,7 @@ const FloatingNavBar: React.FC = () => {
       <div 
         className={`md:hidden transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
       >
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-[#1A1922]/95 backdrop-blur-lg border-b border-white/5 shadow-lg">
+        <div className="px-2 pt-2 pb-3 space-y-1 bg-[#12101A]/95 backdrop-blur-lg border-b border-violet-500/10 shadow-lg">
           {currentUser ? (
             <>
               {navItems.map((item) => (
@@ -167,7 +167,7 @@ const FloatingNavBar: React.FC = () => {
               <div className="pt-2">
                 <Button 
                   variant="outline" 
-                  className="w-full bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white"
+                  className="w-full bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-gradient-to-r hover:from-blue-600/80 hover:to-purple-600/80 hover:text-white hover:border-transparent"
                   onClick={logout}
                 >
                   Logout
