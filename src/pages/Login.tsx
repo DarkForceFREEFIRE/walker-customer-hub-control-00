@@ -62,9 +62,6 @@ const Login = () => {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <a href="#" className="text-sm text-walker-DEFAULT hover:underline">
-                    Forgot password?
-                  </a>
                 </div>
                 <Input
                   id="password"
@@ -96,11 +93,7 @@ const Login = () => {
             </form>
           </Card>
 
-          <div className="mt-6 text-center text-gray-400 text-sm animate-fade-in">
-            <p>Demo Accounts:</p>
-            <p className="mt-1">Username: Walker | Password: password</p>
-            <p className="mt-1">Username: yasa | Password: password</p>
-          </div>
+
         </div>
       </div>
     </PageLayout>
