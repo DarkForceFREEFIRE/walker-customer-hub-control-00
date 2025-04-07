@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase, User } from '@/lib/supabase';
@@ -52,41 +51,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (username: string, password: string) => {
     setLoading(true);
     try {
-      // In a real implementation, we'd use the Supabase auth service
-      // Since we're working with a custom user table and bcrypt passwords,
-      // we need to use a server-side route to validate the password
-      
-      // For demo purposes, we'll query the user directly
-      // In production, NEVER do this without a server-side password check
+      // In a real implementation with bcrypt passwords, we'd need a server endpoint
+      // to verify the password. Since we can't verify bcrypt passwords client-side,
+      // we'll just check if the user exists for this demo
       const { data, error } = await supabase
         .from('users')
         .select('*')
         .eq('username', username)
         .single();
       
-      if (error) throw error;
+      if (error) {
+        console.error('Login error:', error);
+        throw error;
+      }
       
-      // IMPORTANT: This is just a demo - in a real app, NEVER check passwords client-side
-      // For the Walker usecase, we'd need a server function to validate the bcrypt hash
       if (data) {
-        // Simulate successful login - in reality, we would validate the password on the server
-        if (data.username === username) {
-          setCurrentUser(data as User);
-          localStorage.setItem('userId', data.id.toString());
+        // In a real app, we would verify the password with bcrypt on a server
+        // For this demo, we'll assume password is correct if username exists
+        setCurrentUser(data as User);
+        localStorage.setItem('userId', data.id.toString());
+        
+        // Update last_login time
+        const { error: updateError } = await supabase
+          .from('users')
+          .update({ last_login: new Date().toISOString() })
+          .eq('id', data.id);
           
-          // Update last_login time
-          const { error: updateError } = await supabase
-            .from('users')
-            .update({ last_login: new Date().toISOString() })
-            .eq('id', data.id);
-            
-          if (updateError) console.error('Failed to update last login:', updateError);
-          
-          toast.success('Login successful');
-          navigate('/dashboard');
-        } else {
-          toast.error('Invalid credentials');
-        }
+        if (updateError) console.error('Failed to update last login:', updateError);
+        
+        toast.success('Login successful');
+        navigate('/dashboard');
       } else {
         toast.error('User not found');
       }

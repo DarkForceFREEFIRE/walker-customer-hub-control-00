@@ -99,6 +99,7 @@ const Login = () => {
           <div className="mt-6 text-center text-gray-400 text-sm animate-fade-in">
             <p>Demo Accounts:</p>
             <p className="mt-1">Username: Walker | Password: password</p>
+            <p className="mt-1">Username: yasa | Password: password</p>
           </div>
         </div>
       </div>
