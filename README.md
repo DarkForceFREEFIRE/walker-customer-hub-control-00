@@ -1,73 +1,82 @@
-# Welcome to your Lovable project
+# Walker Regedits Free Fire Panel 🐍
 
-## Project info
+![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg) <!-- Choose an appropriate license -->
 
-**URL**: https://lovable.dev/projects/94bf536d-5a14-488e-bf9a-ade935f3acc8
+A Python-based panel designed to provide various enhancements and modifications for Garena Free Fire.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+**⚠️ Disclaimer:** Using third-party tools, modifications, or "regedits" that alter game functionality can violate Garena Free Fire's Terms of Service. Usage of this software is entirely at your own risk. The developers are not responsible for any account suspensions, bans, or other disciplinary actions taken against users. Use responsibly and understand the potential consequences.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/94bf536d-5a14-488e-bf9a-ade935f3acc8) and start prompting.
+## ✨ Features
 
-Changes made via Lovable will be committed automatically to this repo.
+This panel offers a range of features categorized for ease of use:
 
-**Use your preferred IDE**
+**⚜️ Supreme Features:**
+*   [List Supreme Feature 1 - e.g., Advanced Aim Assistance]
+*   [List Supreme Feature 2 - e.g., Location Tracking (ESP)]
+*   [List Supreme Feature 3 - e.g., No Recoil Pro]
+*   *(Add more Supreme features here)*
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+**🔧 Essential Features:**
+*   [List Essential Feature 1 - e.g., Basic Aim Assist]
+*   [List Essential Feature 2 - e.g., Crosshair Overlay]
+*   [List Essential Feature 3 - e.g., FPS Boost]
+*   *(Add more Essential features here)*
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+**🔗 External Features:**
+*   [List External Feature 1 - e.g., Settings Optimizer]
+*   [List External Feature 2 - e.g., Sensitivity Calculator]
+*   [List External Feature 3 - e.g., External Overlay Support]
+*   *(Add more External features here)*
 
-Follow these steps:
+*(Please replace the bracketed examples above with your actual feature descriptions)*
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🚀 Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Follow these steps to get the panel running:
 
-# Step 3: Install the necessary dependencies.
-npm i
+1.  **Prerequisites:**
+    *   Python 3.x installed (Download from [python.org](https://www.python.org/downloads/))
+    *   `pip` (Python package installer, usually comes with Python)
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+2.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/[your-username]/walker-regedits-free-fire-panel.git
+    cd walker-regedits-free-fire-panel
+    ```
+    *(Replace `[your-username]` with your actual GitHub username)*
 
-**Edit a file directly in GitHub**
+3.  **Install Dependencies:**
+    *   It's highly recommended to use a virtual environment:
+        ```bash
+        python -m venv venv
+        # On Windows
+        .\venv\Scripts\activate
+        # On macOS/Linux
+        source venv/bin/activate
+        ```
+    *   Install the required packages:
+        ```bash
+        pip install -r requirements.txt
+        ```
+        *(Make sure you have a `requirements.txt` file listing all necessary Python libraries)*
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## ▶️ Usage
 
-**Use GitHub Codespaces**
+1.  **Navigate to the Directory:**
+    Make sure you are in the project's root directory in your terminal or command prompt. If you created a virtual environment, ensure it's activated.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+2.  **Run the Panel:**
+    ```bash
+    python main_script.py
+    ```
+    *(Replace `main_script.py` with the actual name of your main Python script that launches the panel)*
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/94bf536d-5a14-488e-bf9a-ade935f3acc8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+3.  **Configure and Use:**
+    *   Follow the on-screen instructions within the panel interface.
+    *   Configure the desired features before or during gameplay as appropriate.
+    *   *(Add any specific usage notes here, e.g., "Run as administrator if required", "Start the panel before launching the game")*
