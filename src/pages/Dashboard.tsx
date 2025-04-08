@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { RefreshCw, Shield, User, Settings, AlertTriangle } from 'lucide-react';
@@ -59,7 +58,7 @@ const Dashboard = () => {
     }
   };
   
-  const handleHWIDResetConfirm = async (password: string) => {
+  const handleHWIDResetConfirm = async () => {
     setIsProcessing(true);
     try {
       // The password has already been verified by the PasswordConfirmDialog
@@ -74,7 +73,7 @@ const Dashboard = () => {
     }
   };
   
-  const handleDeleteAccountConfirm = async (password: string) => {
+  const handleDeleteAccountConfirm = async () => {
     setIsProcessing(true);
     try {
       // The password has already been verified by the PasswordConfirmDialog
@@ -235,7 +234,6 @@ const Dashboard = () => {
         description="Please enter your password to confirm HWID reset."
         actionLabel="Reset HWID"
         isLoading={isProcessing}
-        userId={currentUser.id}
       />
       
       <PasswordConfirmDialog
@@ -246,7 +244,6 @@ const Dashboard = () => {
         description="This action cannot be undone. Please enter your password to delete your account."
         actionLabel="Delete Account"
         isLoading={isProcessing}
-        userId={currentUser.id}
       />
     </PageLayout>
   );

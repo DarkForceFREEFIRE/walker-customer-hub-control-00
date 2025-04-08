@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase, User } from '@/lib/supabase';
@@ -51,9 +52,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (username: string, password: string) => {
     setLoading(true);
     try {
-      // Since we can't verify bcrypt passwords client-side,
-      // we'll assume the demo credentials are valid for testing
-      if (username === 'Walker' && password === 'test') {
+      // For demo purposes, accept 'test' as the password for any user
+      // In a real implementation, this would verify bcrypt hash on the server
+      if (password === 'test') {
         // Fetch the user
         const { data, error } = await supabase
           .from('users')
@@ -62,6 +63,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           .single();
         
         if (error) throw error;
+        if (!data) {
+          toast.error('User not found');
+          setLoading(false);
+          return;
+        }
         
         setCurrentUser(data as User);
         localStorage.setItem('userId', data.id.toString());
@@ -77,7 +83,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         toast.success('Login successful');
         navigate('/dashboard');
       } else {
-        toast.error('Invalid username or password');
+        toast.error('Invalid password');
       }
     } catch (error) {
       console.error('Login error:', error);
