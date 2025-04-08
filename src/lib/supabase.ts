@@ -30,8 +30,7 @@ export type ProductSafetyStatus = {
   last_updated: string;
 };
 
-// Note: This is a placeholder notification for the user
-// For actual verification, you need to create a Postgres function in Supabase
+// Note: For a proper implementation, you need to create a Postgres function in Supabase
 // that can compare bcrypt password with the stored hash
 /*
 -- Example SQL to create the verify_password function in Supabase

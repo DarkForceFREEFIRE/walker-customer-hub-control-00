@@ -11,7 +11,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -36,7 +35,7 @@ const PasswordConfirmDialog: React.FC<PasswordConfirmDialogProps> = ({
 }) => {
   const [password, setPassword] = useState('');
   const [verifying, setVerifying] = useState(false);
-  const { currentUser } = useAuth();
+  const { currentUser, verifyPassword } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,12 +48,9 @@ const PasswordConfirmDialog: React.FC<PasswordConfirmDialogProps> = ({
     setVerifying(true);
     
     try {
-      // In a real implementation, we'd verify this password against the bcrypt hash
-      // stored in the database. Since we can't do bcrypt comparison in the browser,
-      // we're temporarily using a simplified check for the demo
+      const isValid = await verifyPassword(password);
       
-      if (password === 'test') {
-        // For demo purposes, we'll accept 'test' as the password
+      if (isValid) {
         onConfirm();
         setPassword('');
         onOpenChange(false);
