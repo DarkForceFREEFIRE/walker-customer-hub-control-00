@@ -30,24 +30,6 @@ export type ProductSafetyStatus = {
   last_updated: string;
 };
 
-// Note: For a proper implementation, you need to create a Postgres function in Supabase
-// that can compare bcrypt password with the stored hash
-/*
--- Example SQL to create the verify_password function in Supabase
-create or replace function verify_password(user_id int, password_to_check text)
-returns boolean as $$
-declare
-  stored_hash text;
-begin
-  -- Get the stored hashed password for the user
-  select password into stored_hash from users where id = user_id;
-  
-  -- Check if the password matches using pgcrypto extension
-  return crypt(password_to_check, stored_hash) = stored_hash;
-end;
-$$ language plpgsql security definer;
-*/
-
 // Helper function to get user by ID
 export const getUserById = async (userId: number): Promise<User | null> => {
   const { data, error } = await supabase

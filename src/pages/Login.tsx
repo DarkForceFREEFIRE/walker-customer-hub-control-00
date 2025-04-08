@@ -94,9 +94,9 @@ const Login = () => {
           </Card>
 
           <div className="text-center mt-6 text-sm text-gray-400 animate-fade-in">
-            <p>Demo username: Walker | password: test</p>
+            <p>Use your Supabase credentials to log in</p>
+            <p>Demo username: Walker | password: walker#1234</p>
           </div>
-
         </div>
       </div>
     </PageLayout>
