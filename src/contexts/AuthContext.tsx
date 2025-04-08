@@ -1,6 +1,7 @@
+
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase, User } from '@/lib/supabase';
+import { supabase, User, authenticateUser, getUserById } from '@/lib/supabase';
 import { toast } from 'sonner';
 
 interface AuthContextType {
@@ -24,19 +25,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const checkSession = async () => {
       try {
-        // In a real implementation, we would check for a JWT token
-        // For now, let's check localStorage for a user ID
         const userId = localStorage.getItem('userId');
         
         if (userId) {
-          const { data, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('id', userId)
-            .single();
-          
-          if (error) throw error;
-          if (data) setCurrentUser(data as User);
+          const user = await getUserById(parseInt(userId));
+          if (user) setCurrentUser(user);
         }
       } catch (error) {
         console.error('Session error:', error);
@@ -51,72 +44,58 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const verifyPassword = async (password: string): Promise<boolean> => {
     if (!currentUser) return false;
-
-    // For the Walker account with specific password
-    if (currentUser.username === 'Walker' && password === 'walker#1234') {
-      return true;
-    }
     
-    // For demo testing - keep the test password working
-    if (password === 'test') {
-      return true;
+    try {
+      // Verify password using Supabase RPC
+      const { data, error } = await supabase.rpc('verify_password', {
+        user_id: currentUser.id,
+        password_to_check: password
+      });
+      
+      if (error) {
+        console.error('Password verification error:', error);
+        return false;
+      }
+      
+      return !!data;
+    } catch (error) {
+      console.error('Password verification error:', error);
+      return false;
     }
-    
-    return false;
   };
 
   const login = async (username: string, password: string) => {
     setLoading(true);
     try {
-      // Fetch the user
-      const { data, error } = await supabase
+      const authenticatedUser = await authenticateUser(username, password);
+      
+      if (!authenticatedUser) {
+        toast.error('Invalid username or password');
+        return;
+      }
+      
+      // Check if the user is banned
+      if (authenticatedUser.is_banned) {
+        toast.error('Your account has been banned');
+        return;
+      }
+      
+      // Update last_login time
+      const { error: updateError } = await supabase
         .from('users')
-        .select('*')
-        .eq('username', username)
-        .single();
-      
-      if (error) throw error;
-      if (!data) {
-        toast.error('User not found');
-        setLoading(false);
-        return;
+        .update({ last_login: new Date().toISOString() })
+        .eq('id', authenticatedUser.id);
+        
+      if (updateError) {
+        console.error('Failed to update last login:', updateError);
       }
       
-      // Handle specific known user (Walker)
-      if (username === 'Walker' && password === 'walker#1234') {
-        setCurrentUser(data as User);
-        localStorage.setItem('userId', data.id.toString());
-        
-        // Update last_login time
-        const { error: updateError } = await supabase
-          .from('users')
-          .update({ last_login: new Date().toISOString() })
-          .eq('id', data.id);
-          
-        if (updateError) console.error('Failed to update last login:', updateError);
-        
-        toast.success('Login successful');
-        navigate('/dashboard');
-        return;
-      }
+      // Set user session
+      setCurrentUser(authenticatedUser);
+      localStorage.setItem('userId', authenticatedUser.id.toString());
       
-      // Demo login for testing - fallback to allow "test" password
-      if (password === 'test') {
-        setCurrentUser(data as User);
-        localStorage.setItem('userId', data.id.toString());
-        
-        const { error: updateError } = await supabase
-          .from('users')
-          .update({ last_login: new Date().toISOString() })
-          .eq('id', data.id);
-          
-        if (updateError) console.error('Failed to update last login:', updateError);
-        
-        toast.success('Login successful (demo mode)');
-        navigate('/dashboard');
-      } else {
-        toast.error('Invalid password');
-      }
+      toast.success('Login successful');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Login error:', error);
       toast.error('Login failed. Please try again.');

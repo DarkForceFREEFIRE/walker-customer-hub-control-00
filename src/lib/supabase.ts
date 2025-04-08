@@ -30,6 +30,40 @@ export type ProductSafetyStatus = {
   last_updated: string;
 };
 
+// Helper function to authenticate a user
+export const authenticateUser = async (username: string, password: string): Promise<User | null> => {
+  try {
+    // First, fetch the user by username
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('username', username)
+      .single();
+    
+    if (error || !data) {
+      console.error('User not found:', error);
+      return null;
+    }
+    
+    // Now, verify password using a Supabase RPC function that does bcrypt comparison
+    const { data: verified, error: verifyError } = await supabase
+      .rpc('verify_password', {
+        user_id: data.id,
+        password_to_check: password
+      });
+    
+    if (verifyError || !verified) {
+      console.error('Password verification failed:', verifyError);
+      return null;
+    }
+    
+    return data as User;
+  } catch (error) {
+    console.error('Authentication error:', error);
+    return null;
+  }
+};
+
 // Helper function to get user by ID
 export const getUserById = async (userId: number): Promise<User | null> => {
   const { data, error } = await supabase
