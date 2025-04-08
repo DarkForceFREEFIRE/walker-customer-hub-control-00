@@ -1,5 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
+import bcrypt from 'bcryptjs';
 
 const supabaseUrl = 'https://cdznhvtwqxizvpglwrgs.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkem5odnR3cXhpenZwZ2x3cmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5NzUyMDMsImV4cCI6MjA1ODU1MTIwM30.7cSZJp065mmICnUDfLE1zFaMYHr0zjPhdb--lluowcA';
@@ -30,6 +31,16 @@ export type ProductSafetyStatus = {
   last_updated: string;
 };
 
+// Helper function to verify password
+export const verifyPassword = async (hashedPassword: string, plainPassword: string): Promise<boolean> => {
+  try {
+    return await bcrypt.compare(plainPassword, hashedPassword);
+  } catch (error) {
+    console.error('Password verification error:', error);
+    return false;
+  }
+};
+
 // Helper function to authenticate a user
 export const authenticateUser = async (username: string, password: string): Promise<User | null> => {
   try {
@@ -45,15 +56,11 @@ export const authenticateUser = async (username: string, password: string): Prom
       return null;
     }
     
-    // Now, verify password using a Supabase RPC function that does bcrypt comparison
-    const { data: verified, error: verifyError } = await supabase
-      .rpc('verify_password', {
-        user_id: data.id,
-        password_to_check: password
-      });
+    // Now, verify password using bcrypt
+    const isPasswordValid = await verifyPassword(data.password, password);
     
-    if (verifyError || !verified) {
-      console.error('Password verification failed:', verifyError);
+    if (!isPasswordValid) {
+      console.error('Password verification failed');
       return null;
     }
     

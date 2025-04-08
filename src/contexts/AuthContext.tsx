@@ -1,7 +1,7 @@
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase, User, authenticateUser, getUserById } from '@/lib/supabase';
+import { supabase, User, authenticateUser, getUserById, verifyPassword } from '@/lib/supabase';
 import { toast } from 'sonner';
 
 interface AuthContextType {
@@ -42,22 +42,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     checkSession();
   }, []);
 
-  const verifyPassword = async (password: string): Promise<boolean> => {
+  const checkPassword = async (password: string): Promise<boolean> => {
     if (!currentUser) return false;
     
     try {
-      // Verify password using Supabase RPC
-      const { data, error } = await supabase.rpc('verify_password', {
-        user_id: currentUser.id,
-        password_to_check: password
-      });
-      
-      if (error) {
-        console.error('Password verification error:', error);
-        return false;
-      }
-      
-      return !!data;
+      return await verifyPassword(currentUser.password, password);
     } catch (error) {
       console.error('Password verification error:', error);
       return false;
@@ -178,7 +167,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     logout,
     resetHWID,
     deleteAccount,
-    verifyPassword
+    verifyPassword: checkPassword
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
