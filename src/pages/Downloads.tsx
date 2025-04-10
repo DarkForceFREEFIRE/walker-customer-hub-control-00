@@ -63,11 +63,11 @@ const Downloads = () => {
     
     // Generate descriptions based on item_id if none provided
     switch(item.item_id) {
-      case 'loader':
+      case 'Panel':
         return 'The Walker Regedits Latest Panel.';
-      case 'support-tool':
+      case 'Free Fire x86':
         return 'Recommended Free Fire version for extra safety.';
-      case 'user-manual':
+      case 'VC_Redist':
         return 'Default runtimes (Installed by default on original Windows. No need on many PC).';
       default:
         return 'Download this file to enhance your Walker Regedits experience.';
