@@ -49,10 +49,10 @@ const Downloads = () => {
     switch(item.item_id) {
       case 'loader':
         return 'Walker Regedits Panel';
-      case 'support-tool':
+      case 'Executable':
         return 'Free Fire';
       case 'user-manual':
-        return 'Direct X Runtime files';
+        return 'Application Runtime files';
       default:
         return `${item.item_id.charAt(0).toUpperCase()}${item.item_id.slice(1)}`;
     }
@@ -64,11 +64,11 @@ const Downloads = () => {
     // Generate descriptions based on item_id if none provided
     switch(item.item_id) {
       case 'loader':
-        return 'Our core optimization package with essential features for all users.';
+        return 'The Walker Regedits Latest Panel.';
       case 'support-tool':
-        return 'Additional tools and utilities for game optimization and support.';
+        return 'Recommended Free Fire version for extra safety.';
       case 'user-manual':
-        return 'Documentation and required system dependencies.';
+        return 'Default runtimes (Installed by default on original Windows. No need on many PC).';
       default:
         return 'Download this file to enhance your Walker Regedits experience.';
     }
