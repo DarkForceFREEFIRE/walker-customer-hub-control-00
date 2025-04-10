@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -18,12 +17,12 @@ const NavItem = ({ to, icon, label, isActive }: NavItemProps) => {
       className={({ isActive }) => 
         `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-200 ${
           isActive 
-            ? "bg-walker-DEFAULT text-white font-medium" 
+            ? "text-walker-DEFAULT font-medium" 
             : "text-gray-300 hover:bg-walker-DEFAULT/10"
         }`
       }
     >
-      <div className={`transition-colors duration-200 ${isActive ? "text-white" : "text-gray-400"}`}>
+      <div className={`transition-colors duration-200 ${isActive ? "text-walker-DEFAULT" : "text-gray-400"}`}>
         {icon}
       </div>
       <span className={`transition-all duration-200 ${isActive ? "translate-x-1" : ""}`}>{label}</span>

@@ -22,8 +22,7 @@ const Guides = () => {
               <div className="flex-1">
                 <h3 className="text-xl font-medium mb-3">Check Safety Status</h3>
                 <p className="text-gray-300 mb-4">
-                  Before downloading any Walker Regedits tools, always verify the current safety status on your Dashboard. 
-                  This helps ensure you're downloading when our tools are confirmed safe to use.
+                  Check the panel safety status before use to reduce bans.
                 </p>
                 <div className="bg-walker-DEFAULT/10 border border-walker-DEFAULT/20 rounded-md p-4">
                   <div className="flex items-center">
@@ -48,10 +47,9 @@ const Guides = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-medium mb-3">Download Files</h3>
+                <h3 className="text-xl font-medium mb-3">Download the Panel</h3>
                 <p className="text-gray-300 mb-4">
-                  Head to the Downloads section and select the appropriate version for your subscription level. 
-                  Click the download button to begin the process.
+                  Download the panel from downloads section.
                 </p>
                 <div className="bg-amber-500/10 border border-amber-500/20 rounded-md p-4 mt-4">
                   <div className="flex items-start">
@@ -59,10 +57,9 @@ const Guides = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                     </svg>
                     <div>
-                      <p className="text-amber-400 font-medium">NOTE: Use recommended emulator</p>
+                      <p className="text-amber-400 font-medium">Warning</p>
                       <p className="mt-1 text-sm text-gray-300">
-                        For optimal performance and compatibility, we strongly recommend using our approved 
-                        emulator when running Walker Regedits tools.
+                        We recommend to use our recommended Free Fire APK.
                       </p>
                     </div>
                   </div>
@@ -79,16 +76,13 @@ const Guides = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-medium mb-3">Extract Files</h3>
+                <h3 className="text-xl font-medium mb-3">Open the Emulator</h3>
                 <p className="text-gray-300 mb-4">
-                  Once downloaded, locate the ZIP file in your downloads folder. Right-click and select "Extract All" 
-                  or use a program like WinRAR or 7-Zip to extract the contents.
+                  Launch the recommended emulator to ensure compatibility with our panel.
                 </p>
                 <div className="bg-walker-dark rounded-lg p-4 border border-white/10">
-                  <p className="text-sm text-gray-400 mb-2 font-medium">Recommended extraction path:</p>
-                  <code className="bg-black/30 px-3 py-1.5 rounded text-green-400 block overflow-x-auto">
-                    C:\Walker\Regedits\
-                  </code>
+                  <p className="text-sm text-gray-400 mb-2 font-medium">Note: We also recommend to use our recommended emulators</p>
+                  <p className="text-sm text-gray-300">Emulators: BlueStacks 5.12+, MSI 5.12+</p>
                 </div>
               </div>
             </div>
@@ -102,23 +96,19 @@ const Guides = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-medium mb-3">Use Application</h3>
+                <h3 className="text-xl font-medium mb-3">Use Our Panel</h3>
                 <p className="text-gray-300 mb-4">
-                  Navigate to the extracted folder and run the application as administrator for best results. 
-                  The first time you run it, you may need to complete a one-time setup process.
+                  Use our panel according to the given guidelines.
                 </p>
                 <div className="bg-walker-dark rounded-lg p-4 border border-white/10 space-y-4">
                   <div>
-                    <p className="text-sm text-gray-400 mb-1 font-medium">For Supreme and Essential packages:</p>
-                    <code className="bg-black/30 px-3 py-1.5 rounded text-green-400 block overflow-x-auto">
-                      Right-click "WalkerRegedits.exe" → Run as administrator
-                    </code>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400 mb-1 font-medium">For External package:</p>
-                    <code className="bg-black/30 px-3 py-1.5 rounded text-green-400 block overflow-x-auto">
-                      Right-click "WalkerExternal.exe" → Run as administrator
-                    </code>
+                    <p className="text-sm text-gray-400 mb-1 font-medium">Follow these safety guidelines:</p>
+                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-300 pl-2">
+                      <li>Always check the safety status before use</li>
+                      <li>Use only in supported game modes</li>
+                      <li>Avoid using excessive features at once</li>
+                      <li>Update to the latest version regularly</li>
+                    </ul>
                   </div>
                 </div>
               </div>
