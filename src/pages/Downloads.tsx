@@ -48,11 +48,11 @@ const Downloads = () => {
     // Generate a title based on item_id if none provided
     switch(item.item_id) {
       case 'loader':
-        return 'Walker Regedits Loader';
+        return 'Walker Regedits Panel';
       case 'support-tool':
-        return 'Support Tool';
+        return 'Free Fire';
       case 'user-manual':
-        return 'User Manual & Dependencies';
+        return 'Direct X Runtime files';
       default:
         return `${item.item_id.charAt(0).toUpperCase()}${item.item_id.slice(1)}`;
     }
