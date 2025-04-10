@@ -31,7 +31,7 @@ export type ProductSafetyStatus = {
   last_updated: string;
 };
 
-// Helper function to verify password
+// Helper function to verify password using bcryptjs
 export const verifyPassword = async (hashedPassword: string, plainPassword: string): Promise<boolean> => {
   try {
     return await bcrypt.compare(plainPassword, hashedPassword);
