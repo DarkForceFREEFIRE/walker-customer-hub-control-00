@@ -31,6 +31,20 @@ export type ProductSafetyStatus = {
   last_updated: string;
 };
 
+export type DownloadItem = {
+  id: number;
+  created_at: string;
+  item_id: string;
+  version: string;
+  last_updated: string;
+  file_size: string;
+  download_url: string;
+  title?: string;
+  icon_name?: string;
+  description?: string;
+  display_order?: number;
+};
+
 // Helper function to verify password using bcryptjs
 export const verifyPassword = async (hashedPassword: string, plainPassword: string): Promise<boolean> => {
   try {
@@ -85,4 +99,20 @@ export const getUserById = async (userId: number): Promise<User | null> => {
   }
   
   return data as User;
+};
+
+// Helper function to fetch download items
+export const fetchDownloadItems = async (): Promise<DownloadItem[]> => {
+  const { data, error } = await supabase
+    .from('download_items')
+    .select('*')
+    .order('display_order', { ascending: true })
+    .order('id', { ascending: true });
+  
+  if (error) {
+    console.error('Error fetching download items:', error);
+    return [];
+  }
+  
+  return data as DownloadItem[];
 };
