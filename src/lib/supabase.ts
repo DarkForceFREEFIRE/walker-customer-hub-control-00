@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import bcrypt from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 
 const supabaseUrl = 'https://cdznhvtwqxizvpglwrgs.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkem5odnR3cXhpenZwZ2x3cmdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5NzUyMDMsImV4cCI6MjA1ODU1MTIwM30.7cSZJp065mmICnUDfLE1zFaMYHr0zjPhdb--lluowcA';
