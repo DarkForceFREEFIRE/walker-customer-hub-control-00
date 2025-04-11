@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Star, LucideIcon } from "lucide-react";
 
 interface NavItemProps {
   to: string;
@@ -15,10 +15,10 @@ const NavItem = ({ to, icon, label }: NavItemProps) => {
     <NavLink 
       to={to}
       className={({ isActive }) => 
-        `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-200 ${
+        `flex items-center space-x-2 py-2 px-3 rounded-xl transition-all duration-300 ${
           isActive 
-            ? "text-teal-DEFAULT font-medium" 
-            : "text-gray-300 hover:bg-secondary/30"
+            ? "text-teal-DEFAULT font-medium bg-secondary/50" 
+            : "text-gray-400 hover:text-white hover:bg-secondary/30"
         }`
       }
     >
@@ -60,24 +60,24 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/5 backdrop-blur-lg ${scrolled ? "bg-background/80" : "bg-background/50"}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-card/80 backdrop-blur-xl shadow-lg" : "bg-transparent"}`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo and brand */}
           <div className="flex items-center">
-            <NavLink to="/" className="flex items-center">
+            <NavLink to="/" className="flex items-center group">
               <div className="flex-shrink-0 mr-2">
-                <div className="w-8 h-8 rounded-full bg-teal-DEFAULT flex items-center justify-center text-white font-bold">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-DEFAULT to-blue-500 flex items-center justify-center text-white font-bold shadow-lg shadow-teal-DEFAULT/20 group-hover:shadow-teal-DEFAULT/30 transition-all duration-300">
                   W
                 </div>
               </div>
-              <span className="text-xl font-bold text-white">Walker Regedits</span>
+              <span className="text-xl font-bold text-white group-hover:text-teal-DEFAULT transition-colors duration-300">Walker</span>
             </NavLink>
           </div>
 
           {/* Desktop navigation */}
           <div className="hidden md:block">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1">
               {navItems.map((item) => (
                 <NavItem 
                   key={item.label}
@@ -87,7 +87,10 @@ const NavBar = () => {
                 />
               ))}
               <NavLink to="/login">
-                <Button variant="outline" className="ml-4 bg-transparent border-teal-DEFAULT text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white">
+                <Button 
+                  variant="outline" 
+                  className="ml-4 bg-transparent border border-teal-DEFAULT/30 text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white transition-all duration-300"
+                >
                   Login
                 </Button>
               </NavLink>
@@ -113,8 +116,8 @@ const NavBar = () => {
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden ${isMobileMenuOpen ? "block animate-fade-in" : "hidden animate-fade-out"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-lg border-b border-white/5 shadow-lg">
+      <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 bg-card backdrop-blur-lg shadow-lg">
           {navItems.map((item) => (
             <NavItem 
               key={item.label}
@@ -125,7 +128,10 @@ const NavBar = () => {
           ))}
           <div className="pt-2">
             <NavLink to="/login" className="block w-full">
-              <Button variant="outline" className="w-full bg-transparent border-teal-DEFAULT text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white">
+              <Button 
+                variant="outline" 
+                className="w-full bg-transparent border border-teal-DEFAULT/30 text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white"
+              >
                 Login
               </Button>
             </NavLink>

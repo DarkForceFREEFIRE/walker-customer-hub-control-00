@@ -2,47 +2,71 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
+import { ArrowRight, CheckCircle2, ChevronDown, Star } from 'lucide-react';
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
       
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJzdGFycyIgeD0iMCIgeT0iMCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjcwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ0cmFuc3BhcmVudCIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wOCkiLz48Y2lyY2xlIGN4PSIyNSIgY3k9IjQwIiByPSIwLjUiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNCkiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjE1IiByPSIwLjUiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNikiLz48Y2lyY2xlIGN4PSI0NSIgY3k9IjM1IiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDYpIi8+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMC41IiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDQpIi8+PGNpcmNsZSBjeD0iNTUiIGN5PSIyNSIgcj0iMC43NSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNzdGFycykiLz48L3N2Zz4=')]"></div>
+        <div className="absolute left-0 right-0 top-0 h-[500px] bg-gradient-to-br from-teal-DEFAULT/20 via-fuchsia-400/5 to-transparent blur-3xl opacity-20"></div>
+        <div className="absolute -bottom-48 left-0 right-0 h-[500px] bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+      </div>
+      
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-walker-dark to-background z-[-1]"></div>
+        <section className="pt-28 lg:pt-40 pb-16 px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
-              <span className="bg-gradient-to-r from-walker-light to-walker-DEFAULT text-transparent bg-clip-text">
+            <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-teal-DEFAULT bg-teal-DEFAULT/10 rounded-full mb-6 border border-teal-DEFAULT/20">
+              <Star className="w-4 h-4" />
+              <span>4.9/5 rating from over 1,200 users</span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white">
+              <span className="bg-gradient-to-r from-teal-DEFAULT via-cyan-400 to-blue-500 text-transparent bg-clip-text">
                 Walker Regedits
-              </span>
+              </span> for <br className="md:hidden" />
+              <span className="typing-text inline-block">Pro Gamers</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Optimize your gaming experience with our professional toolkit for enhanced performance and customization
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
+              The ultimate optimization toolkit for enhancing your gaming experience, performance, and customization
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link to="/dashboard">
-                <Button size="lg" className="bg-walker-DEFAULT hover:bg-walker-hover text-white px-8">
-                  Dashboard
+                <Button size="lg" className="bg-teal-DEFAULT hover:bg-teal-hover text-white px-8 h-12 rounded-xl shadow-lg shadow-teal-DEFAULT/20 hover:shadow-teal-DEFAULT/30 transition-all duration-300 text-base">
+                  Go to Dashboard
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link to="/downloads">
-                <Button size="lg" variant="outline" className="border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white px-8">
+                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-xl transition-all duration-300 text-base">
                   Download Now
                 </Button>
               </Link>
+            </div>
+            
+            <div className="mt-20 md:mt-28 relative">
+              <div className="flex justify-center">
+                <a href="#features" className="animate-bounce flex flex-col items-center text-gray-400 hover:text-teal-DEFAULT transition-colors">
+                  <span className="text-sm mb-2">Scroll to learn more</span>
+                  <ChevronDown className="h-5 w-5" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
         
         {/* Features Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Key Features</h2>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text">Key Features</h2>
               <p className="text-gray-400 max-w-2xl mx-auto">
-                Our tools provide everything you need to maximize your gaming experience
+                Our toolkit provides everything you need to elevate your gaming experience
               </p>
             </div>
             
@@ -84,11 +108,11 @@ const Index = () => {
                   description: "Built with security in mind, our tools are regularly updated to keep you safe."
                 }
               ].map((feature, index) => (
-                <div key={index} className="bg-walker-dark/50 border border-white/5 rounded-lg p-6 flex flex-col items-center text-center hover:border-walker-DEFAULT/30 transition-colors duration-300">
-                  <div className="text-walker-DEFAULT mb-4">
+                <div key={index} className="bg-card border border-white/5 rounded-xl p-6 flex flex-col items-center text-center hover:border-teal-DEFAULT/30 transition-colors duration-300 backdrop-blur-sm">
+                  <div className="text-teal-DEFAULT mb-4 p-3 bg-teal-DEFAULT/10 rounded-xl border border-teal-DEFAULT/10">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                  <h3 className="text-xl font-bold mb-3 text-white">{feature.title}</h3>
                   <p className="text-gray-400">{feature.description}</p>
                 </div>
               ))}
@@ -97,20 +121,33 @@ const Index = () => {
         </section>
         
         {/* CTA Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-walker-dark/50 to-walker-DEFAULT/20 border-y border-white/5">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Ready to Enhance Your Gaming Experience?</h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Join thousands of satisfied users who have improved their gameplay with Walker Regedits.
+        <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-DEFAULT/20 to-blue-500/10 opacity-10 rounded-3xl mx-4 lg:mx-16"></div>
+          <div className="max-w-4xl mx-auto text-center relative">
+            <h2 className="text-3xl font-bold mb-6 text-white">Ready to Enhance Your Gaming Experience?</h2>
+            <p className="text-xl text-gray-300 mb-10">
+              Join thousands of satisfied gamers who have improved their gameplay with Walker Regedits.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              {[
+                "Improved FPS", "Reduced Lag", "Enhanced Visuals", "Optimized Settings", "Easy to Use", "Constant Updates"
+              ].map((item, i) => (
+                <div key={i} className="flex items-center bg-card border border-white/5 rounded-lg px-4 py-3">
+                  <CheckCircle2 className="h-5 w-5 text-teal-DEFAULT mr-2 flex-shrink-0" />
+                  <span className="text-gray-300">{item}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link to="/store">
-                <Button size="lg" className="bg-walker-DEFAULT hover:bg-walker-hover text-white px-8">
+                <Button size="lg" className="bg-teal-DEFAULT hover:bg-teal-hover text-white px-8 h-12 rounded-xl shadow-lg shadow-teal-DEFAULT/20 hover:shadow-teal-DEFAULT/30 transition-all duration-300 text-base">
                   View Packages
                 </Button>
               </Link>
               <Link to="/guides">
-                <Button size="lg" variant="outline" className="border-white/20 hover:border-walker-DEFAULT hover:bg-walker-DEFAULT/10 px-8">
+                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-xl transition-all duration-300 text-base">
                   Read Guides
                 </Button>
               </Link>
@@ -119,41 +156,43 @@ const Index = () => {
         </section>
       </main>
       
-      <footer className="py-8 bg-walker-dark/70 backdrop-blur-md border-t border-white/5">
+      <footer className="py-12 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+            <div className="mb-8 md:mb-0">
               <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-walker-DEFAULT to-purple-800 flex items-center justify-center text-white font-bold mr-2">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-DEFAULT to-blue-500 flex items-center justify-center text-white font-bold mr-3">
                   W
                 </div>
-                <span className="text-xl font-bold">Walker Regedits</span>
+                <div>
+                  <span className="text-xl font-bold text-white">Walker Regedits</span>
+                  <p className="text-sm text-gray-400 mt-1">
+                    Premium optimization tools for gamers
+                  </p>
+                </div>
               </div>
-              <p className="text-gray-400 mt-2">
-                Premium optimization tools for gamers
-              </p>
             </div>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-center md:text-left">
-              <Link to="/dashboard" className="text-gray-300 hover:text-walker-DEFAULT">Dashboard</Link>
-              <Link to="/store" className="text-gray-300 hover:text-walker-DEFAULT">Store</Link>
-              <Link to="/downloads" className="text-gray-300 hover:text-walker-DEFAULT">Downloads</Link>
-              <Link to="/guides" className="text-gray-300 hover:text-walker-DEFAULT">Guides</Link>
-              <Link to="/redeem" className="text-gray-300 hover:text-walker-DEFAULT">Redeem</Link>
-              <Link to="/login" className="text-gray-300 hover:text-walker-DEFAULT">Login</Link>
+            <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-center md:text-left md:flex md:space-x-8">
+              <Link to="/dashboard" className="text-gray-300 hover:text-teal-DEFAULT">Dashboard</Link>
+              <Link to="/store" className="text-gray-300 hover:text-teal-DEFAULT">Store</Link>
+              <Link to="/downloads" className="text-gray-300 hover:text-teal-DEFAULT">Downloads</Link>
+              <Link to="/guides" className="text-gray-300 hover:text-teal-DEFAULT">Guides</Link>
+              <Link to="/redeem" className="text-gray-300 hover:text-teal-DEFAULT">Redeem</Link>
+              <Link to="/login" className="text-gray-300 hover:text-teal-DEFAULT">Login</Link>
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center">
+          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
               © {new Date().getFullYear()} Walker Regedits. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-walker-DEFAULT">
+              <a href="#" className="text-gray-400 hover:text-teal-DEFAULT">
                 Terms
               </a>
-              <a href="#" className="text-gray-400 hover:text-walker-DEFAULT">
+              <a href="#" className="text-gray-400 hover:text-teal-DEFAULT">
                 Privacy
               </a>
-              <a href="#" className="text-gray-400 hover:text-walker-DEFAULT">
+              <a href="#" className="text-gray-400 hover:text-teal-DEFAULT">
                 Contact
               </a>
             </div>

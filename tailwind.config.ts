@@ -68,7 +68,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+        walker: {
+          DEFAULT: '#00C9A7',
+          hover: '#00B396',
+          dark: '#1f1f24',
+          light: '#E5FFF8',
+        }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -107,7 +113,15 @@ export default {
 						opacity: "0",
 						transform: "translateY(10px)"
 					}
-				}
+				},
+        "pulse-glow": {
+          "0%, 100%": { 
+            boxShadow: "0 0 5px rgba(0, 201, 167, 0.2), 0 0 20px rgba(0, 201, 167, 0.2)"
+          },
+          "50%": { 
+            boxShadow: "0 0 10px rgba(0, 201, 167, 0.4), 0 0 30px rgba(0, 201, 167, 0.3)"
+          }
+        }
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
@@ -115,7 +129,17 @@ export default {
 				float: 'float 5s ease-in-out infinite',
 				"fade-in": "fade-in 0.3s ease-out",
 				"fade-out": "fade-out 0.3s ease-out",
-			}
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite"
+			},
+      boxShadow: {
+        'modern': '0 4px 20px -2px rgba(0,0,0,0.2)',
+        'input': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
+        'card': '0 10px 30px -12px rgba(0, 0, 0, 0.4)',
+        'glow': '0 0 10px rgba(0, 201, 167, 0.5), 0 0 30px rgba(0, 201, 167, 0.3)',
+      },
+      backgroundImage: {
+        'auth-pattern': "url('data:image/svg+xml,%3csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"rgb(148 163 184 / 0.05)\"%3e%3cpath d=\"M0 .5H31.5V32\/%3e%3c/svg%3e')",
+      }
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

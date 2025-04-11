@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Bell, Search, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
@@ -59,14 +59,14 @@ const FloatingNavBar: React.FC = () => {
       <NavLink 
         to={to}
         className={({ isActive }) => 
-          `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${
+          `flex items-center space-x-2 py-2 px-3 rounded-xl transition-all duration-300 ${
             isActive 
-              ? "text-walker-DEFAULT font-medium" 
-              : "text-gray-300 hover:bg-white/5 hover:text-walker-DEFAULT"
+              ? "text-teal-DEFAULT font-medium bg-secondary/50" 
+              : "text-gray-400 hover:text-white hover:bg-secondary/30"
           }`
         }
       >
-        <div className="transition-transform duration-200 group-hover:scale-110">
+        <div className="transition-transform duration-200">
           {icon}
         </div>
         <span className="transition-transform duration-200">{label}</span>
@@ -77,8 +77,8 @@ const FloatingNavBar: React.FC = () => {
   return (
     <nav
       className={cn(
-        "fixed inset-x-0 z-50 transition-all duration-300 backdrop-blur-xl",
-        isScrolled ? "bg-[#12101A]/85 border-b border-violet-500/10 shadow-lg shadow-violet-900/10" : "bg-[#12101A]/50",
+        "fixed inset-x-0 z-50 transition-all duration-300",
+        isScrolled ? "bg-card/80 backdrop-blur-xl shadow-lg border-b border-white/5" : "bg-transparent",
         isVisible ? "top-0" : "-top-20", // Hide nav by sliding up
         "animate-fade-in"
       )}
@@ -89,11 +89,11 @@ const FloatingNavBar: React.FC = () => {
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center group">
               <div className="flex-shrink-0 mr-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-purple-800/30 transition-all duration-300 group-hover:scale-110">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-DEFAULT to-blue-500 flex items-center justify-center text-white font-bold shadow-lg shadow-teal-DEFAULT/20 group-hover:shadow-teal-DEFAULT/30 transition-all duration-300">
                   W
                 </div>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 via-walker-DEFAULT to-violet-400 text-transparent bg-clip-text transition-all duration-300 group-hover:from-blue-300 group-hover:to-purple-300">Walker Regedits</span>
+              <span className="text-xl font-bold text-white group-hover:text-teal-DEFAULT transition-colors duration-300">Walker</span>
             </NavLink>
           </div>
 
@@ -110,23 +110,50 @@ const FloatingNavBar: React.FC = () => {
                       label={item.label}
                     />
                   ))}
-                  <Button 
-                    variant="outline" 
-                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-gradient-to-r hover:from-blue-600/80 hover:to-purple-600/80 hover:text-white hover:border-transparent transition-all duration-300 shadow-lg shadow-purple-900/5"
-                    onClick={logout}
-                  >
-                    Logout
-                  </Button>
+                  <div className="flex items-center ml-2 space-x-1">
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                    >
+                      <Bell size={18} />
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                    >
+                      <Search size={18} />
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      onClick={logout}
+                      className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                    >
+                      <LogOut size={18} />
+                    </Button>
+                  </div>
                 </>
               ) : (
-                <NavLink to="/login">
-                  <Button 
-                    variant="outline" 
-                    className="ml-4 bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-gradient-to-r hover:from-blue-600/80 hover:to-purple-600/80 hover:text-white hover:border-transparent transition-all duration-300 shadow-lg shadow-purple-900/5"
-                  >
-                    Login
-                  </Button>
-                </NavLink>
+                <>
+                  {navItems.map((item) => (
+                    <NavItem 
+                      key={item.label}
+                      to={item.to}
+                      icon={item.icon}
+                      label={item.label}
+                    />
+                  ))}
+                  <NavLink to="/login">
+                    <Button 
+                      variant="outline" 
+                      className="ml-4 bg-transparent border border-teal-DEFAULT/30 text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white transition-all duration-300"
+                    >
+                      Login
+                    </Button>
+                  </NavLink>
+                </>
               )}
             </div>
           </div>
@@ -151,9 +178,9 @@ const FloatingNavBar: React.FC = () => {
 
       {/* Mobile menu */}
       <div 
-        className={`md:hidden transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+        className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
       >
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-[#12101A]/95 backdrop-blur-lg border-b border-violet-500/10 shadow-lg">
+        <div className="px-2 pt-2 pb-3 space-y-1 bg-card backdrop-blur-lg shadow-lg">
           {currentUser ? (
             <>
               {navItems.map((item) => (
@@ -167,19 +194,35 @@ const FloatingNavBar: React.FC = () => {
               <div className="pt-2">
                 <Button 
                   variant="outline" 
-                  className="w-full bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-gradient-to-r hover:from-blue-600/80 hover:to-purple-600/80 hover:text-white hover:border-transparent"
+                  className="w-full bg-transparent border border-teal-DEFAULT/30 text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white"
                   onClick={logout}
                 >
+                  <LogOut size={16} className="mr-2" />
                   Logout
                 </Button>
               </div>
             </>
           ) : (
-            <NavLink to="/login" className="block w-full">
-              <Button variant="outline" className="w-full bg-transparent border-walker-DEFAULT text-walker-DEFAULT hover:bg-walker-DEFAULT hover:text-white">
-                Login
-              </Button>
-            </NavLink>
+            <>
+              {navItems.map((item) => (
+                <NavItem 
+                  key={item.label}
+                  to={item.to}
+                  icon={item.icon}
+                  label={item.label}
+                />
+              ))}
+              <div className="pt-2">
+                <NavLink to="/login" className="block w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full bg-transparent border border-teal-DEFAULT/30 text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white"
+                  >
+                    Login
+                  </Button>
+                </NavLink>
+              </div>
+            </>
           )}
         </div>
       </div>
