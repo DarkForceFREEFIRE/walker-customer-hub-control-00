@@ -65,10 +65,10 @@
   50% { opacity: 1; }
 }
 
-/* Windows 11 Acrylic/Mica effect */
+/* Windows 11 Acrylic/Mica effect - improved for black theme */
 .mica-effect {
   backdrop-filter: blur(20px) saturate(125%);
-  background: rgba(31, 31, 31, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
 }
@@ -117,9 +117,9 @@
   transform: scale(0.98);
 }
 
-/* Windows 11 Card Style */
+/* Windows 11 Card Style - darker for pure black theme */
 .win11-card {
-  background-color: rgba(41, 41, 41, 0.7);
+  background-color: rgba(10, 10, 10, 0.7);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;

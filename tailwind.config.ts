@@ -72,14 +72,14 @@ export default {
         walker: {
           DEFAULT: '#00C9A7',
           hover: '#00B396',
-          dark: '#1f1f24',
+          dark: '#000000',  // Changed to pure black
           light: '#E5FFF8',
         },
-        // Windows 11 fluent design system colors
+        // Windows 11 fluent design system colors - updated for darker theme
         win11: {
-          background: '#1F1F1F',
-          card: '#292929',
-          accent: '#60CDFF', // Default Windows accent blue
+          background: '#000000',  // Pure black
+          card: '#0A0A0A',        // Very dark gray
+          accent: '#60CDFF',      // Default Windows accent blue
           text: '#FFFFFF',
           border: 'rgba(255, 255, 255, 0.08)'
         }

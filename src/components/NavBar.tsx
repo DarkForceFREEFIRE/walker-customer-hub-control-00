@@ -121,7 +121,7 @@ const NavBar = () => {
               ) : (
                 <NavLink to="/login">
                   <Button 
-                    variant="accent"
+                    variant="default"
                     className="ml-4 bg-accent/90 hover:bg-accent text-white transition-all duration-300"
                   >
                     Login
@@ -163,8 +163,8 @@ const NavBar = () => {
           
           {currentUser ? (
             <Button 
-              variant="accent" 
-              className="w-full mt-2"
+              variant="default" 
+              className="w-full mt-2 bg-accent hover:bg-accent/90"
               onClick={logout}
             >
               <LogOut size={16} className="mr-2" />
@@ -174,8 +174,8 @@ const NavBar = () => {
             <div className="pt-2">
               <NavLink to="/login" className="block w-full">
                 <Button 
-                  variant="accent" 
-                  className="w-full"
+                  variant="default" 
+                  className="w-full bg-accent hover:bg-accent/90"
                 >
                   Login
                 </Button>

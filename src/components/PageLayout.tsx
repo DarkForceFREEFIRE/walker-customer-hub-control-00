@@ -14,7 +14,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   subtitle 
 }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-black">
       <NavBar />
       
       <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
