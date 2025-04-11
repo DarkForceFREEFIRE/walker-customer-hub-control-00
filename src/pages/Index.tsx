@@ -11,7 +11,7 @@ const Index = () => {
       
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJzdGFycyIgeD0iMCIgeT0iMCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjcwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ0cmFuc3BhcmVudCIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wOCkiLz48Y2lyY2xlIGN4PSIyNSIgY3k9IjQwIiByPSIwLjUiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNCkiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjE1IiByPSIwLjUiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNikiLz48Y2lyY2xlIGN4PSI0NSIgY3k9IjM1IiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDYpIi8+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMC41IiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDQpIi8+PGNpcmNsZSBjeD0iNTUiIGN5PSIyNSIgcj0iMC43NSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNzdGFycykiLz48L3N2Zz4=')]"></div>
-        <div className="absolute left-0 right-0 top-0 h-[500px] bg-gradient-to-br from-teal-DEFAULT/20 via-fuchsia-400/5 to-transparent blur-3xl opacity-20"></div>
+        <div className="absolute left-0 right-0 top-0 h-[500px] bg-gradient-to-br from-accent/10 via-accent/5 to-transparent blur-3xl opacity-20"></div>
         <div className="absolute -bottom-48 left-0 right-0 h-[500px] bg-gradient-to-t from-background via-background/80 to-transparent"></div>
       </div>
       
@@ -19,13 +19,13 @@ const Index = () => {
         {/* Hero Section */}
         <section className="pt-28 lg:pt-40 pb-16 px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-teal-DEFAULT bg-teal-DEFAULT/10 rounded-full mb-6 border border-teal-DEFAULT/20">
+            <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-accent bg-accent/10 rounded-full mb-6 border border-accent/20">
               <Star className="w-4 h-4" />
               <span>4.9/5 rating from over 1,200 users</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white">
-              <span className="bg-gradient-to-r from-teal-DEFAULT via-cyan-400 to-blue-500 text-transparent bg-clip-text">
+              <span className="bg-gradient-to-r from-accent via-primary to-blue-500 text-transparent bg-clip-text">
                 Walker Regedits
               </span> for <br className="md:hidden" />
               <span className="typing-text inline-block">Pro Gamers</span>
@@ -37,7 +37,7 @@ const Index = () => {
             
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link to="/dashboard">
-                <Button size="lg" className="bg-teal-DEFAULT hover:bg-teal-hover text-white px-8 h-12 rounded-xl shadow-lg shadow-teal-DEFAULT/20 hover:shadow-teal-DEFAULT/30 transition-all duration-300 text-base">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 h-12 rounded-xl shadow-lg shadow-accent/20 hover:shadow-accent/30 transition-all duration-300 text-base">
                   Go to Dashboard
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -51,7 +51,7 @@ const Index = () => {
             
             <div className="mt-20 md:mt-28 relative">
               <div className="flex justify-center">
-                <a href="#features" className="animate-bounce flex flex-col items-center text-gray-400 hover:text-teal-DEFAULT transition-colors">
+                <a href="#features" className="animate-bounce flex flex-col items-center text-gray-400 hover:text-accent transition-colors">
                   <span className="text-sm mb-2">Scroll to learn more</span>
                   <ChevronDown className="h-5 w-5" />
                 </a>

@@ -15,9 +15,9 @@ const Progress = React.forwardRef<
   const percentage = ((value || 0) / max) * 100;
   
   const sizeClasses = {
-    sm: "h-1.5",
-    md: "h-2",
-    lg: "h-3"
+    sm: "h-1",
+    md: "h-1.5",
+    lg: "h-2"
   };
   
   return (
@@ -34,7 +34,7 @@ const Progress = React.forwardRef<
         <div
           className={cn(
             "h-full w-full flex-1 transition-all duration-300 ease-out rounded-full",
-            color ? `bg-${color}` : "bg-primary"
+            color ? `bg-${color}` : "bg-accent"
           )}
           style={{
             transform: `translateX(-${100 - percentage}%)`,

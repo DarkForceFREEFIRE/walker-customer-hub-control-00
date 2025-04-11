@@ -5,44 +5,44 @@
 
 @layer base {
   :root {
-    --background: 225 6% 13%;
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 228 9% 11%;
+    --card: 222 47% 13%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 228 9% 11%;
+    --popover: 222 47% 13%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 160 84% 39%;
+    --primary: 196 100% 50%; /* Windows accent blue */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 228 10% 20%;
+    --secondary: 222 47% 17%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 228 10% 20%;
+    --muted: 222 47% 17%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 160 84% 39%;
+    --accent: 196 100% 50%; /* Windows accent blue */
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 50.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 228 10% 20%;
-    --input: 228 10% 20%;
-    --ring: 160 84% 39%;
+    --border: 222 47% 17%;
+    --input: 222 47% 17%;
+    --ring: 196 100% 50%;
 
-    --radius: 1rem;
+    --radius: 0.5rem; /* Windows 11 uses more rounded corners */
 
-    --sidebar-background: 228 10% 11%;
+    --sidebar-background: 222 47% 13%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary: 196 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 160 84% 39%;
+    --sidebar-ring: 196 100% 50%;
   }
 }
 
@@ -59,11 +59,11 @@
 
 @layer utilities {
   .text-gradient-teal {
-    @apply bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent;
   }
   
   .text-gradient-blue {
-    @apply bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-400 via-cyan-400 to-primary bg-clip-text text-transparent;
   }
   
   .text-gradient-red {
@@ -85,25 +85,50 @@
   .modern-input {
     @apply bg-secondary/50 border-none rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-primary/40;
   }
+  
+  /* Windows 11 Mica effect */
+  .mica-backdrop-blur {
+    @apply bg-card/70 backdrop-blur-xl;
+    backdrop-filter: blur(20px) saturate(125%);
+    -webkit-backdrop-filter: blur(20px) saturate(125%);
+  }
+  
+  /* Windows 11 Fluent shadows */
+  .shadow-fluent {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+  
+  .shadow-fluent-hover {
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.16), 0 0 2px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Windows 11 animations */
+  .win11-transition {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .win11-scale {
+    @apply hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200;
+  }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: hsl(var(--background) / 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.5);
-  border-radius: 3px;
+  background: hsl(var(--accent) / 0.4);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
+  background: hsl(var(--accent) / 0.6);
 }
 
 /* Add a subtle noise texture for more depth */
@@ -117,4 +142,68 @@
   opacity: 0.4;
   z-index: 100;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Typing text animation */
+.typing-text {
+  position: relative;
+  color: white;
+}
+
+.typing-text::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 70%;
+  background-color: hsl(var(--accent));
+  animation: cursor-blink 1.2s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Windows 11 Animations */
+@keyframes win11-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.win11-reveal {
+  animation: win11-reveal 0.5s cubic-bezier(0.05, 0.7, 0.1, 1.0) forwards;
+}
+
+@keyframes win11-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.win11-fade {
+  animation: win11-fade 0.3s ease-out forwards;
+}
+
+/* Windows 11 Acrylic effect */
+.acrylic {
+  backdrop-filter: blur(30px) saturate(125%);
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Windows 11 button press animation */
+.win11-press {
+  transition: transform 0.1s ease;
+}
+
+.win11-press:active {
+  transform: scale(0.97);
 }

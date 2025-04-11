@@ -2,7 +2,9 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Star, LucideIcon } from "lucide-react";
+import { Menu, X, Search, Bell, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { cn } from "@/lib/utils";
 
 interface NavItemProps {
   to: string;
@@ -15,10 +17,10 @@ const NavItem = ({ to, icon, label }: NavItemProps) => {
     <NavLink 
       to={to}
       className={({ isActive }) => 
-        `flex items-center space-x-2 py-2 px-3 rounded-xl transition-all duration-300 ${
+        `flex items-center space-x-2 py-2 px-3 rounded-md transition-all duration-300 ${
           isActive 
-            ? "text-teal-DEFAULT font-medium bg-secondary/50" 
-            : "text-gray-400 hover:text-white hover:bg-secondary/30"
+            ? "text-accent font-medium bg-secondary/30" 
+            : "text-gray-400 hover:text-white hover:bg-secondary/10"
         }`
       }
     >
@@ -34,6 +36,7 @@ const NavBar = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { currentUser, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,11 +45,9 @@ const NavBar = () => {
 
     window.addEventListener("scroll", handleScroll);
     
-    // Clean up event listener
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when navigating
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
@@ -60,18 +61,23 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-card/80 backdrop-blur-xl shadow-lg" : "bg-transparent"}`}>
+    <nav className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      scrolled 
+        ? "mica-backdrop-blur border-b border-white/10" 
+        : "bg-transparent"
+    )}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo and brand */}
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center group">
               <div className="flex-shrink-0 mr-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-DEFAULT to-blue-500 flex items-center justify-center text-white font-bold shadow-lg shadow-teal-DEFAULT/20 group-hover:shadow-teal-DEFAULT/30 transition-all duration-300">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-blue-500 flex items-center justify-center text-white font-bold shadow-fluent group-hover:shadow-fluent-hover transition-all duration-300">
                   W
                 </div>
               </div>
-              <span className="text-xl font-bold text-white group-hover:text-teal-DEFAULT transition-colors duration-300">Walker</span>
+              <span className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">Walker</span>
             </NavLink>
           </div>
 
@@ -86,14 +92,42 @@ const NavBar = () => {
                   label={item.label}
                 />
               ))}
-              <NavLink to="/login">
-                <Button 
-                  variant="outline" 
-                  className="ml-4 bg-transparent border border-teal-DEFAULT/30 text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white transition-all duration-300"
-                >
-                  Login
-                </Button>
-              </NavLink>
+              
+              {currentUser ? (
+                <div className="flex items-center ml-4 space-x-2">
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                  >
+                    <Bell size={18} />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                  >
+                    <Search size={18} />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={logout}
+                    className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                  >
+                    <LogOut size={18} />
+                  </Button>
+                </div>
+              ) : (
+                <NavLink to="/login">
+                  <Button 
+                    variant="accent"
+                    className="ml-4 bg-accent/90 hover:bg-accent text-white transition-all duration-300"
+                  >
+                    Login
+                  </Button>
+                </NavLink>
+              )}
             </div>
           </div>
 
@@ -117,7 +151,7 @@ const NavBar = () => {
 
       {/* Mobile menu */}
       <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-card backdrop-blur-lg shadow-lg">
+        <div className="px-2 pt-2 pb-3 space-y-1 mica-backdrop-blur shadow-lg">
           {navItems.map((item) => (
             <NavItem 
               key={item.label}
@@ -126,16 +160,28 @@ const NavBar = () => {
               label={item.label}
             />
           ))}
-          <div className="pt-2">
-            <NavLink to="/login" className="block w-full">
-              <Button 
-                variant="outline" 
-                className="w-full bg-transparent border border-teal-DEFAULT/30 text-teal-DEFAULT hover:bg-teal-DEFAULT hover:text-white"
-              >
-                Login
-              </Button>
-            </NavLink>
-          </div>
+          
+          {currentUser ? (
+            <Button 
+              variant="accent" 
+              className="w-full mt-2"
+              onClick={logout}
+            >
+              <LogOut size={16} className="mr-2" />
+              Logout
+            </Button>
+          ) : (
+            <div className="pt-2">
+              <NavLink to="/login" className="block w-full">
+                <Button 
+                  variant="accent" 
+                  className="w-full"
+                >
+                  Login
+                </Button>
+              </NavLink>
+            </div>
+          )}
         </div>
       </div>
     </nav>
