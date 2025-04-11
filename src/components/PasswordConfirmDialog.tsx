@@ -68,22 +68,22 @@ const PasswordConfirmDialog: React.FC<PasswordConfirmDialogProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-gradient-to-b from-[#17141f] to-[#0d0b13] border border-purple-500/20 shadow-xl shadow-purple-900/10">
+      <DialogContent className="sm:max-w-md bg-card border border-border/30 shadow-xl">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle className="text-gradient-purple">{title}</DialogTitle>
-            <DialogDescription className="text-gray-400">{description}</DialogDescription>
+            <DialogTitle className="text-foreground">{title}</DialogTitle>
+            <DialogDescription className="text-muted-foreground">{description}</DialogDescription>
           </DialogHeader>
           <div className="py-4">
             <div className="space-y-2">
-              <Label htmlFor="confirm-password" className="text-gray-300">Password</Label>
+              <Label htmlFor="confirm-password" className="text-muted-foreground">Password</Label>
               <Input
                 id="confirm-password"
                 type="password"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-[#1d1a24] border-white/10 focus:border-walker-DEFAULT/70 focus:ring-walker-DEFAULT/30"
+                className="bg-secondary/50 border-border/50 focus-visible:ring-teal-DEFAULT"
                 required
               />
             </div>
@@ -92,14 +92,14 @@ const PasswordConfirmDialog: React.FC<PasswordConfirmDialogProps> = ({
             <Button 
               variant="outline" 
               onClick={() => onOpenChange(false)} 
-              className="bg-transparent hover:bg-white/5 border-white/10"
+              className="bg-transparent hover:bg-secondary/50 border-border/30"
               type="button"
             >
               Cancel
             </Button>
             <Button 
               type="submit" 
-              className="bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 hover:from-blue-700 hover:via-violet-700 hover:to-purple-700 text-white shadow-lg shadow-purple-700/30 border-0 transition-all duration-300" 
+              className="bg-teal-DEFAULT hover:bg-teal-hover text-white" 
               disabled={isLoading || verifying}
             >
               {isLoading || verifying ? "Processing..." : actionLabel}

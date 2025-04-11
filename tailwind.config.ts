@@ -53,11 +53,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				walker: {
-					DEFAULT: '#9b87f5',
-					hover: '#7E69AB',
-					dark: '#1A1F2C',
-					light: '#E5DEFF',
+				teal: {
+					DEFAULT: '#00C9A7',
+					hover: '#00B396',
+					dark: '#00A084',
+					light: '#E5FFF8',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
