@@ -176,7 +176,7 @@ const Downloads = () => {
                     <div>
                        <h3 className={`text-lg font-bold ${showFestiveEffects && isPanel ? festiveGradientText : ''}`}>{getItemTitle(item)}</h3>
                        <Badge variant="outline" className={`text-xs mt-1 ${festiveBadgeStyle}`}>
-                          v{item.version}
+                          {item.version}
                        </Badge>
                     </div>
                   </div>
