@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { DownloadItem, fetchDownloadItems } from '@/lib/supabase';
 import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/badge'; // Import Badge for version/tags
-import NewYearBanner from '@/components/NewYearBanner'; // Import the banner
+// Removed: import NewYearBanner from '@/components/NewYearBanner';
 
 // Helper to check if it's currently the festive season (e.g., April)
 const isFestiveSeason = () => {
@@ -119,23 +119,13 @@ const Downloads = () => {
     <PageLayout
       title="Downloads"
       subtitle={showFestiveEffects ? "Grab your festive tools & updates!" : "Get the latest Walker Regedits tools"}
-      className="relative" // Needed for absolute positioning of banner/effects
+      // Removed relative class if only used for banner
     >
-      {/* Render the festive banner */}
-      {showFestiveEffects && <NewYearBanner />}
-
-      {/* Optional: Add a festive heading */}
-      {showFestiveEffects && (
-        <h2 className="text-2xl font-bold mb-6 mt-8 flex items-center glow-text">
-          <Gift className="mr-2 h-5 w-5 text-yellow-400 animate-pulse" />
-          <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
-            New Year Downloads
-          </span>
-        </h2>
-      )}
+      {/* Removed NewYearBanner */}
+      {/* Removed Festive H2 heading */}
 
       {/* Grid layout similar to Store */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${showFestiveEffects ? 'mt-6' : 'mt-0'} animate-fade-in`}>
+      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in`}>
         {isLoading ? (
           Array(3).fill(0).map((_, index) => <div key={index}>{renderSkeletonCard()}</div>)
         ) : error ? (
@@ -233,9 +223,6 @@ const Downloads = () => {
           })
         )}
       </div>
-
-      {/* Removed the old Statistics Table and System Requirements Card */}
-
     </PageLayout>
   );
 };
