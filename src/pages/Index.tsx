@@ -1,7 +1,9 @@
+
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
-import { ArrowRight, CheckCircle2, ChevronDown, Star, Gift, Cake, PartyPopper } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronDown, Star, Gift, Cake, PartyPopper, Percent, Package, Layers } from 'lucide-react';
+import NewYearGreeting from '@/components/NewYearGreeting';
 
 const Index = () => {
   return (
@@ -15,9 +17,11 @@ const Index = () => {
       </div>
       
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Hero Section with Animated Greeting */}
         <section className="pt-28 lg:pt-40 pb-16 px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-5xl mx-auto text-center">
+            <NewYearGreeting />
+            
             <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-accent bg-accent/10 rounded-full mb-6 border border-accent/20">
               <Star className="w-4 h-4" />
               <span>4.9/5 rating from over 1,200 users</span>
@@ -36,7 +40,7 @@ const Index = () => {
             
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link to="/dashboard">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 h-12 rounded-xl shadow-lg shadow-accent/20 hover:shadow-accent/30 transition-all duration-300 text-base">
+                <Button size="lg" className="bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-500/90 text-white px-8 h-12 rounded-xl shadow-lg shadow-accent/20 hover:shadow-accent/30 transition-all duration-300 text-base">
                   Go to Dashboard
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -50,8 +54,8 @@ const Index = () => {
             
             <div className="mt-20 md:mt-28 relative">
               <div className="flex justify-center">
-                <a href="#features" className="animate-bounce flex flex-col items-center text-gray-400 hover:text-accent transition-colors">
-                  <span className="text-sm mb-2">Scroll to learn more</span>
+                <a href="#discounts" className="animate-bounce flex flex-col items-center text-gray-400 hover:text-accent transition-colors">
+                  <span className="text-sm mb-2">Special New Year Discounts</span>
                   <ChevronDown className="h-5 w-5" />
                 </a>
               </div>
@@ -125,6 +129,153 @@ const Index = () => {
                   Special Offers
                 </Button>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* New Year Discounts Section */}
+        <section id="discounts" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-transparent">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-purple-300 bg-purple-900/20 rounded-full mb-6 border border-purple-500/30">
+                <Percent className="w-4 h-4" />
+                <span>Limited Time New Year Offers</span>
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-300 text-transparent bg-clip-text">
+                New Year Special Discounts
+              </h2>
+              <p className="text-gray-300 max-w-2xl mx-auto">
+                Celebrate Sinhala and Tamil New Year with exclusive discounts on our premium packages
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Supreme Package",
+                  icon: <Package className="h-8 w-8 text-purple-400" />,
+                  originalPrice: "2,500",
+                  discountedPrice: "500",
+                  discount: "80%",
+                  color: "from-purple-600/20 to-pink-600/20",
+                  borderColor: "border-purple-500/30",
+                  description: "Full premium access with priority support",
+                  badge: "Most Popular"
+                },
+                {
+                  title: "Essential Package",
+                  icon: <Layers className="h-8 w-8 text-blue-400" />,
+                  originalPrice: "3,000",
+                  discountedPrice: "600",
+                  discount: "80%",
+                  color: "from-blue-600/20 to-cyan-600/20",
+                  borderColor: "border-blue-500/30",
+                  description: "Core features for everyday users"
+                },
+                {
+                  title: "External Package",
+                  icon: <Gift className="h-8 w-8 text-teal-400" />,
+                  originalPrice: "5,000",
+                  discountedPrice: "500",
+                  discount: "90%",
+                  color: "from-teal-600/20 to-green-600/20",
+                  borderColor: "border-teal-500/30",
+                  description: "Basic functionality for casual users"
+                }
+              ].map((pack, index) => (
+                <div
+                  key={index}
+                  className={`rounded-xl p-1 bg-gradient-to-br ${pack.color} backdrop-blur-xl group hover:scale-105 transition-all duration-500`}
+                >
+                  <div className="bg-black/80 rounded-lg p-6 h-full flex flex-col relative overflow-hidden border-t border-white/10">
+                    {pack.badge && (
+                      <div className="absolute -right-10 top-5 rotate-45 bg-purple-600 px-10 py-1 text-xs text-white font-medium">
+                        {pack.badge}
+                      </div>
+                    )}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-black to-gray-900 border border-white/5">
+                        {pack.icon}
+                      </div>
+                      <div className="flex flex-col items-end">
+                        <span className="text-gray-400 line-through text-sm">Rs. {pack.originalPrice}</span>
+                        <span className="text-2xl font-bold text-white">Rs. {pack.discountedPrice}</span>
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-white">{pack.title}</h3>
+                    <span className="inline-block px-2 py-1 text-xs bg-purple-900/30 text-purple-300 rounded-full mb-3 border border-purple-500/20">
+                      Save {pack.discount}
+                    </span>
+                    <p className="text-gray-400 mb-6 flex-grow">{pack.description}</p>
+                    <Link to="/store">
+                      <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
+                        Buy Now
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                {
+                  title: "Supreme + Essential Bundle",
+                  icon: <Layers className="h-8 w-8 text-indigo-400" />,
+                  originalPrice: "1,840",
+                  discountedPrice: "920",
+                  discount: "50%",
+                  color: "from-indigo-600/20 to-blue-600/20",
+                  borderColor: "border-indigo-500/30",
+                  description: "Perfect combination of our top packages"
+                },
+                {
+                  title: "Complete Bundle",
+                  icon: <Layers className="h-8 w-8 text-violet-400" />,
+                  originalPrice: "6,000",
+                  discountedPrice: "1,200",
+                  discount: "80%",
+                  color: "from-violet-600/20 to-fuchsia-600/20",
+                  borderColor: "border-violet-500/30",
+                  description: "Supreme + Essential + External - everything included",
+                  badge: "Best Value"
+                }
+              ].map((bundle, index) => (
+                <div
+                  key={index}
+                  className={`rounded-xl p-1 bg-gradient-to-br ${bundle.color} backdrop-blur-xl group hover:scale-105 transition-all duration-500`}
+                >
+                  <div className="bg-black/80 rounded-lg p-6 flex flex-col md:flex-row md:items-center relative overflow-hidden border-t border-white/10">
+                    {bundle.badge && (
+                      <div className="absolute -right-10 top-5 rotate-45 bg-violet-600 px-10 py-1 text-xs text-white font-medium">
+                        {bundle.badge}
+                      </div>
+                    )}
+                    <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-black to-gray-900 border border-white/5">
+                        {bundle.icon}
+                      </div>
+                    </div>
+                    <div className="flex-grow md:mr-6">
+                      <h3 className="text-xl font-bold mb-1 text-white">{bundle.title}</h3>
+                      <span className="inline-block px-2 py-1 text-xs bg-purple-900/30 text-purple-300 rounded-full mb-2 border border-purple-500/20">
+                        Save {bundle.discount}
+                      </span>
+                      <p className="text-gray-400">{bundle.description}</p>
+                    </div>
+                    <div className="flex flex-col items-end mt-4 md:mt-0">
+                      <span className="text-gray-400 line-through text-sm">Rs. {bundle.originalPrice}</span>
+                      <span className="text-2xl font-bold text-white mb-3">Rs. {bundle.discountedPrice}</span>
+                      <Link to="/store">
+                        <Button className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white">
+                          Buy Now
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -273,3 +424,4 @@ const Index = () => {
 };
 
 export default Index;
+
