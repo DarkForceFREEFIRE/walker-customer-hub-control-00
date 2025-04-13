@@ -137,7 +137,7 @@ const Dashboard = () => {
         {showFestiveEffects && (
            <div className="mb-6 p-4 rounded-lg bg-gradient-to-r from-yellow-500/10 via-orange-500/10 to-red-500/10 border border-orange-500/30 text-center animate-fade-in">
              <p className="text-lg font-semibold text-gradient-festive animate-subtle-shimmer">
-               🎉 Happy Sinhala & Tamil New Year! Suba Aluth Avuruddak Wewa! Puthandu Vazthukal! 🎉
+               🎉 Happy Sinhala & Tamil New Year! සුබ අලුත් අවුරුද්දක් වේවා! 🎉
              </p>
            </div>
         )}
