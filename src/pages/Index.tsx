@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
-import { ArrowRight, CheckCircle2, ChevronDown, Star, Gift, Cake, Celebration } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronDown, Star, Gift, Cake, PartyPopper } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -58,12 +58,12 @@ const Index = () => {
             </div>
           </div>
         </section>
-
+            
         {/* New Year Celebration Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent">
           <div className="max-w-5xl mx-auto text-center">
             <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-accent bg-accent/10 rounded-full mb-6 border border-accent/20">
-              <Celebration className="w-4 h-4" />
+              <PartyPopper className="w-4 h-4" />
               <span>Sinhala and Tamil New Year Celebration</span>
             </div>
             
@@ -92,7 +92,7 @@ const Index = () => {
                   text: "Family Celebrations" 
                 },
                 { 
-                  icon: <Celebration className="h-6 w-6 text-accent" />, 
+                  icon: <PartyPopper className="h-6 w-6 text-accent" />, 
                   text: "Cultural Harmony" 
                 }
               ].map((item, index) => (
@@ -171,7 +171,7 @@ const Index = () => {
                       <path d="M12 15V18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M12 9V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M15 12H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M9 12H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M9 12H6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   ),
                   description: "Built with security in mind, our tools are regularly updated to keep you safe."
