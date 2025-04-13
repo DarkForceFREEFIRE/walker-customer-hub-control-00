@@ -73,10 +73,7 @@ const Index = () => {
             
             <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white">
               <span className="bg-gradient-to-r from-accent via-primary to-blue-500 text-transparent bg-clip-text">
-                Happy Aluth Avurudda 
-              </span> & {" "}
-              <span className="bg-gradient-to-r from-accent via-primary to-blue-500 text-transparent bg-clip-text">
-                Puthandu
+                සුබ අලුත් අවුරුද්දක් වේවා!
               </span>
             </h2>
             
