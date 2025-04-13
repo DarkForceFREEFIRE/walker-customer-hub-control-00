@@ -1,8 +1,7 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
-import { ArrowRight, CheckCircle2, ChevronDown, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronDown, Star, Gift, Cake, Celebration } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -59,7 +58,77 @@ const Index = () => {
             </div>
           </div>
         </section>
-        
+
+        {/* New Year Celebration Section */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-accent bg-accent/10 rounded-full mb-6 border border-accent/20">
+              <Celebration className="w-4 h-4" />
+              <span>Sinhala and Tamil New Year Celebration</span>
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white">
+              <span className="bg-gradient-to-r from-accent via-primary to-blue-500 text-transparent bg-clip-text">
+                Happy Aluth Avurudda 
+              </span> & {" "}
+              <span className="bg-gradient-to-r from-accent via-primary to-blue-500 text-transparent bg-clip-text">
+                Puthandu
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+              Celebrate the traditional New Year with joy, prosperity, and cultural richness. 
+              A time of renewal, family gatherings, and festive traditions.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              {[
+                { 
+                  icon: <Gift className="h-6 w-6 text-accent" />, 
+                  text: "Festive Traditions" 
+                },
+                { 
+                  icon: <Cake className="h-6 w-6 text-accent" />, 
+                  text: "Family Celebrations" 
+                },
+                { 
+                  icon: <Celebration className="h-6 w-6 text-accent" />, 
+                  text: "Cultural Harmony" 
+                }
+              ].map((item, index) => (
+                <div 
+                  key={index} 
+                  className="flex items-center justify-center bg-card border border-white/5 rounded-xl p-6 hover:border-accent/30 transition-colors duration-300"
+                >
+                  {item.icon}
+                  <span className="ml-3 text-gray-300">{item.text}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-5">
+              <Link to="/guides">
+                <Button 
+                  size="lg" 
+                  className="bg-accent hover:bg-accent/90 text-white px-8 h-12 rounded-xl shadow-lg shadow-accent/20 hover:shadow-accent/30 transition-all duration-300 text-base"
+                >
+                  Learn More
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/store">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-xl transition-all duration-300 text-base"
+                >
+                  Special Offers
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Features Section */}
         <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
