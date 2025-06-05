@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Download, Clock, ShieldCheck, FileText, Package, Gift, Zap, Sun } from 'lucide-react'; // Added Package, Gift, Zap, Sun, FileText
+import { Download, Clock, ShieldCheck, FileText, Package, Gift, Zap, Sun } from 'lucide-react'; 
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card'; // Use the same Card component
+import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import PageLayout from '@/components/PageLayout';
 import { toast } from 'sonner';
 import { DownloadItem, fetchDownloadItems } from '@/lib/supabase';
 import { useQuery } from '@tanstack/react-query';
-import { Badge } from '@/components/ui/badge'; // Import Badge for version/tags
-// Removed: import NewYearBanner from '@/components/NewYearBanner';
-
-// Helper to check if it's currently the festive season (e.g., April)
-const isFestiveSeason = () => {
-  const today = new Date();
-  const month = today.getMonth(); // 0 = January, 3 = April
-  return month === 3; // Assume festival in April
-};
+import { Badge } from '@/components/ui/badge';
 
 const Downloads = () => {
   const { data: downloadItems, isLoading, error } = useQuery({
@@ -25,7 +17,7 @@ const Downloads = () => {
   const [showFestiveEffects, setShowFestiveEffects] = useState(false);
 
   useEffect(() => {
-    setShowFestiveEffects(isFestiveSeason());
+    setShowFestiveEffects(false);
   }, []);
 
   useEffect(() => {
