@@ -36,7 +36,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className, children }
 
   return (
     <div className={cn(
-      'inline-flex items-center px-2.5 py-1 rounded-md border text-xs font-medium backdrop-blur-sm shadow-lg',
+      'inline-flex items-center px-2.5 py-1 rounded-lg border text-xs font-medium backdrop-blur-sm shadow-lg transition-all duration-300 hover:scale-105',
       getStatusStyles(),
       className
     )}>
