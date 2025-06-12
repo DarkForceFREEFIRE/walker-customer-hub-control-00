@@ -1,48 +1,80 @@
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 0%;  /* Pure black background */
+    --background: 0 0% 0%;
     --foreground: 210 40% 98%;
-
-    --card: 0 0% 4%;  /* Slightly lighter black for cards */
+    --card: 240 10% 3.9%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 0 0% 4%;
+    --popover: 240 10% 3.9%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 196 100% 50%; /* Windows accent blue */
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 0 0% 7%;  /* Dark gray for secondary elements */
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
-    --muted: 0 0% 7%;
+    --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 196 100% 50%; /* Windows accent blue */
+    --accent: 180 100% 40%;
     --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 50.6%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    
+    /* Walker specific colors */
+    --walker-DEFAULT: 180 100% 40%;
+    --walker-hover: 180 100% 35%;
+    --walker-dark: 240 10% 3.9%;
+    
+    /* Teal colors */
+    --teal-DEFAULT: 180 100% 40%;
+    --teal-hover: 180 100% 35%;
+  }
 
-    --border: 0 0% 7%;
-    --input: 0 0% 7%;
-    --ring: 196 100% 50%;
-
-    --radius: 0.5rem; /* Windows 11 uses more rounded corners */
-
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 196 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 196 100% 50%;
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 180 100% 40%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    
+    /* Walker specific colors for light mode */
+    --walker-DEFAULT: 180 100% 40%;
+    --walker-hover: 180 100% 35%;
+    --walker-dark: 210 40% 96%;
+    
+    /* Teal colors */
+    --teal-DEFAULT: 180 100% 40%;
+    --teal-hover: 180 100% 35%;
   }
 }
 
@@ -50,127 +82,53 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
   }
 }
 
-@layer utilities {
-  .text-gradient-teal {
-    @apply bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent;
-  }
-  
-  .text-gradient-blue {
-    @apply bg-gradient-to-r from-blue-400 via-cyan-400 to-primary bg-clip-text text-transparent;
-  }
-  
-  .text-gradient-purple {
-    @apply bg-gradient-to-r from-purple-400 via-purple-500 to-pink-500 bg-clip-text text-transparent;
-  }
-  
-  .text-gradient-amber {
-    @apply bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent;
-  }
-  
-  .text-gradient-red {
-    @apply bg-gradient-to-r from-red-400 via-rose-400 to-pink-400 bg-clip-text text-transparent;
-  }
-  
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;
-  }
-  
-  .glass-card-dark {
-    @apply bg-black/40 backdrop-blur-md border border-white/5 shadow-xl;
-  }
+/* Rest of existing CSS styles */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
 
-  .modern-card {
-    @apply bg-card rounded-xl border border-white/5 shadow-md;
-  }
-  
-  .modern-input {
-    @apply bg-secondary/50 border-none rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-primary/40;
-  }
-  
-  /* Windows 11 Mica effect - improved with darker base */
-  .mica-backdrop-blur {
-    @apply bg-black/70 backdrop-blur-xl;
-    backdrop-filter: blur(20px) saturate(125%);
-    -webkit-backdrop-filter: blur(20px) saturate(125%);
-  }
-  
-  /* Windows 11 Fluent shadows */
-  .shadow-fluent {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.08);
-  }
-  
-  .shadow-fluent-hover {
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.16), 0 0 2px rgba(0, 0, 0, 0.08);
-  }
-  
-  /* Windows 11 animations */
-  .win11-transition {
-    @apply transition-all duration-300 ease-out;
-  }
-  
-  .win11-scale {
-    @apply hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200;
-  }
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
 
-  /* Windows 11 acrylic effect - darker for pure black theme */
-  .acrylic {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(30px) saturate(125%);
-    -webkit-backdrop-filter: blur(30px) saturate(125%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-  
-  /* New Year celebration styles */
-  .celebration-card {
-    @apply bg-gradient-to-br from-purple-900/20 via-pink-900/10 to-amber-900/20 backdrop-blur-xl border border-white/10 rounded-xl p-6;
-  }
-  
-  .festive-button {
-    @apply bg-gradient-to-r from-amber-500 to-yellow-500 text-black font-medium hover:from-amber-600 hover:to-yellow-600 shadow-amber-glow;
-  }
-  
-  .discount-badge {
-    @apply bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full text-xs font-medium;
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Custom scrollbar - darker for black theme */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
+.card {
+  padding: 2em;
 }
 
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--accent) / 0.4);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--accent) / 0.6);
-}
-
-/* Add a subtle noise texture for more depth */
-.noise {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0.4;
-  z-index: 100;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+.read-the-docs {
+  color: #888;
 }
 
 /* Typing text animation */
@@ -196,77 +154,158 @@
   50% { opacity: 1; }
 }
 
-/* Windows 11 Animations */
-@keyframes win11-reveal {
-  0% {
+/* Windows 11 Acrylic/Mica effect - improved for black theme */
+.mica-effect {
+  backdrop-filter: blur(20px) saturate(125%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}
+
+/* Light mode mica effect */
+.light .mica-effect {
+  backdrop-filter: blur(20px) saturate(125%);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Windows 11 Reveal highlight effect */
+.reveal-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.reveal-highlight:hover::before {
+  left: 100%;
+}
+
+/* Windows 11 Button Styles */
+.win11-button {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.win11-button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.win11-button:active {
+  background-color: rgba(255, 255, 255, 0.04);
+  transform: scale(0.98);
+}
+
+/* Light mode button styles */
+.light .win11-button {
+  background-color: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: black;
+}
+
+.light .win11-button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Windows 11 Card Style - darker for pure black theme */
+.win11-card {
+  background-color: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14);
+  transition: all 0.3s ease;
+}
+
+.win11-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Light mode card styles */
+.light .win11-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.light .win11-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Gradient text utilities */
+.text-gradient-blue {
+  background: linear-gradient(45deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-red {
+  background: linear-gradient(45deg, #ef4444, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Backdrop blur utilities */
+.mica-backdrop-blur {
+  backdrop-filter: blur(20px) saturate(125%);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.light .mica-backdrop-blur {
+  backdrop-filter: blur(20px) saturate(125%);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Animation utilities */
+@keyframes fade-in {
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.win11-reveal {
-  animation: win11-reveal 0.5s cubic-bezier(0.05, 0.7, 0.1, 1.0) forwards;
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
 }
 
-@keyframes win11-fade {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+/* Shadow utilities */
+.shadow-fluent {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14);
 }
 
-.win11-fade {
-  animation: win11-fade 0.3s ease-out forwards;
+.shadow-fluent-hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Windows 11 Acrylic effect - improved for pure black theme */
-.acrylic {
-  backdrop-filter: blur(30px) saturate(125%);
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.light .shadow-fluent {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Windows 11 button press animation */
-.win11-press {
-  transition: transform 0.1s ease;
-}
-
-.win11-press:active {
-  transform: scale(0.97);
-}
-
-/* New Year celebration specific styles */
-.floating-particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.particle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  animation: float-particle 6s infinite ease-in-out;
-}
-
-@keyframes float-particle {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-}
-
-/* Festive glowing effect */
-.glow-text {
-  text-shadow: 0 0 10px rgba(245, 158, 11, 0.5), 0 0 20px rgba(245, 158, 11, 0.3);
-}
-
-.glow-border {
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3), inset 0 0 5px rgba(139, 92, 246, 0.2);
+.light .shadow-fluent-hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
