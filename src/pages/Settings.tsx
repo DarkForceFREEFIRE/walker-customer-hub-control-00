@@ -6,18 +6,20 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { User, Palette, ExternalLink, MessageCircle, Youtube, Send } from 'lucide-react';
+import { User, ExternalLink, MessageCircle, Youtube, Send, Shield, AlertTriangle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
 import { supabase } from '@/lib/supabase';
 import PasswordConfirmDialog from '@/components/PasswordConfirmDialog';
+import HWIDResetProgress from '@/components/HWIDResetProgress';
 
 const Settings = () => {
-  const { currentUser } = useAuth();
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { currentUser, resetHWID, deleteAccount } = useAuth();
   const [username, setUsername] = useState(currentUser?.username || '');
   const [isUpdating, setIsUpdating] = useState(false);
   const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
+  const [isHWIDDialogOpen, setIsHWIDDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [pendingUsername, setPendingUsername] = useState('');
 
   const handleUsernameUpdate = async () => {
@@ -58,9 +60,31 @@ const Settings = () => {
     }
   };
 
-  const handleThemeToggle = () => {
-    toggleTheme();
-    toast.success(`Switched to ${isDarkMode ? 'light' : 'dark'} mode`);
+  const handleHWIDResetConfirm = async () => {
+    setIsProcessing(true);
+    try {
+      await resetHWID();
+      setIsHWIDDialogOpen(false);
+      toast.success('HWID reset successful');
+    } catch (error) {
+      console.error('HWID reset error:', error);
+      toast.error('Failed to reset HWID');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleDeleteAccountConfirm = async () => {
+    setIsProcessing(true);
+    try {
+      await deleteAccount();
+      toast.success('Account deleted successfully');
+    } catch (error) {
+      console.error('Delete account error:', error);
+      toast.error('Failed to delete account');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const socialLinks = [
@@ -91,124 +115,123 @@ const Settings = () => {
   ];
 
   return (
-    <PageLayout title="Settings" subtitle="Manage your account preferences">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <PageLayout title="Settings" subtitle="Manage your account preferences and configurations">
+      <div className="max-w-4xl mx-auto space-y-6">
         {/* Profile Settings */}
-        <Card className="border border-border">
-          <div className="p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <User className="h-5 w-5 text-blue-400" />
-              <h2 className="text-xl font-semibold">Profile Information</h2>
+        <div className="dashboard-card p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <User className="h-5 w-5 text-blue-400" />
+            <h2 className="text-xl font-semibold text-white">Profile Information</h2>
+          </div>
+          
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="username" className="text-gray-300">Username</Label>
+                <Input
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="mt-2 bg-black/20 border-white/10 rounded-xl"
+                  placeholder="Enter your username"
+                />
+              </div>
+              <div>
+                <Label htmlFor="subscription" className="text-gray-300">Subscription Status</Label>
+                <Input
+                  id="subscription"
+                  value={currentUser?.subscription_status || 'Not available'}
+                  className="mt-2 bg-black/20 border-white/10 rounded-xl"
+                  disabled
+                />
+                <p className="text-xs text-gray-400 mt-1">Subscription status cannot be changed</p>
+              </div>
             </div>
             
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="username">Username</Label>
-                  <Input
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="mt-2"
-                    placeholder="Enter your username"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="subscription">Subscription Status</Label>
-                  <Input
-                    id="subscription"
-                    value={currentUser?.subscription_status || 'Not available'}
-                    className="mt-2"
-                    disabled
-                  />
-                  <p className="text-xs text-muted-foreground mt-1">Subscription status cannot be changed</p>
-                </div>
+            <Button 
+              onClick={handleUsernameUpdate} 
+              disabled={isUpdating || username === currentUser?.username}
+              className="modern-button"
+            >
+              {isUpdating ? 'Updating...' : 'Update Username'}
+            </Button>
+          </div>
+        </div>
+
+        {/* Account Management */}
+        <div className="dashboard-card p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <Shield className="h-5 w-5 text-purple-400" />
+            <h2 className="text-xl font-semibold text-white">Account Management</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="modern-card p-6">
+              <h4 className="text-lg font-semibold mb-3 text-gradient-blue">Reset Hardware ID</h4>
+              <div className="mb-4">
+                <HWIDResetProgress used={currentUser?.hwid_resets_used || 0} max={currentUser?.max_hwid_resets || 5} />
               </div>
-              
-              <Button 
-                onClick={handleUsernameUpdate} 
-                disabled={isUpdating || username === currentUser?.username}
-                className="bg-accent hover:bg-accent/90"
+              <p className="text-gray-400 mb-4 text-sm">
+                Reset your HWID if you've changed your hardware or are using a new device.
+                You have <span className="font-semibold text-accent">{(currentUser?.max_hwid_resets || 5) - (currentUser?.hwid_resets_used || 0)}</span> resets remaining.
+              </p>
+              <Button
+                onClick={() => setIsHWIDDialogOpen(true)}
+                className="modern-button w-full"
+                disabled={(currentUser?.hwid_resets_used || 0) >= (currentUser?.max_hwid_resets || 5)}
               >
-                {isUpdating ? 'Updating...' : 'Update Username'}
+                Reset HWID
+              </Button>
+            </div>
+
+            <div className="modern-card p-6">
+              <h4 className="text-lg font-semibold mb-3 text-gradient-red">Delete Account</h4>
+              <p className="text-gray-400 mb-4 text-sm">
+                Permanently delete your account and all associated data. This action cannot be undone.
+              </p>
+              <Button
+                variant="destructive"
+                onClick={() => setIsDeleteDialogOpen(true)}
+                className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 rounded-xl"
+              >
+                <AlertTriangle className="mr-2 h-4 w-4" />
+                Delete Account
               </Button>
             </div>
           </div>
-        </Card>
-
-        {/* Appearance */}
-        <Card className="border border-border">
-          <div className="p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <Palette className="h-5 w-5 text-purple-400" />
-              <h2 className="text-xl font-semibold">Appearance</h2>
-            </div>
-            
-            <div className="space-y-4">
-              <div>
-                <Label>Theme</Label>
-                <div className="grid grid-cols-2 gap-3 mt-2">
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                      isDarkMode 
-                        ? 'border-blue-500/30 bg-secondary/20' 
-                        : 'border-border hover:border-blue-500/30'
-                    }`}
-                    onClick={() => !isDarkMode && handleThemeToggle()}
-                  >
-                    <p className="font-medium">Dark Mode</p>
-                    <p className="text-sm text-muted-foreground">Default theme</p>
-                  </div>
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                      !isDarkMode 
-                        ? 'border-blue-500/30 bg-secondary/20' 
-                        : 'border-border hover:border-blue-500/30'
-                    }`}
-                    onClick={() => isDarkMode && handleThemeToggle()}
-                  >
-                    <p className="font-medium">Light Mode</p>
-                    <p className="text-sm text-muted-foreground">Light theme</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Card>
+        </div>
 
         {/* Social Links */}
-        <Card className="border border-border">
-          <div className="p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <ExternalLink className="h-5 w-5 text-green-400" />
-              <h2 className="text-xl font-semibold">Community & Support</h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-4 border border-border rounded-lg hover:border-blue-500/30 hover:bg-secondary/10 transition-colors"
-                >
-                  <div className="text-blue-400">
-                    {link.icon}
-                  </div>
-                  <div>
-                    <p className="font-medium">{link.name}</p>
-                    <p className="text-sm text-muted-foreground">{link.description}</p>
-                  </div>
-                  <ExternalLink className="h-4 w-4 text-muted-foreground ml-auto" />
-                </a>
-              ))}
-            </div>
+        <div className="dashboard-card p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <ExternalLink className="h-5 w-5 text-green-400" />
+            <h2 className="text-xl font-semibold text-white">Community & Support</h2>
           </div>
-        </Card>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {socialLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-4 modern-card hover:scale-105 transition-transform duration-200"
+              >
+                <div className="text-blue-400">
+                  {link.icon}
+                </div>
+                <div>
+                  <p className="font-medium text-white">{link.name}</p>
+                  <p className="text-sm text-gray-400">{link.description}</p>
+                </div>
+                <ExternalLink className="h-4 w-4 text-gray-400 ml-auto" />
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Password confirmation dialog */}
+      {/* Password confirmation dialogs */}
       <PasswordConfirmDialog
         open={isPasswordDialogOpen}
         onOpenChange={setIsPasswordDialogOpen}
@@ -217,6 +240,27 @@ const Settings = () => {
         description="Please enter your password to confirm username change."
         actionLabel="Update Username"
         isLoading={isUpdating}
+      />
+
+      <PasswordConfirmDialog
+        open={isHWIDDialogOpen}
+        onOpenChange={setIsHWIDDialogOpen}
+        onConfirm={handleHWIDResetConfirm}
+        title="Reset Hardware ID"
+        description="Please enter your password to confirm HWID reset."
+        actionLabel="Reset HWID"
+        isLoading={isProcessing}
+      />
+
+      <PasswordConfirmDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        onConfirm={handleDeleteAccountConfirm}
+        title="Delete Account"
+        description="This action cannot be undone. Please enter your password to delete your account."
+        actionLabel="Delete Account"
+        isLoading={isProcessing}
+        isDestructive
       />
     </PageLayout>
   );

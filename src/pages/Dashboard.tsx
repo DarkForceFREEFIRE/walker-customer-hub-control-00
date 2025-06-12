@@ -1,22 +1,18 @@
 
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { RefreshCw, Shield, User, Settings, AlertTriangle } from 'lucide-react';
+import { RefreshCw, Shield, User, Calendar, Clock, MapPin, Server } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import StatusBadge from '@/components/StatusBadge';
 import HWIDResetProgress from '@/components/HWIDResetProgress';
-import PasswordConfirmDialog from '@/components/PasswordConfirmDialog';
 import { toast } from 'sonner';
 import { supabase, ProductSafetyStatus } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Dashboard = () => {
-  const { currentUser, resetHWID, deleteAccount } = useAuth();
+  const { currentUser } = useAuth();
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isHWIDDialogOpen, setIsHWIDDialogOpen] = useState(false);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
 
   // Query for fetching safety status data
   const { data: safetyStatusData, refetch: refetchSafetyStatus } = useQuery({
@@ -31,9 +27,30 @@ const Dashboard = () => {
     }
   });
 
+  // Query for fetching user statistics
+  const { data: userStats } = useQuery({
+    queryKey: ['userStats'],
+    queryFn: async () => {
+      const { count: totalUsers } = await supabase
+        .from('users')
+        .select('*', { count: 'exact', head: true });
+
+      const { count: activeUsers } = await supabase
+        .from('users')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_banned', false);
+
+      return {
+        totalUsers: totalUsers || 0,
+        activeUsers: activeUsers || 0,
+        bannedUsers: (totalUsers || 0) - (activeUsers || 0)
+      };
+    }
+  });
+
   // Format date to be more readable
   const formatDate = (dateString: string) => {
-    if (!dateString) return 'N/A';
+    if (!dateString) return 'Never';
     const date = new Date(dateString);
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
@@ -48,109 +65,30 @@ const Dashboard = () => {
     setIsRefreshing(true);
     try {
       await refetchSafetyStatus();
-      toast.success("Safety status refreshed");
+      toast.success("Dashboard refreshed");
     } catch (error) {
-      console.error('Error refreshing safety status:', error);
-      toast.error("Failed to refresh safety status");
+      console.error('Error refreshing dashboard:', error);
+      toast.error("Failed to refresh dashboard");
     } finally {
       setIsRefreshing(false);
     }
   };
 
-  const handleHWIDResetConfirm = async () => {
-    setIsProcessing(true);
-    try {
-      await resetHWID();
-      setIsHWIDDialogOpen(false);
-      toast.success('HWID reset successful');
-    } catch (error) {
-      console.error('HWID reset error:', error);
-      toast.error('Failed to reset HWID');
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  const handleDeleteAccountConfirm = async () => {
-    setIsProcessing(true);
-    try {
-      await deleteAccount();
-      toast.success('Account deleted successfully');
-    } catch (error) {
-      console.error('Delete account error:', error);
-      toast.error('Failed to delete account');
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
   if (!currentUser) {
-    return <div className="min-h-screen flex items-center justify-center bg-background">Loading user data...</div>;
+    return <div className="min-h-screen flex items-center justify-center bg-background">Loading...</div>;
   }
 
   return (
-    <PageLayout title="Dashboard" subtitle="Manage your account and check product status">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in">
-        {/* User Information Card */}
-        <div className="lg:col-span-2 dashboard-card p-8">
-          <div className="flex items-center mb-6">
-            <User className="h-6 w-6 text-accent mr-3" />
-            <h2 className="text-2xl font-bold">User Information</h2>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <PageLayout title="Dashboard" subtitle="Overview of your account and system status">
+      <div className="space-y-6">
+        {/* Welcome Section */}
+        <div className="dashboard-card p-6">
+          <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Username</p>
-              <p className="font-semibold text-lg">{currentUser.username}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Subscription</p>
-              <p className="font-semibold text-lg">{currentUser.subscription_status}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Status</p>
-              <StatusBadge
-                status={currentUser.is_banned ? "danger" : "safe"}
-                className="mt-1"
-              >
-                {currentUser.is_banned ? "Banned" : "Active"}
-              </StatusBadge>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">IP Address</p>
-              <p className="font-semibold">{currentUser.ip_address}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">HWID</p>
-              <p className="font-mono text-sm bg-black/20 px-3 py-1 rounded-lg truncate">
-                {currentUser.hwid || 'Not set'}
-              </p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">HWID Resets</p>
-              <HWIDResetProgress used={currentUser.hwid_resets_used} max={currentUser.max_hwid_resets} />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Created Date</p>
-              <p className="font-semibold">{formatDate(currentUser.created_at)}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Last Login</p>
-              <p className="font-semibold">{formatDate(currentUser.last_login)}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Safety Status Card */}
-        <div className="dashboard-card p-8">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center">
-              <Shield className="h-6 w-6 text-accent mr-3" />
-              <h2 className="text-2xl font-bold">Safety Status</h2>
+              <h2 className="text-2xl font-bold text-white">Welcome back, {currentUser.username}!</h2>
+              <p className="text-gray-400 mt-1">Here's what's happening with your account</p>
             </div>
             <Button
-              size="sm"
-              variant="outline"
               onClick={handleRefresh}
               disabled={isRefreshing}
               className="modern-button-secondary"
@@ -159,91 +97,162 @@ const Dashboard = () => {
               {isRefreshing ? 'Refreshing...' : 'Refresh'}
             </Button>
           </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="dashboard-card p-6 text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-500/20 rounded-xl mb-4">
+              <User className="h-6 w-6 text-blue-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white">{userStats?.totalUsers || 0}</h3>
+            <p className="text-gray-400">Total Users</p>
+          </div>
           
-          <div className="space-y-4">
-            {safetyStatusData ? (
-              safetyStatusData.map((product) => (
-                <div key={product.id} className="modern-card p-4">
-                  <div className="flex justify-between items-center">
+          <div className="dashboard-card p-6 text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-green-500/20 rounded-xl mb-4">
+              <Shield className="h-6 w-6 text-green-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white">{userStats?.activeUsers || 0}</h3>
+            <p className="text-gray-400">Active Users</p>
+          </div>
+
+          <div className="dashboard-card p-6 text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-500/20 rounded-xl mb-4">
+              <Server className="h-6 w-6 text-purple-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white">{currentUser.subscription_status}</h3>
+            <p className="text-gray-400">Your Plan</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* User Information Widget */}
+          <div className="dashboard-card p-6">
+            <div className="flex items-center mb-6">
+              <User className="h-5 w-5 text-accent mr-3" />
+              <h3 className="text-xl font-semibold text-white">Account Information</h3>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-2 border-b border-white/10">
+                <span className="text-gray-400">Username</span>
+                <span className="text-white font-medium">{currentUser.username}</span>
+              </div>
+              
+              <div className="flex justify-between items-center py-2 border-b border-white/10">
+                <span className="text-gray-400">Status</span>
+                <StatusBadge
+                  status={currentUser.is_banned ? "danger" : "safe"}
+                  className="text-sm"
+                >
+                  {currentUser.is_banned ? "Banned" : "Active"}
+                </StatusBadge>
+              </div>
+              
+              <div className="flex justify-between items-center py-2 border-b border-white/10">
+                <span className="text-gray-400">Subscription</span>
+                <span className="text-white font-medium">{currentUser.subscription_status}</span>
+              </div>
+              
+              <div className="py-2">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-gray-400">HWID Resets</span>
+                </div>
+                <HWIDResetProgress used={currentUser.hwid_resets_used} max={currentUser.max_hwid_resets} />
+              </div>
+            </div>
+          </div>
+
+          {/* System Status Widget */}
+          <div className="dashboard-card p-6">
+            <div className="flex items-center mb-6">
+              <Shield className="h-5 w-5 text-accent mr-3" />
+              <h3 className="text-xl font-semibold text-white">Safety Status</h3>
+            </div>
+            
+            <div className="space-y-3">
+              {safetyStatusData ? (
+                safetyStatusData.map((product) => (
+                  <div key={product.id} className="flex justify-between items-center p-3 bg-black/20 rounded-xl">
                     <div>
-                      <p className="font-semibold">{product.product_name}</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="font-medium text-white">{product.product_name}</p>
+                      <p className="text-xs text-gray-400">
                         Updated: {formatDate(product.last_updated)}
                       </p>
                     </div>
                     <StatusBadge status={product.status as any} />
                   </div>
+                ))
+              ) : (
+                <div className="text-center py-6">
+                  <p className="text-gray-400">Loading safety status...</p>
                 </div>
-              ))
-            ) : (
-              <div className="text-center py-6">
-                <p className="text-muted-foreground">Loading safety status...</p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Account Configuration Card */}
-        <div className="lg:col-span-3 dashboard-card p-8">
-          <div className="flex items-center mb-6">
-            <Settings className="h-6 w-6 text-accent mr-3" />
-            <h2 className="text-2xl font-bold">Account Configuration</h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="modern-card p-6">
-              <h4 className="text-xl font-semibold mb-3 text-gradient-blue">Reset Hardware ID</h4>
-              <p className="text-muted-foreground mb-4">
-                Reset your HWID if you've changed your hardware or are using a new device.
-                You have <span className="font-semibold text-accent">{currentUser.max_hwid_resets - currentUser.hwid_resets_used}</span> resets remaining.
-              </p>
-              <Button
-                onClick={() => setIsHWIDDialogOpen(true)}
-                className="modern-button w-full"
-                disabled={currentUser.hwid_resets_used >= currentUser.max_hwid_resets}
-              >
-                Reset HWID
-              </Button>
+              )}
             </div>
+          </div>
 
-            <div className="modern-card p-6">
-              <h4 className="text-xl font-semibold mb-3 text-gradient-red">Delete Account</h4>
-              <p className="text-muted-foreground mb-4">
-                Permanently delete your account and all associated data. This action cannot be undone.
-              </p>
-              <Button
-                variant="destructive"
-                onClick={() => setIsDeleteDialogOpen(true)}
-                className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 rounded-xl"
-              >
-                Delete Account
-              </Button>
+          {/* Session Information Widget */}
+          <div className="dashboard-card p-6">
+            <div className="flex items-center mb-6">
+              <Clock className="h-5 w-5 text-accent mr-3" />
+              <h3 className="text-xl font-semibold text-white">Session Details</h3>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-2 border-b border-white/10">
+                <span className="text-gray-400 flex items-center">
+                  <MapPin className="h-4 w-4 mr-2" />
+                  IP Address
+                </span>
+                <span className="text-white font-mono text-sm">{currentUser.ip_address}</span>
+              </div>
+              
+              <div className="flex justify-between items-center py-2 border-b border-white/10">
+                <span className="text-gray-400 flex items-center">
+                  <Calendar className="h-4 w-4 mr-2" />
+                  Member Since
+                </span>
+                <span className="text-white">{formatDate(currentUser.created_at)}</span>
+              </div>
+              
+              <div className="flex justify-between items-center py-2">
+                <span className="text-gray-400 flex items-center">
+                  <Clock className="h-4 w-4 mr-2" />
+                  Last Login
+                </span>
+                <span className="text-white">{formatDate(currentUser.last_login)}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* HWID Information Widget */}
+          <div className="dashboard-card p-6">
+            <div className="flex items-center mb-6">
+              <Server className="h-5 w-5 text-accent mr-3" />
+              <h3 className="text-xl font-semibold text-white">Hardware Information</h3>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="text-gray-400 text-sm">Hardware ID</label>
+                <div className="mt-1 p-3 bg-black/20 rounded-xl">
+                  <code className="text-white font-mono text-sm break-all">
+                    {currentUser.hwid || 'Not set'}
+                  </code>
+                </div>
+              </div>
+              
+              <div className="flex justify-between items-center py-2">
+                <span className="text-gray-400">HWID Lock</span>
+                <StatusBadge status={currentUser.hwid_lock ? "safe" : "warning"}>
+                  {currentUser.hwid_lock ? "Enabled" : "Disabled"}
+                </StatusBadge>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Password confirmation dialogs */}
-      <PasswordConfirmDialog
-        open={isHWIDDialogOpen}
-        onOpenChange={setIsHWIDDialogOpen}
-        onConfirm={handleHWIDResetConfirm}
-        title="Reset Hardware ID"
-        description="Please enter your password to confirm HWID reset."
-        actionLabel="Reset HWID"
-        isLoading={isProcessing}
-      />
-
-      <PasswordConfirmDialog
-        open={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}
-        onConfirm={handleDeleteAccountConfirm}
-        title="Delete Account"
-        description="This action cannot be undone. Please enter your password to delete your account."
-        actionLabel="Delete Account"
-        isLoading={isProcessing}
-        isDestructive
-      />
     </PageLayout>
   );
 };
