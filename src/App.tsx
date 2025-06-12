@@ -9,9 +9,12 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Store from "./pages/Store";
-import Redeem from "./pages/Redeem";
 import Downloads from "./pages/Downloads";
 import Guides from "./pages/Guides";
+import Disclaimer from "./pages/Disclaimer";
+import Terms from "./pages/Terms";
+import RefundPolicy from "./pages/RefundPolicy";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import { useAuth } from "./contexts/AuthContext";
 
@@ -38,19 +41,14 @@ const AuthRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/store" element={<Store />} />
+      <Route path="/guides" element={<Guides />} />
+      <Route path="/disclaimer" element={<Disclaimer />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/refund-policy" element={<RefundPolicy />} />
       <Route path="/dashboard" element={
         <ProtectedRoute>
           <Dashboard />
-        </ProtectedRoute>
-      } />
-      <Route path="/store" element={
-        <ProtectedRoute>
-          <Store />
-        </ProtectedRoute>
-      } />
-      <Route path="/redeem" element={
-        <ProtectedRoute>
-          <Redeem />
         </ProtectedRoute>
       } />
       <Route path="/downloads" element={
@@ -58,9 +56,9 @@ const AuthRoutes = () => {
           <Downloads />
         </ProtectedRoute>
       } />
-      <Route path="/guides" element={
+      <Route path="/settings" element={
         <ProtectedRoute>
-          <Guides />
+          <Settings />
         </ProtectedRoute>
       } />
       <Route path="*" element={<NotFound />} />

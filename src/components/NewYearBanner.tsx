@@ -60,7 +60,7 @@ const CoolBanner: React.FC = () => {
         />
       ))}
       
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
           100% { transform: translateY(-20px) rotate(360deg); opacity: 0; }

@@ -73,7 +73,7 @@ const NewYearGreeting: React.FC = () => {
         ))}
       </div>
       
-      <style jsx>{`
+      <style>{`
         @keyframes pulse {
           0% { transform: scale(0.8); opacity: 0.5; }
           100% { transform: scale(1.2); opacity: 1; }

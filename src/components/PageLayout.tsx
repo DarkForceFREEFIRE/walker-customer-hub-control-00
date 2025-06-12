@@ -6,18 +6,20 @@ interface PageLayoutProps {
   children: React.ReactNode;
   title?: string;
   subtitle?: string;
+  className?: string;
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({ 
   children, 
   title, 
-  subtitle 
+  subtitle,
+  className = ""
 }) => {
   return (
     <div className="min-h-screen flex flex-col bg-black">
       <NavBar />
       
-      <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      <main className={`flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full ${className}`}>
         {(title || subtitle) && (
           <div className="mb-10 text-center animate-fade-in">
             {title && <h1 className="text-3xl font-bold text-white mb-3">{title}</h1>}
@@ -43,14 +45,14 @@ const PageLayout: React.FC<PageLayoutProps> = ({
             </div>
             
             <div className="mt-6 md:mt-0 flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-accent transition-colors">
+              <a href="/terms" className="text-gray-400 hover:text-accent transition-colors">
                 Terms
               </a>
-              <a href="#" className="text-gray-400 hover:text-accent transition-colors">
-                Privacy
+              <a href="/disclaimer" className="text-gray-400 hover:text-accent transition-colors">
+                Disclaimer
               </a>
-              <a href="#" className="text-gray-400 hover:text-accent transition-colors">
-                Contact
+              <a href="/refund-policy" className="text-gray-400 hover:text-accent transition-colors">
+                Refund Policy
               </a>
             </div>
           </div>
