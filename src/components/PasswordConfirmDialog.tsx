@@ -22,6 +22,7 @@ interface PasswordConfirmDialogProps {
   description: string;
   actionLabel: string;
   isLoading?: boolean;
+  isDestructive?: boolean;
 }
 
 const PasswordConfirmDialog: React.FC<PasswordConfirmDialogProps> = ({
@@ -32,6 +33,7 @@ const PasswordConfirmDialog: React.FC<PasswordConfirmDialogProps> = ({
   description,
   actionLabel,
   isLoading = false,
+  isDestructive = false,
 }) => {
   const [password, setPassword] = useState('');
   const [verifying, setVerifying] = useState(false);
@@ -99,7 +101,7 @@ const PasswordConfirmDialog: React.FC<PasswordConfirmDialogProps> = ({
             </Button>
             <Button 
               type="submit" 
-              className="bg-teal-DEFAULT hover:bg-teal-hover text-white" 
+              className={isDestructive ? "bg-destructive hover:bg-destructive/90 text-destructive-foreground" : "bg-teal-DEFAULT hover:bg-teal-hover text-white"}
               disabled={isLoading || verifying}
             >
               {isLoading || verifying ? "Processing..." : actionLabel}
