@@ -1,9 +1,7 @@
 
 import React from 'react';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
-import { Badge } from '@/components/ui/badge';
 import { Package, Gift, Layers, Star, ShieldCheck, MessageSquare } from 'lucide-react';
 import CoolBanner from '@/components/NewYearBanner';
 
@@ -14,7 +12,7 @@ const products = [
     description: 'Full access to all Walker Regedits features with priority support.',
     price: '2,500',
     popular: true,
-    icon: <Package className="h-5 w-5" />,
+    icon: <Package className="h-6 w-6" />,
     features: [
       'All essential features',
       'Advanced configurations',
@@ -30,7 +28,7 @@ const products = [
     description: 'Core features for everyday users at an affordable price.',
     price: '3,000',
     popular: false,
-    icon: <Layers className="h-5 w-5" />,
+    icon: <Layers className="h-6 w-6" />,
     features: [
       'All essential features',
       'Basic configurations',
@@ -46,7 +44,7 @@ const products = [
     description: 'Perfect for casual users needing basic functionality.',
     price: '5,000',
     popular: false,
-    icon: <Gift className="h-5 w-5" />,
+    icon: <Gift className="h-6 w-6" />,
     features: [
       'Basic features only',
       'Limited configurations',
@@ -65,7 +63,7 @@ const bundles = [
     description: 'Get the best of both worlds with this powerful combo.',
     price: '1,840',
     popular: false,
-    icon: <Star className="h-5 w-5" />,
+    icon: <Star className="h-6 w-6" />,
     features: [
       'All Supreme features',
       'All Essential features',
@@ -81,7 +79,7 @@ const bundles = [
     description: 'The ultimate package with everything included.',
     price: '6,000',
     popular: true,
-    icon: <ShieldCheck className="h-5 w-5" />,
+    icon: <ShieldCheck className="h-6 w-6" />,
     features: [
       'All Supreme features',
       'All Essential features',
@@ -103,72 +101,71 @@ const Store = () => {
     >
       <CoolBanner />
       
-      <h2 className="text-2xl font-bold mb-6 mt-10 flex items-center">
-        <Gift className="mr-2 h-5 w-5 text-blue-400" />
-        <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+      <h2 className="text-3xl font-bold mb-8 mt-12 flex items-center justify-center">
+        <Gift className="mr-3 h-7 w-7 text-accent" />
+        <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">
           Premium Packages
         </span>
       </h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         {products.map((product) => (
-          <Card
+          <div
             key={product.id}
-            className={`border relative overflow-hidden backdrop-blur-sm transition-all duration-300 hover:scale-105 ${
+            className={`store-card p-8 relative ${
               product.popular 
-                ? 'border-blue-500/30 shadow-lg shadow-blue-500/10' 
-                : 'border-white/5'
+                ? 'border-accent/40 shadow-xl shadow-accent/20' 
+                : 'border-white/10'
             }`}
           >
             {product.popular && (
-              <div className="absolute top-0 right-0">
-                <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-semibold px-3 py-1 rounded-bl">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <div className="bg-gradient-to-r from-accent to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg">
                   Most Popular
                 </div>
               </div>
             )}
-            <div className="p-6">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="p-2 rounded-full bg-card/80 border border-white/5">
-                  {product.icon}
-                </div>
-                <h3 className="text-xl font-bold">{product.name}</h3>
+            
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="p-3 rounded-xl bg-accent/10 border border-accent/20">
+                {product.icon}
               </div>
-              
-              <p className="text-gray-400 mb-6">{product.description}</p>
-              
-              <div className="mb-6">
-                <span className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Rs. {product.price}</span>
-                <span className="text-gray-400 ml-1">/month</span>
-              </div>
-              
-              <Button 
-                className={`w-full mb-6 ${
-                  product.popular 
-                    ? 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700' 
-                    : 'bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-600 hover:to-gray-800 border border-white/5'
-                }`}
-              >
-                Purchase Now
-              </Button>
-              
-              <ul className="space-y-2">
-                {product.features.map((feature, index) => (
-                  <li key={index} className="flex items-center">
-                    <svg className="w-4 h-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              <h3 className="text-2xl font-bold">{product.name}</h3>
             </div>
-          </Card>
+            
+            <p className="text-muted-foreground mb-6 leading-relaxed">{product.description}</p>
+            
+            <div className="mb-8">
+              <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Rs. {product.price}</span>
+              <span className="text-muted-foreground ml-2">/month</span>
+            </div>
+            
+            <Button 
+              className={`w-full mb-8 rounded-xl py-3 ${
+                product.popular 
+                  ? 'modern-button' 
+                  : 'modern-button-secondary'
+              }`}
+            >
+              Purchase Now
+            </Button>
+            
+            <ul className="space-y-3">
+              {product.features.map((feature, index) => (
+                <li key={index} className="flex items-center">
+                  <svg className="w-5 h-5 text-accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span className="text-sm">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
       </div>
       
-      <h2 className="text-2xl font-bold mb-6 mt-12 flex items-center">
-        <Package className="mr-2 h-5 w-5 text-cyan-400" />
+      <h2 className="text-3xl font-bold mb-8 mt-16 flex items-center justify-center">
+        <Package className="mr-3 h-7 w-7 text-cyan-400" />
         <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
           Special Bundles
         </span>
@@ -176,67 +173,66 @@ const Store = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         {bundles.map((bundle) => (
-          <Card
+          <div
             key={bundle.id}
-            className={`border relative overflow-hidden backdrop-blur-sm transition-all duration-300 hover:scale-105 ${
+            className={`store-card p-8 relative ${
               bundle.popular 
-                ? 'border-cyan-500/30 shadow-lg shadow-cyan-500/10' 
-                : 'border-white/5'
+                ? 'border-cyan-500/40 shadow-xl shadow-cyan-500/20' 
+                : 'border-white/10'
             }`}
           >
             {bundle.popular && (
-              <div className="absolute top-0 right-0">
-                <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-bl">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg">
                   Best Value
                 </div>
               </div>
             )}
-            <div className="p-6">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="p-2 rounded-full bg-card/80 border border-white/5">
-                  {bundle.icon}
-                </div>
-                <h3 className="text-xl font-bold">{bundle.name}</h3>
+            
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                {bundle.icon}
               </div>
-              
-              <p className="text-gray-400 mb-4">{bundle.description}</p>
-              
-              <div className="mb-6">
-                <span className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Rs. {bundle.price}</span>
-                <span className="text-gray-400 ml-1">/month</span>
-              </div>
-              
-              <Button 
-                className={`w-full mb-6 ${
-                  bundle.popular 
-                    ? 'bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-700 hover:to-indigo-700' 
-                    : 'bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-600 hover:to-gray-800 border border-white/5'
-                }`}
-              >
-                Purchase Now
-              </Button>
-              
-              <div className="grid grid-cols-2 gap-2">
-                {bundle.features.map((feature, index) => (
-                  <div key={index} className="flex items-center">
-                    <svg className="w-4 h-4 text-blue-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
+              <h3 className="text-2xl font-bold">{bundle.name}</h3>
             </div>
-          </Card>
+            
+            <p className="text-muted-foreground mb-6 leading-relaxed">{bundle.description}</p>
+            
+            <div className="mb-8">
+              <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Rs. {bundle.price}</span>
+              <span className="text-muted-foreground ml-2">/month</span>
+            </div>
+            
+            <Button 
+              className={`w-full mb-8 rounded-xl py-3 ${
+                bundle.popular 
+                  ? 'bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-700 hover:to-indigo-700' 
+                  : 'modern-button-secondary'
+              }`}
+            >
+              Purchase Now
+            </Button>
+            
+            <div className="grid grid-cols-2 gap-3">
+              {bundle.features.map((feature, index) => (
+                <div key={index} className="flex items-center">
+                  <svg className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span className="text-sm">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
 
-      <div className="mt-16">
-        <h2 className="text-2xl font-bold mb-6 flex items-center">
-          <MessageSquare className="mr-2 h-5 w-5 text-cyan-400" />
+      <div className="mt-20">
+        <h2 className="text-3xl font-bold mb-8 flex items-center justify-center">
+          <MessageSquare className="mr-3 h-7 w-7 text-cyan-400" />
           <span>Frequently Asked Questions</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
             {
               question: 'How do the subscription plans work?',
@@ -255,9 +251,9 @@ const Store = () => {
               answer: 'We offer a 7-day money-back guarantee if you\'re not satisfied with our service. Contact our support team to process your refund.'
             }
           ].map((faq, index) => (
-            <div key={index} className="bg-gradient-to-br from-blue-900/10 to-cyan-900/10 border border-white/5 rounded-lg p-6 hover:border-blue-500/20 transition-colors backdrop-blur-sm">
-              <h3 className="font-medium text-lg mb-2">{faq.question}</h3>
-              <p className="text-gray-400">{faq.answer}</p>
+            <div key={index} className="modern-card p-6">
+              <h3 className="font-semibold text-xl mb-3">{faq.question}</h3>
+              <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
             </div>
           ))}
         </div>

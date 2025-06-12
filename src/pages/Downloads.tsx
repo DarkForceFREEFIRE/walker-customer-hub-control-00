@@ -1,7 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
-import { Download, Clock, ShieldCheck, FileText, Package, Gift, Zap, Sun } from 'lucide-react'; 
+import { Download, Clock, Package, FileText } from 'lucide-react'; 
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import PageLayout from '@/components/PageLayout';
 import { toast } from 'sonner';
@@ -14,11 +14,6 @@ const Downloads = () => {
     queryKey: ['downloadItems'],
     queryFn: fetchDownloadItems
   });
-  const [showFestiveEffects, setShowFestiveEffects] = useState(false);
-
-  useEffect(() => {
-    setShowFestiveEffects(false);
-  }, []);
 
   useEffect(() => {
     if (error) {
@@ -38,11 +33,10 @@ const Downloads = () => {
       const date = new Date(dateString);
       return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(date);
     } catch (e) {
-      return dateString; // Fallback
+      return dateString;
     }
   };
 
-  // --- Title & Description Getters (keep as they are) ---
   const getItemTitle = (item: DownloadItem) => {
     if (item.title) return item.title;
     switch(item.item_id) {
@@ -63,154 +57,117 @@ const Downloads = () => {
      }
   };
 
-  // --- FESTIVE STYLES (Adopt from Store/Dashboard) ---
-  const festiveGradientText = showFestiveEffects ? 'text-gradient-festive' : 'text-white'; // Example, define text-gradient-festive
-  const festiveBorderPopular = showFestiveEffects ? 'border-yellow-500/40 shadow-lg shadow-yellow-600/10' : 'border-purple-500/30 shadow-lg shadow-purple-500/10'; // Highlight main item festively
-  const festiveBorderNormal = showFestiveEffects ? 'border-orange-600/20' : 'border-white/5';
-  const festiveButtonPopular = showFestiveEffects
-    ? 'bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 hover:from-yellow-600 hover:via-orange-600 hover:to-red-700 text-white shadow-lg shadow-orange-600/30'
-    : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white'; // Store's popular button
-  const festiveButtonNormal = showFestiveEffects
-    ? 'bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white shadow-md shadow-red-600/20'
-    : 'bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-600 hover:to-gray-800 border border-white/5 text-white'; // Store's normal button
-
-  const festiveBadgeStyle = showFestiveEffects
-    ? 'bg-yellow-500/10 text-yellow-300 border-yellow-500/30'
-    : 'bg-blue-500/10 text-blue-300 border-blue-500/30'; // Example badge style
-
-  const festiveCardBg = showFestiveEffects ? 'bg-[#1a1820]/70' : 'bg-card/80'; // Warmer festive bg
-
-  // --- Skeleton Card (Matching new structure) ---
   const renderSkeletonCard = () => (
-    <Card className={`border ${festiveBorderNormal} overflow-hidden backdrop-blur-sm`}>
-      <div className="p-6">
-        <div className="flex items-center space-x-3 mb-4">
-          <Skeleton className={`h-10 w-10 rounded-full ${showFestiveEffects ? 'bg-yellow-800/50' : 'bg-muted'}`} />
-          <div>
-            <Skeleton className={`h-5 w-32 mb-1 ${showFestiveEffects ? 'bg-yellow-800/50' : 'bg-muted'}`} />
-            <Skeleton className={`h-3 w-16 ${showFestiveEffects ? 'bg-yellow-800/30' : 'bg-muted/50'}`} />
-          </div>
+    <div className="download-card p-6">
+      <div className="flex items-center space-x-3 mb-4">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div>
+          <Skeleton className="h-5 w-32 mb-1" />
+          <Skeleton className="h-3 w-16" />
         </div>
-        <Skeleton className={`h-4 w-full mb-2 ${showFestiveEffects ? 'bg-yellow-800/40' : 'bg-muted'}`} />
-        <Skeleton className={`h-4 w-3/4 mb-4 ${showFestiveEffects ? 'bg-yellow-800/40' : 'bg-muted'}`} />
-        <div className="flex justify-between items-center mb-5">
-          <Skeleton className={`h-4 w-20 ${showFestiveEffects ? 'bg-yellow-800/30' : 'bg-muted/50'}`} />
-          <Skeleton className={`h-4 w-24 ${showFestiveEffects ? 'bg-yellow-800/30' : 'bg-muted/50'}`} />
-        </div>
-        <Skeleton className={`h-10 w-full ${showFestiveEffects ? 'bg-orange-700/50' : 'bg-primary/50'}`} />
-         <div className="flex justify-between items-center mt-4">
-           <Skeleton className={`h-4 w-24 ${showFestiveEffects ? 'bg-yellow-800/30' : 'bg-muted/50'}`} />
-           <Skeleton className={`h-8 w-28 ${showFestiveEffects ? 'bg-yellow-800/30' : 'bg-muted/50'}`} />
-         </div>
       </div>
-    </Card>
+      <Skeleton className="h-4 w-full mb-2" />
+      <Skeleton className="h-4 w-3/4 mb-4" />
+      <div className="flex justify-between items-center mb-5">
+        <Skeleton className="h-4 w-20" />
+        <Skeleton className="h-4 w-24" />
+      </div>
+      <Skeleton className="h-12 w-full" />
+      <div className="flex justify-between items-center mt-4">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-8 w-28" />
+      </div>
+    </div>
   );
 
-  // --- Main Render Function ---
   return (
     <PageLayout
       title="Downloads"
-      subtitle={showFestiveEffects ? "Grab your festive tools & updates!" : "Get the latest Walker Regedits tools"}
-      // Removed relative class if only used for banner
+      subtitle="Get the latest Walker Regedits tools"
     >
-      {/* Removed NewYearBanner */}
-      {/* Removed Festive H2 heading */}
-
-      {/* Grid layout similar to Store */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in`}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">
         {isLoading ? (
           Array(3).fill(0).map((_, index) => <div key={index}>{renderSkeletonCard()}</div>)
         ) : error ? (
-          <Card className={`md:col-span-2 lg:col-span-3 p-6 text-center ${festiveBorderNormal} ${festiveCardBg}`}>
+          <div className="md:col-span-2 lg:col-span-3 download-card p-8 text-center">
              <p className="text-red-400">Could not load download items. Please try again later.</p>
-           </Card>
+           </div>
         ) : (!downloadItems || downloadItems.length === 0) ? (
-          <Card className={`md:col-span-2 lg:col-span-3 p-10 text-center ${festiveBorderNormal} ${festiveCardBg}`}>
-             <FileText className={`mx-auto h-12 w-12 mb-4 ${showFestiveEffects ? 'text-yellow-500/60 animate-bounce' : 'text-muted-foreground/50'}`} />
-             <h3 className={`text-xl font-medium mb-2 ${showFestiveEffects ? festiveGradientText : ''}`}>No Downloads Available</h3>
-             <p className={`${showFestiveEffects ? 'text-orange-300/80' : 'text-muted-foreground'}`}>Check back soon for new releases and updates!</p>
-           </Card>
+          <div className="md:col-span-2 lg:col-span-3 download-card p-12 text-center">
+             <FileText className="mx-auto h-16 w-16 mb-6 text-muted-foreground/50" />
+             <h3 className="text-2xl font-semibold mb-3">No Downloads Available</h3>
+             <p className="text-muted-foreground">Check back soon for new releases and updates!</p>
+           </div>
         ) : (
           downloadItems.map((item) => {
-            const isPanel = item.item_id === 'Panel'; // Identify the main item for potential highlight
-            const cardBorder = isPanel ? festiveBorderPopular : festiveBorderNormal;
-            const buttonStyle = isPanel ? festiveButtonPopular : festiveButtonNormal;
+            const isPanel = item.item_id === 'Panel';
 
             return (
-              <Card
+              <div
                 key={item.id}
-                className={`border relative overflow-hidden backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] ${cardBorder} ${festiveCardBg} group`}
+                className={`download-card p-6 relative group ${
+                  isPanel ? 'border-accent/30 shadow-xl shadow-accent/10' : ''
+                }`}
               >
-                {/* Conditional "Latest" or "Main" badge */}
                 {isPanel && (
-                   <div className={`absolute top-0 right-0 ${showFestiveEffects ? 'bg-gradient-to-r from-yellow-500 to-orange-500' : 'bg-walker-DEFAULT'} text-white text-xs font-semibold px-3 py-1 rounded-bl shadow-md`}>
-                     Main App
+                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                     <div className="bg-gradient-to-r from-accent to-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
+                       Main App
+                     </div>
                    </div>
                  )}
-                 {/* Optional festive sparkle */}
-                 {showFestiveEffects && isPanel && (
-                    <div className="absolute top-2 left-2 text-yellow-400 opacity-70 animate-sparkle">
-                        <Sun size={16} />
-                    </div>
-                 )}
-                  {showFestiveEffects && !isPanel && (
-                     <div className="absolute bottom-2 right-2 text-red-400 opacity-0 group-hover:opacity-60 transition-opacity duration-300 animate-sparkle [animation-play-state:paused] group-hover:[animation-play-state:running]">
-                         <Zap size={14} />
-                     </div>
-                  )}
 
-                <div className="p-6 flex flex-col h-full"> {/* Flex column for structure */}
-                  {/* Header: Icon + Title + Version */}
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className={`p-2 rounded-full border ${showFestiveEffects ? 'bg-orange-900/30 border-orange-600/20' : 'bg-card/80 border-white/5'}`}>
-                      {isPanel ? <Package className={`h-5 w-5 ${showFestiveEffects ? 'text-yellow-400' : 'text-primary'}`} /> : <FileText className={`h-5 w-5 ${showFestiveEffects ? 'text-orange-400' : 'text-muted-foreground'}`} />}
+                <div className="flex flex-col h-full">
+                  <div className="flex items-center space-x-4 mb-6">
+                    <div className="p-3 rounded-xl bg-accent/10 border border-accent/20">
+                      {isPanel ? 
+                        <Package className="h-6 w-6 text-accent" /> : 
+                        <FileText className="h-6 w-6 text-muted-foreground" />
+                      }
                     </div>
                     <div>
-                       <h3 className={`text-lg font-bold ${showFestiveEffects && isPanel ? festiveGradientText : ''}`}>{getItemTitle(item)}</h3>
-                       <Badge variant="outline" className={`text-xs mt-1 ${festiveBadgeStyle}`}>
+                       <h3 className="text-xl font-bold">{getItemTitle(item)}</h3>
+                       <Badge variant="outline" className="text-xs mt-1 bg-accent/10 text-accent border-accent/30">
                           {item.version}
                        </Badge>
                     </div>
                   </div>
 
-                  {/* Description */}
-                  <p className={`text-sm mb-4 grow ${showFestiveEffects ? 'text-orange-300/90' : 'text-gray-400'}`}> {/* `grow` to push button down */}
+                  <p className="text-muted-foreground mb-6 grow leading-relaxed">
                     {getItemDescription(item)}
                   </p>
 
-                  {/* Metadata (Size, Updated) */}
-                  <div className="flex justify-between items-center text-xs mb-5 text-gray-400">
+                  <div className="flex justify-between items-center text-sm mb-6 text-muted-foreground">
                     <div className="flex items-center">
-                       <Download size={14} className={`mr-1.5 ${showFestiveEffects ? 'text-yellow-500/80' : 'text-gray-500'}`} />
+                       <Download size={16} className="mr-2" />
                        Size: {item.file_size}
                     </div>
                     <div className="flex items-center">
-                       <Clock size={14} className={`mr-1.5 ${showFestiveEffects ? 'text-yellow-500/80' : 'text-gray-500'}`} />
+                       <Clock size={16} className="mr-2" />
                        Updated: {formatDate(item.last_updated)}
                     </div>
                   </div>
 
-                  {/* Download Button */}
                   <Button
                     onClick={() => handleDownload(item)}
-                    className={`w-full mt-auto ${buttonStyle} win11-press`} // `mt-auto` pushes button to bottom
+                    className={`w-full mt-auto rounded-xl py-3 ${
+                      isPanel ? 'modern-button' : 'modern-button-secondary'
+                    }`}
                   >
-                    <Download size={16} className="mr-2" />
+                    <Download size={18} className="mr-2" />
                     Download Now
                   </Button>
 
-                   {/* Footer: File ID / Release Notes (Optional & Subtle) */}
-                   <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-xs">
-                     <span className={`${showFestiveEffects ? 'text-orange-400/60' : 'text-gray-500'}`}>
-                       ID: <code className="font-mono bg-black/20 px-1 rounded">{item.item_id}</code>
+                   <div className="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                     <span className="text-muted-foreground">
+                       ID: <code className="font-mono bg-black/20 px-2 py-1 rounded">{item.item_id}</code>
                      </span>
-                     {/* Make Release Notes less prominent if desired */}
-                     <Button variant="link" size="sm" className={`h-auto p-0 ${showFestiveEffects ? 'text-yellow-500 hover:text-yellow-300' : 'text-blue-400 hover:text-blue-300'}`}>
+                     <Button variant="link" size="sm" className="h-auto p-0 text-accent hover:text-accent/80">
                        Release Notes
                      </Button>
                    </div>
                 </div>
-              </Card>
+              </div>
             );
           })
         )}

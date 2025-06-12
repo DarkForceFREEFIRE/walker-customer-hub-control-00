@@ -1,10 +1,9 @@
 
 import React from 'react';
 import PageLayout from '@/components/PageLayout';
-import { Card } from '@/components/ui/card';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/lib/supabase';
 import { AlertTriangle, CheckCircle, Download, Monitor, PlayCircle, Shield, Clock, Zap, Users, Star } from 'lucide-react';
 
 const FeatureCard = ({ 
@@ -19,23 +18,23 @@ const FeatureCard = ({
   status: 'recommended' | 'warning' | 'info';
 }) => {
   const statusColors = {
-    recommended: 'bg-green-500/10 border-green-500/20 text-green-400',
-    warning: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
-    info: 'bg-blue-500/10 border-blue-500/20 text-blue-400'
+    recommended: 'border-green-500/30 shadow-lg shadow-green-500/10',
+    warning: 'border-amber-500/30 shadow-lg shadow-amber-500/10',
+    info: 'border-blue-500/30 shadow-lg shadow-blue-500/10'
   };
 
   return (
-    <Card className={`p-6 border transition-all duration-300 hover:scale-[1.02] ${statusColors[status]}`}>
+    <div className={`modern-card p-6 ${statusColors[status]}`}>
       <div className="flex items-start gap-4">
-        <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+        <div className="p-3 rounded-xl bg-accent/10 border border-accent/20">
           {icon}
         </div>
         <div className="flex-1">
           <h3 className="text-lg font-semibold mb-2">{title}</h3>
-          <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
+          <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
@@ -51,18 +50,18 @@ const StepCard = ({
   tips?: string[];
 }) => {
   return (
-    <div className="relative">
-      <div className="flex items-start gap-6 p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/30 rounded-2xl border border-white/10 backdrop-blur-sm hover:border-blue-500/30 transition-all duration-300">
-        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+    <div className="modern-card p-8">
+      <div className="flex items-start gap-6">
+        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-accent to-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
           {number}
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
-          <p className="text-gray-300 mb-4 leading-relaxed">{description}</p>
+          <h3 className="text-xl font-semibold mb-3">{title}</h3>
+          <p className="text-muted-foreground mb-4 leading-relaxed">{description}</p>
           {tips && (
             <div className="space-y-2">
               {tips.map((tip, index) => (
-                <div key={index} className="flex items-center gap-2 text-sm text-blue-300">
+                <div key={index} className="flex items-center gap-2 text-sm text-accent">
                   <CheckCircle size={16} />
                   <span>{tip}</span>
                 </div>
@@ -76,46 +75,66 @@ const StepCard = ({
 };
 
 const Guides = () => {
+  // Get real user count from Supabase
+  const { data: userStats } = useQuery({
+    queryKey: ['userStats'],
+    queryFn: async () => {
+      const { count: totalUsers } = await supabase
+        .from('users')
+        .select('*', { count: 'exact', head: true });
+      
+      const { count: activeUsers } = await supabase
+        .from('users')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_banned', false);
+
+      return {
+        totalUsers: totalUsers || 0,
+        activeUsers: activeUsers || 0
+      };
+    }
+  });
+
   return (
     <PageLayout title="User Guides" subtitle="Complete guide to using Walker Regedits safely and effectively">
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div className="max-w-6xl mx-auto space-y-16">
         {/* Safety Notice */}
-        <Alert className="border-amber-500/20 bg-amber-900/10 backdrop-blur-sm">
+        <Alert className="border-amber-500/30 bg-amber-900/10 backdrop-blur-sm rounded-2xl">
           <AlertTriangle className="h-5 w-5 text-amber-500" />
           <AlertTitle className="text-amber-400 text-lg">Safety First</AlertTitle>
-          <AlertDescription className="text-gray-300 mt-2">
+          <AlertDescription className="text-muted-foreground mt-2">
             Always check the panel safety status before use to minimize ban risks. We recommend using our recommended Free Fire APK for the best experience.
           </AlertDescription>
         </Alert>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="text-center p-6 bg-gradient-to-br from-blue-900/20 to-cyan-900/20 rounded-xl border border-blue-500/20">
+          <div className="stats-card bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20">
             <Users className="h-8 w-8 text-blue-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-white">50K+</div>
-            <div className="text-gray-400 text-sm">Active Users</div>
+            <div className="text-3xl font-bold text-white">{userStats?.totalUsers || 0}</div>
+            <div className="text-muted-foreground text-sm">Total Users</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-xl border border-green-500/20">
+          <div className="stats-card bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/20">
             <Shield className="h-8 w-8 text-green-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-white">99.7%</div>
-            <div className="text-gray-400 text-sm">Safety Rate</div>
+            <div className="text-3xl font-bold text-white">99.7%</div>
+            <div className="text-muted-foreground text-sm">Safety Rate</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-purple-900/20 to-indigo-900/20 rounded-xl border border-purple-500/20">
+          <div className="stats-card bg-gradient-to-br from-purple-900/20 to-indigo-900/20 border-purple-500/20">
             <Clock className="h-8 w-8 text-purple-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-white">24/7</div>
-            <div className="text-gray-400 text-sm">Support</div>
+            <div className="text-3xl font-bold text-white">24/7</div>
+            <div className="text-muted-foreground text-sm">Support</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-amber-900/20 to-orange-900/20 rounded-xl border border-amber-500/20">
+          <div className="stats-card bg-gradient-to-br from-amber-900/20 to-orange-900/20 border-amber-500/20">
             <Star className="h-8 w-8 text-amber-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-white">4.9/5</div>
-            <div className="text-gray-400 text-sm">User Rating</div>
+            <div className="text-3xl font-bold text-white">4.9/5</div>
+            <div className="text-muted-foreground text-sm">User Rating</div>
           </div>
         </div>
 
         {/* Getting Started Steps */}
         <div>
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Getting Started</h2>
-          <div className="space-y-6">
+          <h2 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">Getting Started</h2>
+          <div className="space-y-8">
             <StepCard 
               number={1}
               title="Check Safety Status"
@@ -148,8 +167,8 @@ const Guides = () => {
 
         {/* System Requirements */}
         <div>
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">System Requirements</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h2 className="text-4xl font-bold mb-12 text-center">System Requirements</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <FeatureCard 
               icon={<Monitor className="h-6 w-6" />}
               title="Minimum Requirements"
@@ -167,8 +186,8 @@ const Guides = () => {
 
         {/* Best Practices */}
         <div>
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Best Practices</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-4xl font-bold mb-12 text-center">Best Practices</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard 
               icon={<Shield className="h-6 w-6" />}
               title="Account Safety"
@@ -192,8 +211,8 @@ const Guides = () => {
 
         {/* FAQ Section */}
         <div>
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <h2 className="text-4xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {[
               {
                 question: "Is it safe to use Walker Regedits?",
@@ -212,30 +231,12 @@ const Guides = () => {
                 answer: "Contact our 24/7 support team through the official channels for immediate assistance."
               }
             ].map((faq, index) => (
-              <Card key={index} className="p-6 bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-white/10 hover:border-blue-500/30 transition-all duration-300">
-                <h3 className="font-semibold text-lg text-white mb-3">{faq.question}</h3>
-                <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
-              </Card>
+              <div key={index} className="modern-card p-6">
+                <h3 className="font-semibold text-lg mb-3">{faq.question}</h3>
+                <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+              </div>
             ))}
           </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center py-12">
-          <Card className="p-8 bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border-blue-500/20">
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Follow our comprehensive guide and join thousands of satisfied users who trust Walker Regedits for their gaming needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700">
-                Download Now
-              </Button>
-              <Button variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
-                Join Community
-              </Button>
-            </div>
-          </Card>
         </div>
       </div>
     </PageLayout>
