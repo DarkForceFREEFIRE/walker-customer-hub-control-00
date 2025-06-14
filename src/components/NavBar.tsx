@@ -68,7 +68,7 @@ const NavBar = () => {
   return (
     <nav className={cn(
       "fixed top-4 left-4 right-4 z-50 transition-all duration-500",
-      "border border-white/10 rounded-lg",
+      "border border-white/10 rounded-xl",
       scrolled 
         ? "bg-black/90 backdrop-blur-2xl shadow-2xl shadow-black/50" 
         : "bg-black/70 backdrop-blur-xl"
@@ -85,7 +85,7 @@ const NavBar = () => {
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-black animate-pulse"></div>
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-lg font-bold bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent group-hover:from-accent group-hover:to-blue-400 transition-all duration-300">
+                <h1 className="text-lg font-bold bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent group-hover:from-accent group-hover:to-blue-400 transition-all duration-300 whitespace-nowrap">
                   Walker Regedits for Pro Gamers
                 </h1>
               </div>
@@ -122,7 +122,7 @@ const NavBar = () => {
                 {/* Username Display */}
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2">
                   <span className="text-white text-sm font-medium">
-                    {currentUser.email?.split('@')[0] || 'User'}
+                    {currentUser.username || 'User'}
                   </span>
                 </div>
                 
@@ -187,7 +187,7 @@ const NavBar = () => {
         "lg:hidden transition-all duration-300 ease-in-out overflow-hidden",
         isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       )}>
-        <div className="bg-black/95 backdrop-blur-2xl border-t border-white/5 shadow-2xl rounded-b-lg">
+        <div className="bg-black/95 backdrop-blur-2xl border-t border-white/5 shadow-2xl rounded-b-xl">
           <div className="px-6 py-6 space-y-3">
             {publicNavItems.map((item) => (
               <NavItem 
@@ -203,7 +203,7 @@ const NavBar = () => {
                 {/* Mobile Username Display */}
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3 mb-3">
                   <span className="text-white text-sm font-medium">
-                    Welcome, {currentUser.email?.split('@')[0] || 'User'}
+                    Welcome, {currentUser.username || 'User'}
                   </span>
                 </div>
                 
