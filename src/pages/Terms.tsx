@@ -2,231 +2,125 @@
 import React from 'react';
 import PageLayout from '@/components/PageLayout';
 import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Calendar, MapPin, Scale } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Shield, AlertTriangle, Info, FileText } from 'lucide-react';
 
 const Terms = () => {
   return (
-    <PageLayout title="Terms & Conditions" subtitle="Please read these terms carefully before using our platform">
+    <PageLayout title="Terms of Service" subtitle="Legal terms and conditions for using Walker Regedits">
       <div className="max-w-4xl mx-auto">
-        <Card className="border border-white/5">
+        <Card className="border border-blue-500/20 bg-blue-900/10 rounded-xl">
           <div className="p-8">
-            <div className="flex items-center gap-4 mb-8 p-4 bg-blue-900/10 border border-blue-500/20 rounded-lg">
-              <Calendar className="h-5 w-5 text-blue-400" />
-              <div>
-                <p className="font-semibold text-blue-400">Effective Date</p>
-                <p className="text-gray-300">May 6, 2025</p>
+            <div className="flex items-center gap-3 mb-6">
+              <FileText className="h-6 w-6 text-blue-400" />
+              <h2 className="text-2xl font-bold text-blue-400">Terms of Service</h2>
+            </div>
+            
+            <div className="prose prose-invert max-w-none">
+              <div className="bg-black/20 border border-white/10 rounded-xl p-6 mb-8">
+                <p className="text-lg leading-relaxed text-gray-200">
+                  By using Walker Regedits PC optimization software, you agree to comply with and be bound by the following terms and conditions of use.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-green-900/10 border border-green-500/20 rounded-xl p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield className="h-5 w-5 text-green-400" />
+                    <h3 className="text-lg font-semibold text-green-400">Software License</h3>
+                  </div>
+                  <p className="text-gray-300">
+                    Walker Regedits grants you a non-exclusive, non-transferable license to use this PC optimization software for personal use only.
+                  </p>
+                </div>
+                
+                <div className="bg-amber-900/10 border border-amber-500/20 rounded-xl p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <AlertTriangle className="h-5 w-5 text-amber-400" />
+                    <h3 className="text-lg font-semibold text-amber-400">Usage Restrictions</h3>
+                  </div>
+                  <p className="text-gray-300">
+                    You may not reverse engineer, decompile, or distribute this software without explicit written permission.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-4">Acceptable Use Policy</h3>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-400 mt-1">•</span>
+                      Use the software only for legitimate PC optimization purposes
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-400 mt-1">•</span>
+                      Do not attempt to bypass or circumvent any security measures
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-400 mt-1">•</span>
+                      Respect all applicable laws and regulations in your jurisdiction
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-400 mt-1">•</span>
+                      Do not share your license with unauthorized users
+                    </li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-4">Limitation of Liability</h3>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-400 mt-1">•</span>
+                      Walker Regedits is provided "as is" without warranties of any kind
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-400 mt-1">•</span>
+                      We are not liable for any system damage caused by misuse
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-400 mt-1">•</span>
+                      Users are responsible for creating system backups before use
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-400 mt-1">•</span>
+                      Maximum liability is limited to the amount paid for the software
+                    </li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-4">Account Terms</h3>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      You are responsible for maintaining account security
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      Accounts are non-transferable and for individual use only
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      We reserve the right to suspend accounts for violations
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      Refunds are subject to our refund policy terms
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-
-            <div className="prose prose-invert max-w-none space-y-8">
-              <div>
-                <p className="text-gray-300 leading-relaxed mb-6">
-                  Welcome to Walker Regedits. Please read these Terms & Conditions carefully before using our Platform. 
-                  Your access to and use of our Platform is conditioned on your acceptance of and compliance with these terms.
-                </p>
-              </div>
-
-              <Separator className="bg-white/10" />
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">1.</span> Introduction
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  This document is an electronic record in terms of the Electronic Transactions Act, No. 19 of 2006 
-                  (as amended by Act No. 25 of 2017) and the Information and Communication Technology Act, No. 27 of 2003, 
-                  and their respective subsidiary legislation. It is generated by a computer system and does not require 
-                  any physical or digital signatures. This document is published in accordance with applicable laws that 
-                  require publishing rules and regulations, privacy policy, and Terms of Use for the domain name 
-                  https://wzservice.vercel.app/ (the "Website"), including the related mobile site and mobile application 
-                  (collectively referred to as 'Platform').
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">2.</span> Platform Owner
-                </h2>
-                <div className="bg-gray-900/50 border border-white/10 rounded-lg p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <MapPin className="h-4 w-4 text-green-400" />
-                    <span className="font-semibold text-green-400">Company Information</span>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    The Platform is owned by WZ System Utils, a company incorporated under the Companies Act, No. 7 of 2007, 
-                    with its registered office in Sri Lanka (referred to as 'Platform Owner', 'we', 'us', 'our').
-                  </p>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">3.</span> Acceptance of Terms
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  By using the Platform and our services, you agree to these Terms of Use, including applicable policies 
-                  incorporated by reference. If you transact on the Platform, you shall be subject to the policies applicable 
-                  to such transactions. These Terms constitute a binding agreement between you and the Platform Owner.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">4.</span> Modifications
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  We reserve the right to modify these Terms of Use at any time without prior notice. It is your responsibility 
-                  to periodically review these Terms for any updates. Your continued use of the Platform after any modifications 
-                  signifies your acceptance of the revised Terms.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">5.</span> User Responsibilities
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  You agree to provide true, accurate, and complete information during and after registration, and you are 
-                  responsible for all actions taken through your registered account. You are required to independently assess 
-                  and ensure that the Services meet your specific needs.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">6.</span> No Warranties
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  We and any third parties do not guarantee the accuracy, timeliness, performance, completeness, or suitability 
-                  of the information and materials offered on the Platform or through the Services for any particular purpose. 
-                  You acknowledge that such information and materials may contain inaccuracies or errors, and we expressly exclude 
-                  liability for any such inaccuracies or errors to the fullest extent permitted by Sri Lankan law. Your use of any 
-                  information or materials on this Platform is entirely at your own risk.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">7.</span> Intellectual Property
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  The contents of the Platform and Services, including but not limited to text, graphics, logos, images, software, 
-                  and underlying code, are proprietary to us or our licensors. You do not have any rights or interests in the 
-                  intellectual property of the Platform and Services beyond the limited right to use them in accordance with these Terms. 
-                  Unauthorized use, reproduction, or distribution of these materials may lead to legal action under the Intellectual 
-                  Property Act, No. 36 of 2003, and other applicable laws.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">8.</span> Payment
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  You agree to pay the charges associated with availing of the Services as specified on the Platform. All payments 
-                  are subject to applicable taxes and levies in Sri Lanka.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">9.</span> Prohibited Use
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  You agree not to use the Platform or Services for any unlawful or prohibited purpose according to these Terms 
-                  or applicable laws in Sri Lanka, including but not limited to the Computer Crimes Act, No. 24 of 2007, and the 
-                  Prevention of Terrorism Act, No. 48 of 1979, where relevant. This includes, without limitation, attempting to gain 
-                  unauthorized access to our systems, interfering with the Platform's functionality, or engaging in any activity that 
-                  could harm the Platform, other users, or our reputation.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">10.</span> Third-Party Links
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  The Platform may contain links to third-party websites. These links are provided for your convenience and do not 
-                  imply endorsement by us of those websites or their content. Your use of these third-party websites is governed by 
-                  their respective terms and policies, and we are not responsible for their content or practices.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">11.</span> Legal Contract
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  By initiating a transaction for the Services on the Platform, you enter into a legally binding contract with the 
-                  Platform Owner, subject to these Terms and all applicable Sri Lankan laws.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">12.</span> Indemnification
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  You shall indemnify and hold harmless the Platform Owner, its affiliates, and their respective officers, directors, 
-                  agents, and employees from any claims or actions (including reasonable legal fees) arising out of your breach of 
-                  these Terms, our Privacy Policy, or any applicable laws or regulations in Sri Lanka.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">13.</span> Force Majeure
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  We shall not be liable for any failure to perform our obligations under these Terms if such failure is due to 
-                  events beyond our reasonable control, including but not limited to acts of God, war, terrorism, civil unrest, 
-                  natural disasters, epidemics, governmental regulations, power failures, or any other cause beyond our reasonable 
-                  control (force majeure event).
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">14.</span> Governing Law and Jurisdiction
-                </h2>
-                <div className="bg-blue-900/10 border border-blue-500/20 rounded-lg p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Scale className="h-4 w-4 text-blue-400" />
-                    <span className="font-semibold text-blue-400">Jurisdiction</span>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    These Terms and any disputes arising out of or in connection with them shall be governed by and construed in 
-                    accordance with the laws of Sri Lanka. Any disputes or claims arising out of these Terms or your use of the 
-                    Platform shall be subject to the exclusive jurisdiction of the courts in Colombo, Sri Lanka.
-                  </p>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">15.</span> Contact Information
-                </h2>
-                <p className="text-gray-300 leading-relaxed">
-                  For any concerns, questions, or communications related to these Terms, please contact us using the contact 
-                  information provided on our official website.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">16.</span> Misconduct and Abuse Policy
-                </h2>
-                <div className="bg-red-900/10 border border-red-500/20 rounded-lg p-4">
-                  <p className="text-gray-300 leading-relaxed">
-                    We reserve the right to immediately suspend or permanently disable access to our Services or Products without 
-                    prior notice or explanation if we detect, suspect, or are informed of any misconduct by a user. This includes 
-                    but is not limited to attempts to crack, reverse-engineer, tamper with, redistribute, or abuse the Product, or 
-                    any actions that negatively impact our Platform, other users, or our reputation. Such decisions are at the sole 
-                    discretion of the Platform Owner and shall be final and binding.
-                  </p>
-                </div>
-              </section>
+            
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-6 border-t border-white/10">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl">
+                I Accept the Terms
+              </Button>
+              <Button variant="outline" className="border-gray-500 text-gray-300 hover:bg-gray-800 rounded-xl">
+                Download PDF Copy
+              </Button>
             </div>
           </div>
         </Card>
