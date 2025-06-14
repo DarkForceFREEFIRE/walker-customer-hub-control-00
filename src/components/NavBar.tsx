@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Search, Bell, LogOut, Settings } from "lucide-react";
+import { Menu, X, Search, Bell, LogOut, Settings, Home, Package, BookOpen, Download, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +10,7 @@ interface NavItemProps {
   to: string;
   icon: React.ReactNode;
   label: string;
+  isActive?: boolean;
 }
 
 const NavItem = ({ to, icon, label }: NavItemProps) => {
@@ -17,17 +18,19 @@ const NavItem = ({ to, icon, label }: NavItemProps) => {
     <NavLink 
       to={to}
       className={({ isActive }) => 
-        `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${
+        cn(
+          "group relative flex items-center space-x-3 px-4 py-2.5 rounded-xl transition-all duration-300",
+          "hover:bg-white/5 hover:backdrop-blur-sm",
           isActive 
-            ? "text-accent font-medium bg-secondary/30" 
-            : "text-gray-400 hover:text-white hover:bg-secondary/10"
-        }`
+            ? "text-white bg-gradient-to-r from-accent/20 to-blue-500/20 border border-accent/30 shadow-lg shadow-accent/10" 
+            : "text-gray-300 hover:text-white"
+        )
       }
     >
-      <div className={`transition-colors duration-200`}>
+      <div className="transition-all duration-300 group-hover:scale-110">
         {icon}
       </div>
-      <span>{label}</span>
+      <span className="font-medium text-sm">{label}</span>
     </NavLink>
   );
 };
@@ -40,11 +43,10 @@ const NavBar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
-    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -53,41 +55,47 @@ const NavBar = () => {
   }, [location]);
 
   const publicNavItems = [
-    { to: "/store", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5"><path d="M3 6L6 2H18L21 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M4 10V19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 14V8C14 6.89543 13.1046 6 12 6C10.8954 6 10 6.89543 10 8V14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M21 6H3C2.44772 6 2 6.44772 2 7V9C2 9.55228 2.44772 10 3 10H21C21.5523 10 22 9.55228 22 9V7C22 6.44772 21.5523 6 21 6Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>, label: "Store" },
-    { to: "/guides", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5"><path d="M4 19.5V4.5C4 4.10218 4.15804 3.72064 4.43934 3.43934C4.72064 3.15804 5.10218 3 5.5 3H20.5C20.8978 3 21.2794 3.15804 21.5607 3.43934C21.842 3.72064 22 4.10218 22 4.5V19.5C22 19.8978 21.842 20.2794 21.5607 20.5607C21.2794 20.842 20.8978 21 20.5 21H5.5C5.10218 21 4.72064 20.842 4.43934 20.5607C4.15804 20.2794 4 19.8978 4 19.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 3V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>, label: "Guides" }
+    { to: "/", icon: <Home size={18} />, label: "Home" },
+    { to: "/store", icon: <Package size={18} />, label: "Store" },
+    { to: "/guides", icon: <BookOpen size={18} />, label: "Guides" }
   ];
 
   const protectedNavItems = [
-    { to: "/dashboard", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5"><path d="M9 4H5C4.44772 4 4 4.44772 4 5V9C4 9.55228 4.44772 10 5 10H9C9.55228 10 10 9.55228 10 9V5C10 4.44772 9.55228 4 9 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M19 4H15C14.4477 4 14 4.44772 14 5V9C14 9.55228 14.4477 10 15 10H19C19.5523 10 20 9.55228 20 9V5C20 4.44772 19.5523 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 14H5C4.44772 14 4 14.4477 4 15V19C4 19.5523 4.44772 20 5 20H9C9.55228 20 10 19.5523 10 19V15C10 14.4477 9.55228 14 9 14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M19 14H15C14.4477 14 14 14.4477 14 15V19C14 19.5523 14.4477 20 15 20H19C19.5523 20 20 19.5523 20 19V15C20 14.4477 19.5523 14 19 14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>, label: "Dashboard" },
-    { to: "/downloads", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5"><path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>, label: "Downloads" }
+    { to: "/dashboard", icon: <LayoutDashboard size={18} />, label: "Dashboard" },
+    { to: "/downloads", icon: <Download size={18} />, label: "Downloads" }
   ];
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+      "border-b border-white/5",
       scrolled 
-        ? "bg-card/80 backdrop-blur-xl border-b border-white/10 shadow-lg" 
-        : "bg-transparent"
+        ? "bg-black/80 backdrop-blur-2xl shadow-2xl shadow-black/50" 
+        : "bg-black/60 backdrop-blur-xl"
     )}>
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo and brand */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo Section */}
           <div className="flex items-center">
-            <NavLink to="/" className="flex items-center group">
-              <div className="flex-shrink-0 mr-3">
-                <img 
-                  src="https://raw.githubusercontent.com/DarkForceFREEFIRE/Server-Updates/refs/heads/main/logo.png" 
-                  alt="Walker Regedits Logo" 
-                  className="w-10 h-10 rounded-lg shadow-lg group-hover:shadow-accent/30 transition-all duration-300"
-                />
+            <NavLink to="/" className="group flex items-center space-x-3">
+              <div className="relative">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-accent via-blue-500 to-purple-600 flex items-center justify-center shadow-xl shadow-accent/30 group-hover:shadow-accent/50 transition-all duration-300 group-hover:scale-105">
+                  <span className="text-white font-bold text-lg">W</span>
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-black animate-pulse"></div>
               </div>
-              <span className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">Walker Regedits</span>
+              <div className="hidden sm:block">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent group-hover:from-accent group-hover:to-blue-400 transition-all duration-300">
+                  Walker Regedits
+                </h1>
+                <p className="text-xs text-gray-400 -mt-0.5">Premium Tools</p>
+              </div>
             </NavLink>
           </div>
 
-          {/* Desktop navigation */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-1">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-2">
+            <div className="flex items-center space-x-1 bg-white/5 backdrop-blur-sm rounded-2xl p-1 border border-white/10">
               {publicNavItems.map((item) => (
                 <NavItem 
                   key={item.label}
@@ -97,96 +105,7 @@ const NavBar = () => {
                 />
               ))}
               
-              {currentUser ? (
-                <>
-                  {protectedNavItems.map((item) => (
-                    <NavItem 
-                      key={item.label}
-                      to={item.to}
-                      icon={item.icon}
-                      label={item.label}
-                    />
-                  ))}
-                  <div className="flex items-center ml-4 space-x-2">
-                    <Button 
-                      variant="ghost" 
-                      size="icon"
-                      className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
-                    >
-                      <Bell size={18} />
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      size="icon"
-                      className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
-                    >
-                      <Search size={18} />
-                    </Button>
-                    <NavLink to="/settings">
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
-                      >
-                        <Settings size={18} />
-                      </Button>
-                    </NavLink>
-                    <Button 
-                      variant="ghost" 
-                      size="icon"
-                      onClick={logout}
-                      className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
-                    >
-                      <LogOut size={18} />
-                    </Button>
-                  </div>
-                </>
-              ) : (
-                <NavLink to="/login">
-                  <Button 
-                    variant="default"
-                    className="ml-4 bg-accent/90 hover:bg-accent text-white transition-all duration-300 rounded-lg"
-                  >
-                    Login
-                  </Button>
-                </NavLink>
-              )}
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="flex md:hidden">
-            <Button 
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-200 hover:text-white rounded-lg"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-card/80 backdrop-blur-xl shadow-lg">
-          {publicNavItems.map((item) => (
-            <NavItem 
-              key={item.label}
-              to={item.to}
-              icon={item.icon}
-              label={item.label}
-            />
-          ))}
-          
-          {currentUser ? (
-            <>
-              {protectedNavItems.map((item) => (
+              {currentUser && protectedNavItems.map((item) => (
                 <NavItem 
                   key={item.label}
                   to={item.to}
@@ -194,32 +113,122 @@ const NavBar = () => {
                   label={item.label}
                 />
               ))}
-              <NavItem 
-                to="/settings"
-                icon={<Settings size={18} />}
-                label="Settings"
-              />
-              <Button 
-                variant="default" 
-                className="w-full mt-2 bg-accent hover:bg-accent/90 rounded-lg"
-                onClick={logout}
-              >
-                <LogOut size={16} className="mr-2" />
-                Logout
-              </Button>
-            </>
-          ) : (
-            <div className="pt-2">
-              <NavLink to="/login" className="block w-full">
+            </div>
+          </div>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-3">
+            {currentUser ? (
+              <div className="hidden md:flex items-center space-x-2">
                 <Button 
-                  variant="default" 
-                  className="w-full bg-accent hover:bg-accent/90 rounded-lg"
+                  variant="ghost" 
+                  size="icon"
+                  className="w-10 h-10 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300"
                 >
-                  Login
+                  <Search size={18} />
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  className="w-10 h-10 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300 relative"
+                >
+                  <Bell size={18} />
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border border-black"></div>
+                </Button>
+                <NavLink to="/settings">
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="w-10 h-10 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+                  >
+                    <Settings size={18} />
+                  </Button>
+                </NavLink>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={logout}
+                  className="w-10 h-10 rounded-xl text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-300"
+                >
+                  <LogOut size={18} />
+                </Button>
+              </div>
+            ) : (
+              <NavLink to="/login">
+                <Button 
+                  className="bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium px-6 py-2.5 rounded-xl shadow-lg shadow-accent/30 hover:shadow-accent/50 transition-all duration-300 hover:scale-105"
+                >
+                  Get Started
                 </Button>
               </NavLink>
-            </div>
-          )}
+            )}
+
+            {/* Mobile Menu Button */}
+            <Button 
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden w-10 h-10 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={cn(
+        "lg:hidden transition-all duration-300 ease-in-out overflow-hidden",
+        isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+      )}>
+        <div className="bg-black/95 backdrop-blur-2xl border-t border-white/5 shadow-2xl">
+          <div className="px-6 py-6 space-y-3">
+            {publicNavItems.map((item) => (
+              <NavItem 
+                key={item.label}
+                to={item.to}
+                icon={item.icon}
+                label={item.label}
+              />
+            ))}
+            
+            {currentUser ? (
+              <>
+                {protectedNavItems.map((item) => (
+                  <NavItem 
+                    key={item.label}
+                    to={item.to}
+                    icon={item.icon}
+                    label={item.label}
+                  />
+                ))}
+                <NavItem 
+                  to="/settings"
+                  icon={<Settings size={18} />}
+                  label="Settings"
+                />
+                <div className="pt-4 border-t border-white/10">
+                  <Button 
+                    onClick={logout}
+                    className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-medium py-3 rounded-xl transition-all duration-300"
+                  >
+                    <LogOut size={16} className="mr-2" />
+                    Sign Out
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <div className="pt-4 border-t border-white/10">
+                <NavLink to="/login" className="block w-full">
+                  <Button 
+                    className="w-full bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium py-3 rounded-xl shadow-lg transition-all duration-300"
+                  >
+                    Get Started
+                  </Button>
+                </NavLink>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>
