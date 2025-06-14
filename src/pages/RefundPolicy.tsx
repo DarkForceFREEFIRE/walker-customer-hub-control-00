@@ -1,13 +1,10 @@
-
 import React from 'react';
 import PageLayout from '@/components/PageLayout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CreditCard, Clock, CheckCircle, XCircle } from 'lucide-react';
-
 const RefundPolicy = () => {
-  return (
-    <PageLayout title="Refund Policy" subtitle="Our refund terms and conditions for Walker Regedits">
+  return <PageLayout title="Refund Policy" subtitle="Our refund terms and conditions for Walker Regedits">
       <div className="max-w-4xl mx-auto">
         <Card className="border border-green-500/20 bg-green-900/10 rounded-xl">
           <div className="p-8">
@@ -94,21 +91,21 @@ const RefundPolicy = () => {
                   <h3 className="text-xl font-semibold text-white mb-4">Refund Process</h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold mt-0.5">1</div>
+                      <div className="w-6 h-6 rounded-full text-white text-xs flex items-center justify-center font-bold mt-0.5 bg-transparent">1</div>
                       <div>
                         <h4 className="font-medium text-white">Contact Support</h4>
                         <p className="text-gray-300 text-sm">Send an email to support with your order details and reason for refund</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold mt-0.5">2</div>
+                      <div className="w-6 h-6 rounded-full text-white text-xs flex items-center justify-center font-bold mt-0.5 bg-transparent">2</div>
                       <div>
                         <h4 className="font-medium text-white">Verification</h4>
                         <p className="text-gray-300 text-sm">We'll verify your purchase and eligibility for refund</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold mt-0.5">3</div>
+                      <div className="w-6 h-6 rounded-full text-white text-xs flex items-center justify-center font-bold mt-0.5 bg-transparent">3</div>
                       <div>
                         <h4 className="font-medium text-white">Processing</h4>
                         <p className="text-gray-300 text-sm">Refund will be processed to your original payment method within 3-5 business days</p>
@@ -120,18 +117,16 @@ const RefundPolicy = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-6 border-t border-white/10">
-              <Button className="bg-green-600 hover:bg-green-700 text-white rounded-xl">
+              <Button className="bg-green-600 hover:bg-green-700 text-white rounded">
                 Contact Support
               </Button>
-              <Button variant="outline" className="border-gray-500 text-gray-300 hover:bg-gray-800 rounded-xl">
+              <Button variant="outline" className="border-gray-500 text-gray-300 hover:bg-gray-800 rounded">
                 View Purchase History
               </Button>
             </div>
           </div>
         </Card>
       </div>
-    </PageLayout>
-  );
+    </PageLayout>;
 };
-
 export default RefundPolicy;
