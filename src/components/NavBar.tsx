@@ -76,7 +76,7 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section - Left Aligned */}
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             <NavLink to="/" className="group flex items-center space-x-3">
               <div className="relative">
                 <img 
@@ -94,7 +94,7 @@ const NavBar = () => {
           </div>
 
           {/* Desktop Navigation - Center */}
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-2 flex-1 justify-center">
             <div className="flex items-center space-x-1 bg-white/5 backdrop-blur-sm rounded-lg p-1 border border-white/10">
               {publicNavItems.map((item) => (
                 <NavItem 
@@ -117,7 +117,7 @@ const NavBar = () => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 flex-shrink-0">
             {currentUser ? (
               <div className="hidden md:flex items-center space-x-2">
                 {/* Username Display */}
