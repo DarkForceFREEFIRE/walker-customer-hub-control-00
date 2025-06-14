@@ -68,31 +68,32 @@ const NavBar = () => {
   return (
     <nav className={cn(
       "fixed top-4 left-4 right-4 z-50 transition-all duration-500",
-      "border border-white/10 rounded-xl",
+      "border border-white/10 rounded-lg",
       scrolled 
         ? "bg-black/90 backdrop-blur-2xl shadow-2xl shadow-black/50" 
         : "bg-black/70 backdrop-blur-xl"
     )}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo Section */}
+          {/* Logo Section - Left Aligned */}
           <div className="flex items-center">
             <NavLink to="/" className="group flex items-center space-x-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent via-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-accent/30 group-hover:shadow-accent/50 transition-all duration-300 group-hover:scale-105">
-                  <span className="text-white font-bold text-lg">W</span>
-                </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-black animate-pulse"></div>
+                <img 
+                  src="https://raw.githubusercontent.com/DarkForceFREEFIRE/Server-Updates/refs/heads/main/logo.png" 
+                  alt="Walker Regedits Logo"
+                  className="w-10 h-10 rounded-lg shadow-lg group-hover:shadow-accent/50 transition-all duration-300 group-hover:scale-105"
+                />
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-lg font-bold bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent group-hover:from-accent group-hover:to-blue-400 transition-all duration-300 whitespace-nowrap">
-                  Walker Regedits for Pro Gamers
+                  Walker Regedits
                 </h1>
               </div>
             </NavLink>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Center */}
           <div className="hidden lg:flex items-center space-x-2">
             <div className="flex items-center space-x-1 bg-white/5 backdrop-blur-sm rounded-lg p-1 border border-white/10">
               {publicNavItems.map((item) => (
@@ -187,7 +188,7 @@ const NavBar = () => {
         "lg:hidden transition-all duration-300 ease-in-out overflow-hidden",
         isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       )}>
-        <div className="bg-black/95 backdrop-blur-2xl border-t border-white/5 shadow-2xl rounded-b-xl">
+        <div className="bg-black/95 backdrop-blur-2xl border-t border-white/5 shadow-2xl rounded-b-lg">
           <div className="px-6 py-6 space-y-3">
             {publicNavItems.map((item) => (
               <NavItem 
