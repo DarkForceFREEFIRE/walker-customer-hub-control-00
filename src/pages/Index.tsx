@@ -2,267 +2,260 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
-import { ArrowRight, CheckCircle2, ChevronDown, Star, Gift, Package, Layers } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Star, Shield, Zap, Users, Download, Play, Trophy } from 'lucide-react';
 import NewYearGreeting from '@/components/NewYearGreeting';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-black text-white">
       <NavBar />
       
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJzdGFycyIgeD0iMCIgeT0iMCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjcwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ0cmFuc3BhcmVudCIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wOCkiLz48Y2lyY2xlIGN4PSIyNSIgY3k9IjQwIiByPSIwLjUiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNikiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjE1IiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDYpIi8+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMC41IiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDQpIi8+PGNpcmNsZSBjeD0iNTUiIGN5PSIyNSIgcj0iMC43NSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNzdGFycykiLz48L3N2Zz4=')]"></div>
-        <div className="absolute left-0 right-0 top-0 h-[500px] bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent blur-3xl opacity-20"></div>
-        <div className="absolute -bottom-48 left-0 right-0 h-[500px] bg-gradient-to-t from-background via-background/80 to-transparent"></div>
-      </div>
-      
-      <main className="flex-grow">
-        {/* Hero Section with Animated Greeting */}
-        <section className="pt-28 lg:pt-40 pb-16 px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-5xl mx-auto text-center">
-            <NewYearGreeting />
-            
-            <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-blue-300 bg-blue-500/10 rounded-full mb-6 border border-blue-500/20">
-              <Star className="w-4 h-4" />
-              <span>4.9/5 rating from over 1,200 users</span>
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/10 to-cyan-600/20"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
+        
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-4">
+          <NewYearGreeting />
+          
+          <div className="mb-8">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
+              <Star className="w-4 h-4 text-yellow-400 mr-2" />
+              <span className="text-sm text-blue-300">Trusted by 1,200+ Pro Gamers</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 text-transparent bg-clip-text">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 Walker Regedits
-              </span> for <br className="md:hidden" />
-              <span className="typing-text inline-block">Pro Gamers</span>
+              </span>
+              <br />
+              <span className="text-white">for Pros</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
-              The ultimate optimization toolkit for enhancing your gaming experience, performance, and customization
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              The ultimate optimization toolkit for enhancing your gaming performance, 
+              customization, and competitive edge.
             </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-5">
-              <Link to="/dashboard">
-                <Button size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-8 h-12 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base">
-                  Go to Dashboard
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link to="/downloads">
-                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-xl transition-all duration-300 text-base">
-                  Download Now
-                </Button>
-              </Link>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Link to="/dashboard">
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-2xl shadow-blue-500/25 transform hover:scale-105 transition-all duration-300">
+                Get Started Now
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link to="/downloads">
+              <Button size="lg" variant="outline" className="border-white/20 bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-xl text-lg font-semibold backdrop-blur-sm">
+                <Download className="mr-2 h-5 w-5" />
+                Download Free
+              </Button>
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-400 mb-2">99%</div>
+              <div className="text-gray-400">Performance Boost</div>
             </div>
-            
-            <div className="mt-20 md:mt-28 relative">
-              <div className="flex justify-center">
-                <a href="#features" className="animate-bounce flex flex-col items-center text-gray-400 hover:text-blue-400 transition-colors">
-                  <span className="text-sm mb-2">Explore Features</span>
-                  <ChevronDown className="h-5 w-5" />
-                </a>
-              </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-400 mb-2">1M+</div>
+              <div className="text-gray-400">Downloads</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-cyan-400 mb-2">24/7</div>
+              <div className="text-gray-400">Support</div>
             </div>
           </div>
-        </section>
-            
-        {/* Features Section */}
-        <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-900/10 via-blue-900/5 to-transparent">
-          <div className="w-full max-w-none mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 text-transparent bg-clip-text">
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-24 px-4 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Premium Features
               </span>
             </h2>
-            
-            <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
-              Advanced tools designed to give you the competitive edge in gaming
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Advanced tools designed to give you the competitive edge
             </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-6xl mx-auto">
-              {[
-                {
-                  icon: <Package className="h-6 w-6 text-blue-400" />,
-                  text: "Performance Optimization"
-                },
-                {
-                  icon: <Layers className="h-6 w-6 text-cyan-400" />,
-                  text: "Custom Game Settings"
-                },
-                {
-                  icon: <Gift className="h-6 w-6 text-indigo-400" />,
-                  text: "Priority Support"
-                }
-              ].map((item, index) => (
-                <div key={index} className="flex items-center justify-center bg-card/50 backdrop-blur-sm border border-white/5 rounded-lg p-6 hover:border-blue-500/30 transition-colors duration-300">
-                  {item.icon}
-                  <span className="ml-3 text-gray-300">{item.text}</span>
-                </div>
-              ))}
-            </div>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-5">
-              <Link to="/guides">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 h-12 rounded-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link to="/store">
-                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-lg transition-all duration-300 text-base">
-                  View Packages
-                </Button>
-              </Link>
-            </div>
           </div>
-        </section>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: <Zap className="w-8 h-8 text-yellow-400" />,
+                title: "Performance Boost",
+                description: "Optimize your system for maximum FPS and reduced lag"
+              },
+              {
+                icon: <Shield className="w-8 h-8 text-blue-400" />,
+                title: "Safe & Secure",
+                description: "All tools are verified and completely safe to use"
+              },
+              {
+                icon: <Trophy className="w-8 h-8 text-purple-400" />,
+                title: "Pro Gaming",
+                description: "Features specifically designed for competitive gaming"
+              },
+              {
+                icon: <Users className="w-8 h-8 text-cyan-400" />,
+                title: "Community",
+                description: "Join thousands of satisfied gamers worldwide"
+              }
+            ].map((feature, index) => (
+              <div key={index} className="group">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                  <div className="mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* Premium Packages - Full width */}
-        <section id="packages" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-900/20 via-blue-900/10 to-transparent">
-          <div className="w-full max-w-none mx-auto">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-blue-300 bg-blue-900/20 rounded-full mb-6 border border-blue-500/30">
-                <Package className="w-4 h-4" />
-                <span>Premium Packages</span>
-              </div>
-              
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-indigo-300 text-transparent bg-clip-text">
-                Choose Your Perfect Package
-              </h2>
-              <p className="text-gray-300 max-w-2xl mx-auto">
-                Select from our range of optimization packages tailored to your gaming needs
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {[
-                {
-                  title: "Supreme Package",
-                  icon: <Package className="h-8 w-8 text-blue-400" />,
-                  price: "2,500",
-                  color: "from-blue-600/20 to-cyan-600/20",
-                  borderColor: "border-blue-500/30",
-                  description: "Full premium access with priority support",
-                  badge: "Most Popular"
-                },
-                {
-                  title: "Essential Package",
-                  icon: <Layers className="h-8 w-8 text-cyan-400" />,
-                  price: "3,000",
-                  color: "from-cyan-600/20 to-indigo-600/20",
-                  borderColor: "border-cyan-500/30",
-                  description: "Core features for everyday users"
-                },
-                {
-                  title: "External Package",
-                  icon: <Gift className="h-8 w-8 text-indigo-400" />,
-                  price: "5,000",
-                  color: "from-indigo-600/20 to-blue-600/20",
-                  borderColor: "border-indigo-500/30",
-                  description: "Basic functionality for casual users"
-                }
-              ].map((pack, index) => (
-                <div key={index} className={`rounded-lg p-1 bg-gradient-to-br ${pack.color} backdrop-blur-xl group hover:scale-105 transition-all duration-500`}>
-                  <div className="bg-black/80 rounded-lg p-6 h-full flex flex-col relative overflow-hidden border-t border-white/10">
-                    {pack.badge && (
-                      <div className="absolute -right-10 top-5 rotate-45 bg-gradient-to-r from-blue-600 to-cyan-600 px-10 py-1 text-xs text-white font-medium">
-                        {pack.badge}
-                      </div>
-                    )}
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-lg bg-gradient-to-br from-black to-gray-900 border border-white/5">
-                        {pack.icon}
-                      </div>
-                      <div className="flex flex-col items-end">
-                        <span className="text-2xl font-bold text-white text-left">Rs. {pack.price}</span>
-                      </div>
+      {/* Pricing Section */}
+      <section className="py-24 px-4 bg-gradient-to-b from-blue-900/10 to-purple-900/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                Choose Your Package
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Select the perfect package for your gaming needs
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                name: "Supreme Package",
+                price: "2,500",
+                description: "Full premium access with priority support",
+                features: ["All Premium Features", "Priority Support", "Regular Updates", "Performance Analytics"],
+                popular: true,
+                gradient: "from-blue-600 to-cyan-600"
+              },
+              {
+                name: "Essential Package", 
+                price: "3,000",
+                description: "Core features for everyday users",
+                features: ["Core Optimization", "Basic Support", "Monthly Updates", "Gaming Profiles"],
+                popular: false,
+                gradient: "from-purple-600 to-pink-600"
+              },
+              {
+                name: "External Package",
+                price: "5,000", 
+                description: "Advanced tools for power users",
+                features: ["Advanced Features", "Custom Configs", "24/7 Support", "Beta Access"],
+                popular: false,
+                gradient: "from-indigo-600 to-blue-600"
+              }
+            ].map((plan, index) => (
+              <div key={index} className="relative">
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                    <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                      Most Popular
                     </div>
-                    <h3 className="text-xl font-bold mb-2 text-white">{pack.title}</h3>
-                    <p className="text-gray-400 mb-6 flex-grow">{pack.description}</p>
-                    <Link to="/store">
-                      <Button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg">
-                        View Details
-                      </Button>
-                    </Link>
                   </div>
+                )}
+                <div className={`bg-white/5 backdrop-blur-sm border ${plan.popular ? 'border-blue-500/50' : 'border-white/10'} rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300 transform hover:scale-105`}>
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold mb-4 text-white">{plan.name}</h3>
+                    <div className="mb-4">
+                      <span className="text-4xl font-bold text-white">Rs. {plan.price}</span>
+                    </div>
+                    <p className="text-gray-400">{plan.description}</p>
+                  </div>
+                  
+                  <div className="space-y-4 mb-8">
+                    {plan.features.map((feature, i) => (
+                      <div key={i} className="flex items-center">
+                        <CheckCircle2 className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <Link to="/store">
+                    <Button className={`w-full bg-gradient-to-r ${plan.gradient} hover:opacity-90 text-white rounded-xl py-3 font-semibold`}>
+                      Get Started
+                    </Button>
+                  </Link>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        {/* CTA Section - Full width */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
-          <div className="w-full max-w-none mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/10 opacity-10 rounded-xl"></div>
-            <div className="relative text-center">
-              <h2 className="text-3xl font-bold mb-6 text-white">Ready to Enhance Your Gaming Experience?</h2>
-              <p className="text-xl text-gray-300 mb-10">
-                Join thousands of satisfied gamers who have improved their gameplay with Walker Regedits.
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto">
-                {["Improved FPS", "Reduced Lag", "Enhanced Visuals", "Optimized Settings", "Easy to Use", "Constant Updates"].map((item, i) => (
-                  <div key={i} className="flex items-center bg-card/50 backdrop-blur-sm border border-white/5 rounded-lg px-4 py-3 hover:border-blue-500/20 transition-colors">
-                    <CheckCircle2 className="h-5 w-5 text-blue-400 mr-2 flex-shrink-0" />
-                    <span className="text-gray-300">{item}</span>
-                  </div>
-                ))}
               </div>
-              
-              <div className="flex flex-col sm:flex-row justify-center gap-5">
-                <Link to="/store">
-                  <Button size="lg" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 h-12 rounded-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base">
-                    View Packages
-                  </Button>
-                </Link>
-                <Link to="/guides">
-                  <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-lg transition-all duration-300 text-base">
-                    Read Guides
-                  </Button>
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 px-4 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 opacity-50"></div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Ready to <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Level Up</span>?
+          </h2>
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+            Join thousands of satisfied gamers who have transformed their gaming experience with Walker Regedits.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/store">
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-2xl shadow-blue-500/25">
+                <Play className="mr-2 h-5 w-5" />
+                Start Now
+              </Button>
+            </Link>
+            <Link to="/guides">
+              <Button size="lg" variant="outline" className="border-white/20 bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-xl text-lg font-semibold backdrop-blur-sm">
+                Learn More
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
       
-      <footer className="py-12 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+      {/* Footer */}
+      <footer className="py-16 border-t border-white/10 bg-black/50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
             <div className="mb-8 md:mb-0">
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold mr-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl mr-4">
                   W
                 </div>
                 <div>
-                  <span className="text-xl font-bold text-white">Walker Regedits</span>
-                  <p className="text-sm text-gray-400 mt-1">
-                    Premium optimization tools for gamers
-                  </p>
+                  <h3 className="text-2xl font-bold text-white">Walker Regedits</h3>
+                  <p className="text-gray-400 mt-1">Premium optimization tools for gamers</p>
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-center md:text-left md:flex md:space-x-8">
-              <Link to="/dashboard" className="text-gray-300 hover:text-blue-400">Dashboard</Link>
-              <Link to="/store" className="text-gray-300 hover:text-blue-400">Store</Link>
-              <Link to="/downloads" className="text-gray-300 hover:text-blue-400">Downloads</Link>
-              <Link to="/guides" className="text-gray-300 hover:text-blue-400">Guides</Link>
-              <Link to="/redeem" className="text-gray-300 hover:text-blue-400">Redeem</Link>
-              <Link to="/login" className="text-gray-300 hover:text-blue-400">Login</Link>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+              <Link to="/dashboard" className="text-gray-300 hover:text-blue-400 transition-colors">Dashboard</Link>
+              <Link to="/store" className="text-gray-300 hover:text-blue-400 transition-colors">Store</Link>
+              <Link to="/downloads" className="text-gray-300 hover:text-blue-400 transition-colors">Downloads</Link>
+              <Link to="/guides" className="text-gray-300 hover:text-blue-400 transition-colors">Guides</Link>
             </div>
           </div>
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center">
+          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
               © {new Date().getFullYear()} Walker Regedits. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-blue-400">
-                Terms
-              </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400">
-                Privacy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400">
-                Contact
-              </a>
+              <a href="/terms" className="text-gray-400 hover:text-blue-400 transition-colors">Terms</a>
+              <a href="/disclaimer" className="text-gray-400 hover:text-blue-400 transition-colors">Privacy</a>
+              <a href="/refund-policy" className="text-gray-400 hover:text-blue-400 transition-colors">Refund Policy</a>
             </div>
           </div>
         </div>
