@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
@@ -62,9 +63,9 @@ const Index = () => {
           </div>
         </section>
             
-        {/* Features Section - Fixed width issue */}
+        {/* Features Section */}
         <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-900/10 via-blue-900/5 to-transparent">
-          <div className="max-w-7xl mx-auto text-center">
+          <div className="w-full max-w-none mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 text-transparent bg-clip-text">
                 Premium Features
@@ -75,7 +76,7 @@ const Index = () => {
               Advanced tools designed to give you the competitive edge in gaming
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-6xl mx-auto">
               {[
                 {
                   icon: <Package className="h-6 w-6 text-blue-400" />,
@@ -113,9 +114,9 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Premium Packages - Fixed width issue */}
+        {/* Premium Packages - Full width */}
         <section id="packages" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-900/20 via-blue-900/10 to-transparent">
-          <div className="max-w-7xl mx-auto">
+          <div className="w-full max-w-none mx-auto">
             <div className="text-center mb-16">
               <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-blue-300 bg-blue-900/20 rounded-full mb-6 border border-blue-500/30">
                 <Package className="w-4 h-4" />
@@ -130,7 +131,7 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[
                 {
                   title: "Supreme Package",
@@ -187,9 +188,9 @@ const Index = () => {
           </div>
         </section>
         
-        {/* CTA Section - Fixed width issue */}
+        {/* CTA Section - Full width */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-7xl mx-auto">
+          <div className="w-full max-w-none mx-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/10 opacity-10 rounded-xl"></div>
             <div className="relative text-center">
               <h2 className="text-3xl font-bold mb-6 text-white">Ready to Enhance Your Gaming Experience?</h2>
@@ -197,7 +198,7 @@ const Index = () => {
                 Join thousands of satisfied gamers who have improved their gameplay with Walker Regedits.
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto">
                 {["Improved FPS", "Reduced Lag", "Enhanced Visuals", "Optimized Settings", "Easy to Use", "Constant Updates"].map((item, i) => (
                   <div key={i} className="flex items-center bg-card/50 backdrop-blur-sm border border-white/5 rounded-lg px-4 py-3 hover:border-blue-500/20 transition-colors">
                     <CheckCircle2 className="h-5 w-5 text-blue-400 mr-2 flex-shrink-0" />
