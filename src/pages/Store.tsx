@@ -112,7 +112,7 @@ const Store = () => {
         {products.map((product) => (
           <div
             key={product.id}
-            className={`store-card p-8 relative ${
+            className={`bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/20 p-8 relative ${
               product.popular 
                 ? 'border-accent/40 shadow-xl shadow-accent/20' 
                 : 'border-white/10'
@@ -120,37 +120,37 @@ const Store = () => {
           >
             {product.popular && (
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-gradient-to-r from-accent to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg">
+                <div className="bg-gradient-to-r from-accent to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-lg">
                   Most Popular
                 </div>
               </div>
             )}
             
             <div className="flex items-center space-x-3 mb-6">
-              <div className="p-3 rounded-xl bg-accent/10 border border-accent/20">
+              <div className="p-3 rounded-lg bg-accent/10 border border-accent/20">
                 {product.icon}
               </div>
-              <h3 className="text-2xl font-bold">{product.name}</h3>
+              <h3 className="text-2xl font-bold text-left">{product.name}</h3>
             </div>
             
-            <p className="text-muted-foreground mb-6 leading-relaxed">{product.description}</p>
+            <p className="text-muted-foreground mb-6 leading-relaxed text-left">{product.description}</p>
             
-            <div className="mb-8">
+            <div className="mb-8 text-left">
               <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Rs. {product.price}</span>
               <span className="text-muted-foreground ml-2">/month</span>
             </div>
             
             <Button 
-              className={`w-full mb-8 rounded-xl py-3 ${
+              className={`w-full mb-8 rounded-lg py-3 ${
                 product.popular 
-                  ? 'modern-button' 
-                  : 'modern-button-secondary'
+                  ? 'bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-accent/30' 
+                  : 'bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white font-medium px-6 py-3 border border-white/10 transition-all duration-300 hover:scale-105'
               }`}
             >
               Purchase Now
             </Button>
             
-            <ul className="space-y-3">
+            <ul className="space-y-3 text-left">
               {product.features.map((feature, index) => (
                 <li key={index} className="flex items-center">
                   <svg className="w-5 h-5 text-accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,7 +175,7 @@ const Store = () => {
         {bundles.map((bundle) => (
           <div
             key={bundle.id}
-            className={`store-card p-8 relative ${
+            className={`bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/20 p-8 relative ${
               bundle.popular 
                 ? 'border-cyan-500/40 shadow-xl shadow-cyan-500/20' 
                 : 'border-white/10'
@@ -183,37 +183,37 @@ const Store = () => {
           >
             {bundle.popular && (
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg">
+                <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-lg">
                   Best Value
                 </div>
               </div>
             )}
             
             <div className="flex items-center space-x-3 mb-6">
-              <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+              <div className="p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
                 {bundle.icon}
               </div>
-              <h3 className="text-2xl font-bold">{bundle.name}</h3>
+              <h3 className="text-2xl font-bold text-left">{bundle.name}</h3>
             </div>
             
-            <p className="text-muted-foreground mb-6 leading-relaxed">{bundle.description}</p>
+            <p className="text-muted-foreground mb-6 leading-relaxed text-left">{bundle.description}</p>
             
-            <div className="mb-8">
+            <div className="mb-8 text-left">
               <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Rs. {bundle.price}</span>
               <span className="text-muted-foreground ml-2">/month</span>
             </div>
             
             <Button 
-              className={`w-full mb-8 rounded-xl py-3 ${
+              className={`w-full mb-8 rounded-lg py-3 ${
                 bundle.popular 
                   ? 'bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-700 hover:to-indigo-700' 
-                  : 'modern-button-secondary'
+                  : 'bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white font-medium px-6 py-3 border border-white/10 transition-all duration-300 hover:scale-105'
               }`}
             >
               Purchase Now
             </Button>
             
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 text-left">
               {bundle.features.map((feature, index) => (
                 <div key={index} className="flex items-center">
                   <svg className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -251,9 +251,9 @@ const Store = () => {
               answer: 'We offer a 7-day money-back guarantee if you\'re not satisfied with our service. Contact our support team to process your refund.'
             }
           ].map((faq, index) => (
-            <div key={index} className="modern-card p-6">
-              <h3 className="font-semibold text-xl mb-3">{faq.question}</h3>
-              <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+            <div key={index} className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 rounded-lg transition-all duration-300 hover:border-accent/30 p-6">
+              <h3 className="font-semibold text-xl mb-3 text-left">{faq.question}</h3>
+              <p className="text-muted-foreground leading-relaxed text-left">{faq.answer}</p>
             </div>
           ))}
         </div>

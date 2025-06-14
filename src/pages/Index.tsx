@@ -22,7 +22,7 @@ const Index = () => {
           <div className="max-w-5xl mx-auto text-center">
             <NewYearGreeting />
             
-            <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-blue-300 bg-blue-500/10 rounded-full mb-6 border border-blue-500/20">
+            <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-blue-300 bg-blue-500/10 rounded-lg mb-6 border border-blue-500/20">
               <Star className="w-4 h-4" />
               <span>4.9/5 rating from over 1,200 users</span>
             </div>
@@ -40,13 +40,13 @@ const Index = () => {
             
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link to="/dashboard">
-                <Button size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-8 h-12 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base">
+                <Button size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-8 h-12 rounded-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base">
                   Go to Dashboard
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link to="/downloads">
-                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-xl transition-all duration-300 text-base">
+                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-lg transition-all duration-300 text-base">
                   Download Now
                 </Button>
               </Link>
@@ -93,7 +93,7 @@ const Index = () => {
               ].map((item, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center justify-center bg-card/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 hover:border-blue-500/30 transition-colors duration-300"
+                  className="flex items-center justify-center bg-card/50 backdrop-blur-sm border border-white/5 rounded-lg p-6 hover:border-blue-500/30 transition-colors duration-300"
                 >
                   {item.icon}
                   <span className="ml-3 text-gray-300">{item.text}</span>
@@ -105,7 +105,7 @@ const Index = () => {
               <Link to="/guides">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 h-12 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base"
+                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 h-12 rounded-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base"
                 >
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -115,7 +115,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-xl transition-all duration-300 text-base"
+                  className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-lg transition-all duration-300 text-base"
                 >
                   View Packages
                 </Button>
@@ -128,7 +128,7 @@ const Index = () => {
         <section id="packages" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-900/20 via-blue-900/10 to-transparent">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-blue-300 bg-blue-900/20 rounded-full mb-6 border border-blue-500/30">
+              <div className="inline-flex items-center px-3 py-1 space-x-2 text-sm text-blue-300 bg-blue-900/20 rounded-lg mb-6 border border-blue-500/30">
                 <Package className="w-4 h-4" />
                 <span>Premium Packages</span>
               </div>
@@ -171,7 +171,7 @@ const Index = () => {
               ].map((pack, index) => (
                 <div
                   key={index}
-                  className={`rounded-xl p-1 bg-gradient-to-br ${pack.color} backdrop-blur-xl group hover:scale-105 transition-all duration-500`}
+                  className={`rounded-lg p-1 bg-gradient-to-br ${pack.color} backdrop-blur-xl group hover:scale-105 transition-all duration-500`}
                 >
                   <div className="bg-black/80 rounded-lg p-6 h-full flex flex-col relative overflow-hidden border-t border-white/10">
                     {pack.badge && (
@@ -180,17 +180,17 @@ const Index = () => {
                       </div>
                     )}
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-xl bg-gradient-to-br from-black to-gray-900 border border-white/5">
+                      <div className="p-3 rounded-lg bg-gradient-to-br from-black to-gray-900 border border-white/5">
                         {pack.icon}
                       </div>
                       <div className="flex flex-col items-end">
                         <span className="text-2xl font-bold text-white">Rs. {pack.price}</span>
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 text-white">{pack.title}</h3>
-                    <p className="text-gray-400 mb-6 flex-grow">{pack.description}</p>
+                    <h3 className="text-xl font-bold mb-2 text-white text-left">{pack.title}</h3>
+                    <p className="text-gray-400 mb-6 flex-grow text-left">{pack.description}</p>
                     <Link to="/store">
-                      <Button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
+                      <Button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg">
                         View Details
                       </Button>
                     </Link>
@@ -203,7 +203,7 @@ const Index = () => {
         
         {/* CTA Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/10 opacity-10 rounded-3xl mx-4 lg:mx-16"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/10 opacity-10 rounded-lg mx-4 lg:mx-16"></div>
           <div className="max-w-4xl mx-auto text-center relative">
             <h2 className="text-3xl font-bold mb-6 text-white">Ready to Enhance Your Gaming Experience?</h2>
             <p className="text-xl text-gray-300 mb-10">
@@ -223,12 +223,12 @@ const Index = () => {
             
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <Link to="/store">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 h-12 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base">
+                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 h-12 rounded-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 text-base">
                   View Packages
                 </Button>
               </Link>
               <Link to="/guides">
-                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-xl transition-all duration-300 text-base">
+                <Button size="lg" variant="outline" className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white px-8 h-12 rounded-lg transition-all duration-300 text-base">
                   Read Guides
                 </Button>
               </Link>

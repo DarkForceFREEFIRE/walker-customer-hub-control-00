@@ -17,7 +17,7 @@ const NavItem = ({ to, icon, label }: NavItemProps) => {
     <NavLink 
       to={to}
       className={({ isActive }) => 
-        `flex items-center space-x-2 py-2 px-3 rounded-md transition-all duration-300 ${
+        `flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${
           isActive 
             ? "text-accent font-medium bg-secondary/30" 
             : "text-gray-400 hover:text-white hover:bg-secondary/10"
@@ -66,7 +66,7 @@ const NavBar = () => {
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
       scrolled 
-        ? "mica-backdrop-blur border-b border-white/10" 
+        ? "bg-card/80 backdrop-blur-xl border-b border-white/10 shadow-lg" 
         : "bg-transparent"
     )}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,12 +74,14 @@ const NavBar = () => {
           {/* Logo and brand */}
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center group">
-              <div className="flex-shrink-0 mr-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-blue-500 flex items-center justify-center text-white font-bold shadow-fluent group-hover:shadow-fluent-hover transition-all duration-300">
-                  W
-                </div>
+              <div className="flex-shrink-0 mr-3">
+                <img 
+                  src="https://raw.githubusercontent.com/DarkForceFREEFIRE/Server-Updates/refs/heads/main/logo.png" 
+                  alt="Walker Regedits Logo" 
+                  className="w-10 h-10 rounded-lg shadow-lg group-hover:shadow-accent/30 transition-all duration-300"
+                />
               </div>
-              <span className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">Walker</span>
+              <span className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">Walker Regedits</span>
             </NavLink>
           </div>
 
@@ -109,14 +111,14 @@ const NavBar = () => {
                     <Button 
                       variant="ghost" 
                       size="icon"
-                      className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                      className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
                     >
                       <Bell size={18} />
                     </Button>
                     <Button 
                       variant="ghost" 
                       size="icon"
-                      className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                      className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
                     >
                       <Search size={18} />
                     </Button>
@@ -124,7 +126,7 @@ const NavBar = () => {
                       <Button 
                         variant="ghost" 
                         size="icon"
-                        className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                        className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
                       >
                         <Settings size={18} />
                       </Button>
@@ -133,7 +135,7 @@ const NavBar = () => {
                       variant="ghost" 
                       size="icon"
                       onClick={logout}
-                      className="rounded-full text-gray-400 hover:text-white hover:bg-secondary/30"
+                      className="rounded-lg text-gray-400 hover:text-white hover:bg-secondary/30"
                     >
                       <LogOut size={18} />
                     </Button>
@@ -143,7 +145,7 @@ const NavBar = () => {
                 <NavLink to="/login">
                   <Button 
                     variant="default"
-                    className="ml-4 bg-accent/90 hover:bg-accent text-white transition-all duration-300"
+                    className="ml-4 bg-accent/90 hover:bg-accent text-white transition-all duration-300 rounded-lg"
                   >
                     Login
                   </Button>
@@ -158,7 +160,7 @@ const NavBar = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-200 hover:text-white"
+              className="text-gray-200 hover:text-white rounded-lg"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -172,7 +174,7 @@ const NavBar = () => {
 
       {/* Mobile menu */}
       <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 mica-backdrop-blur shadow-lg">
+        <div className="px-2 pt-2 pb-3 space-y-1 bg-card/80 backdrop-blur-xl shadow-lg">
           {publicNavItems.map((item) => (
             <NavItem 
               key={item.label}
@@ -199,7 +201,7 @@ const NavBar = () => {
               />
               <Button 
                 variant="default" 
-                className="w-full mt-2 bg-accent hover:bg-accent/90"
+                className="w-full mt-2 bg-accent hover:bg-accent/90 rounded-lg"
                 onClick={logout}
               >
                 <LogOut size={16} className="mr-2" />
@@ -211,7 +213,7 @@ const NavBar = () => {
               <NavLink to="/login" className="block w-full">
                 <Button 
                   variant="default" 
-                  className="w-full bg-accent hover:bg-accent/90"
+                  className="w-full bg-accent hover:bg-accent/90 rounded-lg"
                 >
                   Login
                 </Button>

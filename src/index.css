@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
@@ -38,6 +39,9 @@
     /* Teal colors */
     --teal-DEFAULT: 180 100% 40%;
     --teal-hover: 180 100% 35%;
+
+    /* Global border radius - Windows 11 style */
+    --radius: 8px;
   }
 }
 
@@ -50,7 +54,7 @@
   }
 }
 
-/* Modern Card Styles with Rounded Corners */
+/* Modern Card Styles with Consistent Rounded Corners */
 .modern-card {
   @apply bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 rounded-lg transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/10;
 }
@@ -70,7 +74,7 @@
   @apply bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg transition-all duration-300 hover:scale-[1.03] hover:border-accent/30 hover:shadow-xl hover:shadow-accent/10;
 }
 
-/* Button Styles */
+/* Button Styles with consistent rounded corners */
 .modern-button {
   @apply bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-accent/30;
 }
@@ -81,7 +85,25 @@
 
 /* Stats Card */
 .stats-card {
-  @apply bg-gradient-to-br from-gray-900/40 to-gray-800/20 backdrop-blur-sm border border-white/10 rounded-lg p-6 text-center transition-all duration-300 hover:border-accent/30;
+  @apply bg-gradient-to-br from-gray-900/40 to-gray-800/20 backdrop-blur-sm border border-white/10 rounded-lg p-6 text-left transition-all duration-300 hover:border-accent/30;
+}
+
+/* Status badges with rounded corners */
+.status-badge {
+  @apply rounded-lg px-3 py-1 text-sm font-medium transition-all duration-300;
+}
+
+/* Safety First card fix */
+.safety-card {
+  @apply bg-gradient-to-br from-amber-900/20 to-orange-900/10 backdrop-blur-sm border border-amber-500/20 rounded-lg p-6 text-left transition-all duration-300 hover:border-amber-500/30;
+}
+
+.safety-card h3 {
+  @apply text-left;
+}
+
+.safety-card p {
+  @apply text-left;
 }
 
 /* Animation keyframes */
