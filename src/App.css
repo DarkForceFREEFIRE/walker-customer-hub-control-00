@@ -1,10 +1,5 @@
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/* Remove the root element width constraints completely */
 
 .logo {
   height: 6em;
@@ -40,29 +35,6 @@
 
 .read-the-docs {
   color: #888;
-}
-
-/* Typing text animation */
-.typing-text {
-  position: relative;
-  color: white;
-}
-
-.typing-text::after {
-  content: "";
-  position: absolute;
-  right: -5px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 2px;
-  height: 70%;
-  background-color: hsl(var(--accent));
-  animation: cursor-blink 1.2s step-end infinite;
-}
-
-@keyframes cursor-blink {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
 }
 
 /* Windows 11 Acrylic/Mica effect - improved for black theme */
