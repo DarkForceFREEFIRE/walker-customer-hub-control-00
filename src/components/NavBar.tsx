@@ -73,8 +73,8 @@ const NavBar = () => {
         ? "bg-black/90 backdrop-blur-2xl shadow-2xl shadow-black/50" 
         : "bg-black/70 backdrop-blur-xl"
     )}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="w-full px-6 lg:px-8">
+        <div className="flex items-center h-16">
           {/* Logo Section - Left Aligned */}
           <div className="flex items-center flex-shrink-0">
             <NavLink to="/" className="group flex items-center space-x-3">
@@ -117,7 +117,7 @@ const NavBar = () => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-3 flex-shrink-0">
+          <div className="flex items-center space-x-3 flex-shrink-0 ml-auto">
             {currentUser ? (
               <div className="hidden md:flex items-center space-x-2">
                 {/* Username Display */}
