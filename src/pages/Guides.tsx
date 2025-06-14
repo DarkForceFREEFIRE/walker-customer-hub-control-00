@@ -1,8 +1,6 @@
-
 import React from 'react';
 import PageLayout from '@/components/PageLayout';
 import { Shield, Download, Settings, BookOpen } from 'lucide-react';
-
 const GuideCard = ({
   icon,
   title,
@@ -12,8 +10,7 @@ const GuideCard = ({
   title: string;
   description: string;
 }) => {
-  return (
-    <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
+  return <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
       <div className="flex items-center mb-4">
         <div className="p-3 rounded-lg bg-blue-500/20">
           {icon}
@@ -21,13 +18,10 @@ const GuideCard = ({
         <h3 className="text-xl font-semibold text-white ml-4">{title}</h3>
       </div>
       <p className="text-gray-300 leading-relaxed">{description}</p>
-    </div>
-  );
+    </div>;
 };
-
 const Guides = () => {
-  return (
-    <PageLayout title="User Guides" subtitle="Learn how to use Walker Regedits effectively">
+  return <PageLayout title="User Guides" subtitle="Learn how to use Walker Regedits effectively">
       <div className="max-w-4xl mx-auto space-y-8">
         
         {/* Safety Notice */}
@@ -49,26 +43,26 @@ const Guides = () => {
           <h2 className="text-2xl font-bold text-white mb-6">Getting Started</h2>
           <div className="space-y-6">
             <div className="border-l-4 border-blue-500 pl-6">
-              <h3 className="text-lg font-semibold text-white mb-2">1. Check Safety Status</h3>
-              <p className="text-gray-300">
+              <h3 className="text-lg font-semibold text-white mb-2 text-left">1. Check Safety Status</h3>
+              <p className="text-gray-300 text-left">
                 Before using any panel features, verify the current safety status on your dashboard.
               </p>
             </div>
             <div className="border-l-4 border-blue-500 pl-6">
-              <h3 className="text-lg font-semibold text-white mb-2">2. Download Required Files</h3>
-              <p className="text-gray-300">
+              <h3 className="text-lg font-semibold text-white mb-2 text-left">2. Download Required Files</h3>
+              <p className="text-gray-300 text-left">
                 Access the downloads section to get the latest panel version and recommended APK files.
               </p>
             </div>
             <div className="border-l-4 border-blue-500 pl-6">
-              <h3 className="text-lg font-semibold text-white mb-2">3. Setup Your Environment</h3>
-              <p className="text-gray-300">
+              <h3 className="text-lg font-semibold text-white mb-2 text-left">3. Setup Your Environment</h3>
+              <p className="text-gray-300 text-left">
                 Configure your emulator with our recommended settings for optimal performance.
               </p>
             </div>
             <div className="border-l-4 border-blue-500 pl-6">
-              <h3 className="text-lg font-semibold text-white mb-2">4. Follow Guidelines</h3>
-              <p className="text-gray-300">
+              <h3 className="text-lg font-semibold text-white mb-2 text-left">4. Follow Guidelines</h3>
+              <p className="text-gray-300 text-left">
                 Use the panel responsibly according to our safety guidelines and best practices.
               </p>
             </div>
@@ -79,26 +73,10 @@ const Guides = () => {
         <div>
           <h2 className="text-2xl font-bold text-white mb-6">Guide Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <GuideCard
-              icon={<Settings className="h-6 w-6 text-blue-400" />}
-              title="Installation & Setup"
-              description="Complete guide for installing and configuring Walker Regedits on your system with step-by-step instructions."
-            />
-            <GuideCard
-              icon={<Shield className="h-6 w-6 text-green-400" />}
-              title="Safety & Security"
-              description="Essential safety practices to protect your accounts and maintain security while using the tools."
-            />
-            <GuideCard
-              icon={<Download className="h-6 w-6 text-purple-400" />}
-              title="Features & Usage"
-              description="Detailed explanation of all features and how to use them effectively for optimal performance."
-            />
-            <GuideCard
-              icon={<BookOpen className="h-6 w-6 text-cyan-400" />}
-              title="FAQ & Support"
-              description="Frequently asked questions and comprehensive support resources for troubleshooting."
-            />
+            <GuideCard icon={<Settings className="h-6 w-6 text-blue-400" />} title="Installation & Setup" description="Complete guide for installing and configuring Walker Regedits on your system with step-by-step instructions." />
+            <GuideCard icon={<Shield className="h-6 w-6 text-green-400" />} title="Safety & Security" description="Essential safety practices to protect your accounts and maintain security while using the tools." />
+            <GuideCard icon={<Download className="h-6 w-6 text-purple-400" />} title="Features & Usage" description="Detailed explanation of all features and how to use them effectively for optimal performance." />
+            <GuideCard icon={<BookOpen className="h-6 w-6 text-cyan-400" />} title="FAQ & Support" description="Frequently asked questions and comprehensive support resources for troubleshooting." />
           </div>
         </div>
 
@@ -131,8 +109,6 @@ const Guides = () => {
           </div>
         </div>
       </div>
-    </PageLayout>
-  );
+    </PageLayout>;
 };
-
 export default Guides;
