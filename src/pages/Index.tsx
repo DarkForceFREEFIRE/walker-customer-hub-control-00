@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
 import { ArrowRight, CheckCircle2, Star, Shield, Zap, Users, Download, Play, Trophy } from 'lucide-react';
 import NewYearGreeting from '@/components/NewYearGreeting';
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-black text-white">
+  return <div className="min-h-screen bg-black text-white">
       <NavBar />
       
       {/* Hero Section */}
@@ -83,36 +81,29 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Zap className="w-8 h-8 text-yellow-400" />,
-                title: "Performance Boost",
-                description: "Optimize your system for maximum FPS and reduced lag"
-              },
-              {
-                icon: <Shield className="w-8 h-8 text-blue-400" />,
-                title: "Safe & Secure",
-                description: "All tools are verified and completely safe to use"
-              },
-              {
-                icon: <Trophy className="w-8 h-8 text-purple-400" />,
-                title: "Pro Gaming",
-                description: "Features specifically designed for competitive gaming"
-              },
-              {
-                icon: <Users className="w-8 h-8 text-cyan-400" />,
-                title: "Community",
-                description: "Join thousands of satisfied gamers worldwide"
-              }
-            ].map((feature, index) => (
-              <div key={index} className="group">
+            {[{
+            icon: <Zap className="w-8 h-8 text-yellow-400" />,
+            title: "Performance Boost",
+            description: "Optimize your system for maximum FPS and reduced lag"
+          }, {
+            icon: <Shield className="w-8 h-8 text-blue-400" />,
+            title: "Safe & Secure",
+            description: "All tools are verified and completely safe to use"
+          }, {
+            icon: <Trophy className="w-8 h-8 text-purple-400" />,
+            title: "Pro Gaming",
+            description: "Features specifically designed for competitive gaming"
+          }, {
+            icon: <Users className="w-8 h-8 text-cyan-400" />,
+            title: "Community",
+            description: "Join thousands of satisfied gamers worldwide"
+          }].map((feature, index) => <div key={index} className="group">
                 <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2">
                   <div className="mb-4">{feature.icon}</div>
                   <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
                   <p className="text-gray-400 leading-relaxed">{feature.description}</p>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -132,40 +123,33 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                name: "Supreme Package",
-                price: "2,500",
-                description: "Full premium access with priority support",
-                features: ["All Premium Features", "Priority Support", "Regular Updates", "Performance Analytics"],
-                popular: true,
-                gradient: "from-blue-600 to-cyan-600"
-              },
-              {
-                name: "Essential Package", 
-                price: "3,000",
-                description: "Core features for everyday users",
-                features: ["Core Optimization", "Basic Support", "Monthly Updates", "Gaming Profiles"],
-                popular: false,
-                gradient: "from-purple-600 to-pink-600"
-              },
-              {
-                name: "External Package",
-                price: "5,000", 
-                description: "Advanced tools for power users",
-                features: ["Advanced Features", "Custom Configs", "24/7 Support", "Beta Access"],
-                popular: false,
-                gradient: "from-indigo-600 to-blue-600"
-              }
-            ].map((plan, index) => (
-              <div key={index} className="relative">
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+            {[{
+            name: "Supreme Package",
+            price: "2,500",
+            description: "Full premium access with priority support",
+            features: ["All Premium Features", "Priority Support", "Regular Updates", "Performance Analytics"],
+            popular: true,
+            gradient: "from-blue-600 to-cyan-600"
+          }, {
+            name: "Essential Package",
+            price: "3,000",
+            description: "Core features for everyday users",
+            features: ["Core Optimization", "Basic Support", "Monthly Updates", "Gaming Profiles"],
+            popular: false,
+            gradient: "from-purple-600 to-pink-600"
+          }, {
+            name: "External Package",
+            price: "5,000",
+            description: "Advanced tools for power users",
+            features: ["Advanced Features", "Custom Configs", "24/7 Support", "Beta Access"],
+            popular: false,
+            gradient: "from-indigo-600 to-blue-600"
+          }].map((plan, index) => <div key={index} className="relative">
+                {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                     <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
                       Most Popular
                     </div>
-                  </div>
-                )}
+                  </div>}
                 <div className={`bg-white/5 backdrop-blur-sm border ${plan.popular ? 'border-blue-500/50' : 'border-white/10'} rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300 transform hover:scale-105`}>
                   <div className="text-center mb-8">
                     <h3 className="text-2xl font-bold mb-4 text-white">{plan.name}</h3>
@@ -176,12 +160,10 @@ const Index = () => {
                   </div>
                   
                   <div className="space-y-4 mb-8">
-                    {plan.features.map((feature, i) => (
-                      <div key={i} className="flex items-center">
+                    {plan.features.map((feature, i) => <div key={i} className="flex items-center">
                         <CheckCircle2 className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
                         <span className="text-gray-300">{feature}</span>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                   
                   <Link to="/store">
@@ -190,8 +172,7 @@ const Index = () => {
                     </Button>
                   </Link>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -224,27 +205,9 @@ const Index = () => {
       </section>
       
       {/* Footer */}
-      <footer className="py-16 border-t border-white/10 bg-black/50">
+      <footer className="py-16 border-t border-white/10 bg-black/50 rounded-sm">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
-            <div className="mb-8 md:mb-0">
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl mr-4">
-                  W
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">Walker Regedits</h3>
-                  <p className="text-gray-400 mt-1">Premium optimization tools for gamers</p>
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
-              <Link to="/dashboard" className="text-gray-300 hover:text-blue-400 transition-colors">Dashboard</Link>
-              <Link to="/store" className="text-gray-300 hover:text-blue-400 transition-colors">Store</Link>
-              <Link to="/downloads" className="text-gray-300 hover:text-blue-400 transition-colors">Downloads</Link>
-              <Link to="/guides" className="text-gray-300 hover:text-blue-400 transition-colors">Guides</Link>
-            </div>
-          </div>
+          
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
               © {new Date().getFullYear()} Walker Regedits. All rights reserved.
@@ -257,8 +220,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
