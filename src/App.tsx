@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Store from "./pages/Store";
 import Downloads from "./pages/Downloads";
+import DownloadCenter from "./pages/DownloadCenter";
 import Guides from "./pages/Guides";
 import Disclaimer from "./pages/Disclaimer";
 import Terms from "./pages/Terms";
@@ -42,6 +43,7 @@ const AuthRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/login" element={<Login />} />
       <Route path="/store" element={<Store />} />
+      <Route path="/download-center" element={<DownloadCenter />} />
       <Route path="/guides" element={<Guides />} />
       <Route path="/disclaimer" element={<Disclaimer />} />
       <Route path="/terms" element={<Terms />} />
