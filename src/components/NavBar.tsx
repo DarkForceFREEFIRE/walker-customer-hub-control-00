@@ -19,11 +19,11 @@ const NavItem = ({ to, icon, label }: NavItemProps) => {
       to={to}
       className={({ isActive }) => 
         cn(
-          "group relative flex items-center space-x-3 px-4 py-2.5 rounded-lg transition-all duration-300",
-          "hover:bg-white/5 hover:backdrop-blur-sm",
+          "group relative flex items-center space-x-3 px-4 py-2.5 rounded-2xl transition-all duration-500",
+          "backdrop-blur-xl hover:backdrop-blur-2xl",
           isActive 
-            ? "text-white bg-gradient-to-r from-accent/20 to-blue-500/20 border border-accent/30 shadow-lg shadow-accent/10" 
-            : "text-gray-300 hover:text-white"
+            ? "text-white bg-[var(--glass-bg-hover)] border border-accent/30 shadow-lg shadow-accent/10" 
+            : "text-gray-300 hover:text-white hover:bg-[var(--glass-bg)]"
         )
       }
     >
@@ -67,11 +67,11 @@ const NavBar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-4 left-4 right-4 z-50 transition-all duration-500",
-      "border border-white/10 rounded-lg",
+      "fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-3xl",
+      "backdrop-blur-[60px] saturate-[180%] border border-[var(--glass-border)]",
       scrolled 
-        ? "bg-black/90 backdrop-blur-2xl shadow-2xl shadow-black/50" 
-        : "bg-black/70 backdrop-blur-xl"
+        ? "bg-[rgba(0,0,0,0.9)] shadow-2xl shadow-black/50" 
+        : "bg-[var(--glass-bg)] shadow-[var(--glass-shadow)]"
     )}>
       <div className="w-full px-6 lg:px-8">
         <div className="flex items-center h-16">
@@ -82,7 +82,7 @@ const NavBar = () => {
                 <img 
                   src="https://raw.githubusercontent.com/DarkForceFREEFIRE/Server-Updates/refs/heads/main/logo.png" 
                   alt="Walker Regedits Logo"
-                  className="w-10 h-10 rounded-lg shadow-lg group-hover:shadow-accent/50 transition-all duration-300 group-hover:scale-105"
+                  className="w-10 h-10 rounded-2xl shadow-lg group-hover:shadow-accent/50 transition-all duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="hidden sm:block">
@@ -95,7 +95,7 @@ const NavBar = () => {
 
           {/* Desktop Navigation - Center */}
           <div className="hidden lg:flex items-center space-x-2 flex-1 justify-center">
-            <div className="flex items-center space-x-1 bg-white/5 backdrop-blur-sm rounded-lg p-1 border border-white/10">
+            <div className="flex items-center space-x-1 bg-[var(--glass-bg)] backdrop-blur-2xl saturate-[180%] rounded-2xl p-1.5 border border-[var(--glass-border)]">
               {publicNavItems.map((item) => (
                 <NavItem 
                   key={item.label}

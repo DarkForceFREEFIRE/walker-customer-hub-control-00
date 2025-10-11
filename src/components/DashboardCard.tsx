@@ -22,11 +22,16 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
 }) => {
   return (
     <Card className={cn(
-      'border-white/5 overflow-hidden backdrop-blur-sm hover:border-walker-DEFAULT/30 transition-colors duration-300 animate-fade-in shadow-xl shadow-black/40 bg-gradient-to-br from-[#1d1a24]/70 to-[#15141B]/70',
+      'overflow-hidden transition-all duration-500 animate-fade-in rounded-3xl',
+      'bg-[var(--glass-bg)] backdrop-blur-[60px] saturate-[180%]',
+      'border border-[var(--glass-border)]',
+      'shadow-[var(--glass-shadow)] shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset]',
+      'hover:border-accent/30 hover:bg-[rgba(255,255,255,0.06)]',
       className
     )}>
       <div className={cn(
-        'py-4 px-6 border-b border-white/5 bg-black/20',
+        'py-4 px-6 border-b border-white/8',
+        'bg-[rgba(255,255,255,0.02)] backdrop-blur-xl',
         headerClassName
       )}>
         <div className="flex justify-between items-center">
@@ -38,7 +43,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       </div>
       <div className="p-6 animate-fade-in">{children}</div>
       {footer && (
-        <div className="border-t border-white/5 bg-black/30 p-4 animate-fade-in">
+        <div className="border-t border-white/8 bg-[rgba(0,0,0,0.2)] backdrop-blur-xl p-4 animate-fade-in">
           {footer}
         </div>
       )}

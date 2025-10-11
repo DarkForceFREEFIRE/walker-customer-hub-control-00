@@ -44,10 +44,10 @@ const Login = () => {
       </div>
       
       <div className="w-full max-w-md z-10">
-        <div className="bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-md border border-white/10 rounded-lg shadow-xl transition-all duration-300 hover:border-accent/20 p-8">
+        <div className="rounded-3xl backdrop-blur-[60px] saturate-[180%] bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 shadow-[var(--glass-shadow)] shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset] transition-all duration-500 hover:border-accent/25 hover:bg-[var(--glass-bg-hover)]">
           <div className="mb-8 text-center">
             <div className="flex items-center justify-center mb-6">
-              <div className="h-12 w-12 bg-gradient-to-br from-accent to-blue-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-accent/30">
+              <div className="h-12 w-12 bg-gradient-to-br from-accent to-blue-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-accent/30 backdrop-blur-xl">
                 <Shield className="h-6 w-6" />
               </div>
             </div>
@@ -63,7 +63,7 @@ const Login = () => {
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="bg-black/20 border-white/10 rounded-lg h-12 text-white placeholder:text-gray-500"
+                className="backdrop-blur-xl bg-[rgba(255,255,255,0.03)] border-[var(--glass-border)] rounded-2xl h-12 text-white placeholder:text-gray-500 transition-all duration-300 focus:border-accent/50 focus:bg-[rgba(255,255,255,0.06)]"
                 disabled={loading}
               />
             </div>
@@ -76,7 +76,7 @@ const Login = () => {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-black/20 border-white/10 rounded-lg h-12 text-white placeholder:text-gray-500"
+                className="backdrop-blur-xl bg-[rgba(255,255,255,0.03)] border-[var(--glass-border)] rounded-2xl h-12 text-white placeholder:text-gray-500 transition-all duration-300 focus:border-accent/50 focus:bg-[rgba(255,255,255,0.06)]"
                 disabled={loading}
               />
             </div>
@@ -104,7 +104,7 @@ const Login = () => {
             
             <Button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-accent/30 h-12 text-base"
+              className="w-full bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium px-6 py-3 rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-accent/40 backdrop-blur-xl h-12 text-base"
               disabled={loading}
             >
               {loading ? 'Signing in...' : 'Sign in'} 

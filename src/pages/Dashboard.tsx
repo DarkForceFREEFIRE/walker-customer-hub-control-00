@@ -93,11 +93,11 @@ const Dashboard = () => {
         <div className="dashboard-card p-4 sm:p-6">
           <div className={`flex ${isMobile ? 'flex-col space-y-4' : 'items-center justify-between'}`}>
             <div className="flex items-center space-x-3 sm:space-x-4">
-              <img 
-                src="https://raw.githubusercontent.com/DarkForceFREEFIRE/Server-Updates/refs/heads/main/logo.png" 
-                alt="Walker Logo" 
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg transition-transform duration-300 hover:scale-110 flex-shrink-0"
-              />
+                <img 
+                  src="https://raw.githubusercontent.com/DarkForceFREEFIRE/Server-Updates/refs/heads/main/logo.png" 
+                  alt="Walker Logo" 
+                  className="w-10 h-10 rounded-2xl transition-transform duration-500 hover:scale-110 flex-shrink-0"
+                />
               <div className="min-w-0 flex-1">
                 <h2 className="text-xl sm:text-2xl font-bold text-white truncate">Welcome back, {currentUser.username}!</h2>
                 <p className="text-gray-400 text-sm sm:text-base mt-1">Here's what's happening with your account</p>
@@ -116,32 +116,32 @@ const Dashboard = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-          <div className="stats-card transition-all duration-300 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.1s' }}>
-            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-blue-500/20 rounded-xl mb-2 sm:mb-4 transition-all duration-300 hover:scale-110">
+          <div className="stats-card transition-all duration-500 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.1s' }}>
+            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-2xl bg-[rgba(59,130,246,0.15)] backdrop-blur-xl border border-blue-500/20 mb-2 sm:mb-4 transition-all duration-500 hover:scale-110">
               <Users className="h-4 w-4 sm:h-6 sm:w-6 text-blue-400" />
             </div>
             <h3 className="text-lg sm:text-2xl font-bold text-white">{userStats?.totalUsers?.toLocaleString() || 0}</h3>
             <p className="text-gray-400 text-xs sm:text-sm">Total Users</p>
           </div>
           
-          <div className="stats-card transition-all duration-300 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.2s' }}>
-            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-green-500/20 rounded-xl mb-2 sm:mb-4 transition-all duration-300 hover:scale-110">
+          <div className="stats-card transition-all duration-500 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.2s' }}>
+            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-2xl bg-[rgba(34,197,94,0.15)] backdrop-blur-xl border border-green-500/20 mb-2 sm:mb-4 transition-all duration-500 hover:scale-110">
               <Shield className="h-4 w-4 sm:h-6 sm:w-6 text-green-400" />
             </div>
             <h3 className="text-lg sm:text-2xl font-bold text-white">{userStats?.activeUsers?.toLocaleString() || 0}</h3>
             <p className="text-gray-400 text-xs sm:text-sm">Active Users</p>
           </div>
 
-          <div className="stats-card transition-all duration-300 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.3s' }}>
-            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-accent/20 rounded-xl mb-2 sm:mb-4 transition-all duration-300 hover:scale-110">
+          <div className="stats-card transition-all duration-500 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.3s' }}>
+            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-2xl bg-[rgba(0,201,167,0.15)] backdrop-blur-xl border border-accent/20 mb-2 sm:mb-4 transition-all duration-500 hover:scale-110">
               <Activity className="h-4 w-4 sm:h-6 sm:w-6 text-accent" />
             </div>
             <h3 className="text-lg sm:text-2xl font-bold text-white">{userStats?.onlineUsers?.toLocaleString() || 0}</h3>
             <p className="text-gray-400 text-xs sm:text-sm">Online Now</p>
           </div>
 
-          <div className="stats-card transition-all duration-300 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.4s' }}>
-            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-purple-500/20 rounded-xl mb-2 sm:mb-4 transition-all duration-300 hover:scale-110">
+          <div className="stats-card transition-all duration-500 hover:scale-105 animate-fade-in p-3 sm:p-4" style={{ animationDelay: '0.4s' }}>
+            <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-2xl bg-[rgba(168,85,247,0.15)] backdrop-blur-xl border border-purple-500/20 mb-2 sm:mb-4 transition-all duration-500 hover:scale-110">
               <Server className="h-4 w-4 sm:h-6 sm:w-6 text-purple-400" />
             </div>
             <h3 className="text-lg sm:text-2xl font-bold text-white capitalize">{currentUser.subscription_status}</h3>
@@ -151,7 +151,7 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* User Information Widget */}
-          <div className="dashboard-card p-4 sm:p-6 animate-fade-in transition-all duration-300 hover:scale-[1.02]" style={{ animationDelay: '0.5s' }}>
+          <div className="dashboard-card p-4 sm:p-6 animate-fade-in transition-all duration-500 hover:scale-[1.01]" style={{ animationDelay: '0.5s' }}>
             <div className="flex items-center mb-4 sm:mb-6">
               <User className="h-4 w-4 sm:h-5 sm:w-5 text-accent mr-2 sm:mr-3" />
               <h3 className="text-lg sm:text-xl font-semibold text-white">Account Information</h3>
@@ -197,7 +197,7 @@ const Dashboard = () => {
             <div className="space-y-2 sm:space-y-3">
               {safetyStatusData ? (
                 safetyStatusData.map((product) => (
-                  <div key={product.id} className="flex justify-between items-center p-3 sm:p-4 bg-black/20 rounded-xl transition-all duration-300 hover:bg-black/30">
+                  <div key={product.id} className="flex justify-between items-center p-3 sm:p-4 rounded-2xl transition-all duration-500 hover:bg-[var(--glass-bg-hover)] backdrop-blur-xl bg-[rgba(0,0,0,0.15)] border border-white/5">
                     <div className="text-left min-w-0 flex-1">
                       <p className="font-medium text-white text-sm sm:text-base truncate">{product.product_name}</p>
                       <p className="text-xs text-gray-400">
@@ -262,7 +262,7 @@ const Dashboard = () => {
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <label className="text-gray-400 text-xs sm:text-sm">Hardware ID</label>
-                <div className="mt-2 p-2 sm:p-3 bg-black/20 rounded-xl transition-all duration-300 hover:bg-black/30">
+                <div className="mt-2 p-2 sm:p-3 rounded-2xl transition-all duration-500 hover:bg-[var(--glass-bg-hover)] backdrop-blur-xl bg-[rgba(0,0,0,0.15)] border border-white/5">
                   <code className="text-white font-mono text-xs sm:text-sm break-all">
                     {currentUser.hwid || 'Not set'}
                   </code>

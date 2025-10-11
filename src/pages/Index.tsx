@@ -80,7 +80,7 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[{
             icon: <Zap className="w-8 h-8 text-yellow-400" />,
             title: "Performance Boost",
@@ -98,7 +98,7 @@ const Index = () => {
             title: "Community",
             description: "Join thousands of satisfied gamers worldwide"
           }].map((feature, index) => <div key={index} className="group">
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                <div className="rounded-3xl backdrop-blur-[40px] saturate-[180%] bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 h-full transition-all duration-500 transform hover:-translate-y-2 hover:bg-[var(--glass-bg-hover)] hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10">
                   <div className="mb-4">{feature.icon}</div>
                   <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
                   <p className="text-gray-400 leading-relaxed">{feature.description}</p>
@@ -146,11 +146,11 @@ const Index = () => {
             gradient: "from-indigo-600 to-blue-600"
           }].map((plan, index) => <div key={index} className="relative">
                 {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                    <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-xl shadow-lg">
                       Most Popular
                     </div>
                   </div>}
-                <div className={`bg-white/5 backdrop-blur-sm border ${plan.popular ? 'border-blue-500/50' : 'border-white/10'} rounded-2xl p-8 h-full hover:bg-white/10 transition-all duration-300 transform hover:scale-105`}>
+                <div className={`rounded-3xl backdrop-blur-[40px] saturate-[180%] bg-[var(--glass-bg)] border ${plan.popular ? 'border-blue-500/40' : 'border-[var(--glass-border)]'} p-8 h-full transition-all duration-500 transform hover:scale-105 hover:bg-[var(--glass-bg-hover)] hover:border-accent/30 shadow-[var(--glass-shadow)]`}>
                   <div className="text-center mb-8">
                     <h3 className="text-2xl font-bold mb-4 text-white">{plan.name}</h3>
                     <div className="mb-4">

@@ -112,22 +112,22 @@ const Store = () => {
         {products.map((product) => (
           <div
             key={product.id}
-            className={`bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:border-accent/40 hover:shadow-2xl hover:shadow-accent/20 p-8 relative ${
+            className={`rounded-3xl backdrop-blur-[40px] saturate-[180%] bg-[var(--glass-bg)] border p-8 relative transition-all duration-500 hover:scale-[1.02] hover:bg-[var(--glass-bg-hover)] shadow-[var(--glass-shadow)] ${
               product.popular 
-                ? 'border-accent/40 shadow-xl shadow-accent/20' 
-                : 'border-white/10'
+                ? 'border-accent/40 shadow-2xl shadow-accent/30 hover:border-accent/50' 
+                : 'border-[var(--glass-border)] hover:border-accent/30'
             }`}
           >
             {product.popular && (
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-gradient-to-r from-accent to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-lg">
+                <div className="bg-gradient-to-r from-accent to-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg backdrop-blur-xl">
                   Most Popular
                 </div>
               </div>
             )}
             
             <div className="flex items-center space-x-3 mb-6">
-              <div className="p-3 rounded-lg bg-accent/10 border border-accent/20">
+              <div className="p-3 rounded-2xl bg-accent/10 border border-accent/20 backdrop-blur-xl">
                 {product.icon}
               </div>
               <h3 className="text-2xl font-bold text-left">{product.name}</h3>
@@ -141,10 +141,10 @@ const Store = () => {
             </div>
             
             <Button 
-              className={`w-full mb-8 rounded-lg py-3 ${
+              className={`w-full mb-8 rounded-2xl py-3 backdrop-blur-xl transition-all duration-500 hover:scale-105 ${
                 product.popular 
-                  ? 'bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-accent/30' 
-                  : 'bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white font-medium px-6 py-3 border border-white/10 transition-all duration-300 hover:scale-105'
+                  ? 'bg-gradient-to-r from-accent to-blue-500 hover:from-accent/90 hover:to-blue-600 text-white font-medium px-6 hover:shadow-xl hover:shadow-accent/40' 
+                  : 'bg-[var(--glass-bg)] hover:bg-[var(--glass-bg-hover)] text-white font-medium px-6 border border-[var(--glass-border)] hover:border-accent/30'
               }`}
             >
               Purchase Now

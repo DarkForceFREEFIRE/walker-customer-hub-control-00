@@ -25,11 +25,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         </div>
       </main>
       
-      <footer className="py-8 border-t border-white/5 backdrop-blur-md">
+      <footer className="py-8 border-t border-white/8 backdrop-blur-[60px] saturate-[180%] bg-[rgba(255,255,255,0.02)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-blue-500 flex items-center justify-center text-white font-bold mr-3 bg-transparent">
+              <div className="w-8 h-8 rounded-2xl bg-gradient-to-br from-accent to-blue-500 flex items-center justify-center text-white font-bold mr-3 backdrop-blur-xl shadow-lg">
                 W
               </div>
               <div>

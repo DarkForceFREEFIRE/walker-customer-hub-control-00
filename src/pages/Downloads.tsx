@@ -119,7 +119,7 @@ const Downloads = () => {
 
                 <div className="flex flex-col h-full">
                   <div className="flex items-center space-x-4 mb-6">
-                    <div className="p-3 rounded-xl bg-accent/10 border border-accent/20">
+                    <div className="p-3 rounded-2xl bg-accent/10 border border-accent/20 backdrop-blur-xl">
                       {isPanel ? 
                         <Package className="h-6 w-6 text-accent" /> : 
                         <FileText className="h-6 w-6 text-muted-foreground" />
@@ -150,7 +150,7 @@ const Downloads = () => {
 
                   <Button
                     onClick={() => handleDownload(item)}
-                    className={`w-full mt-auto rounded-xl py-3 ${
+                    className={`w-full mt-auto rounded-2xl py-3 transition-all duration-500 ${
                       isPanel ? 'modern-button' : 'modern-button-secondary'
                     }`}
                   >
@@ -158,9 +158,9 @@ const Downloads = () => {
                     Download Now
                   </Button>
 
-                   <div className="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                   <div className="mt-4 pt-4 border-t border-white/8 flex justify-between items-center text-xs">
                      <span className="text-muted-foreground">
-                       ID: <code className="font-mono bg-black/20 px-2 py-1 rounded">{item.item_id}</code>
+                       ID: <code className="font-mono backdrop-blur-xl bg-[rgba(0,0,0,0.2)] px-2 py-1 rounded-lg border border-white/5">{item.item_id}</code>
                      </span>
                      <Button variant="link" size="sm" className="h-auto p-0 text-accent hover:text-accent/80">
                        Release Notes

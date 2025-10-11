@@ -31,9 +31,9 @@ const HWIDResetProgress: React.FC<HWIDResetProgressProps> = ({ used, max }) => {
           {used} / {max}
         </span>
       </div>
-      <div className="relative h-2 w-full rounded-full bg-gray-800/50 overflow-hidden backdrop-blur-sm">
+      <div className="relative h-3 w-full rounded-full overflow-hidden backdrop-blur-xl bg-[rgba(255,255,255,0.03)] border border-white/10">
         <div 
-          className={`absolute top-0 left-0 h-full ${getProgressGradient()} animate-pulse transition-all duration-300 rounded-full`}
+          className={`absolute top-0 left-0 h-full ${getProgressGradient()} animate-pulse transition-all duration-500 rounded-full`}
           style={{ width: `${percentage}%` }}
         />
       </div>
