@@ -25,7 +25,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         </div>
       </main>
       
-      <footer className="py-8 border-t border-white/8 backdrop-blur-[60px] saturate-[180%] bg-[rgba(255,255,255,0.02)]">
+      <footer className="py-8 border-t border-white/8 backdrop-blur-2xl backdrop-saturate-150 bg-[rgba(255,255,255,0.02)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center">

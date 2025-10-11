@@ -44,7 +44,7 @@ const Login = () => {
       </div>
       
       <div className="w-full max-w-md z-10">
-        <div className="rounded-3xl backdrop-blur-[60px] saturate-[180%] bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 shadow-[var(--glass-shadow)] shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset] transition-all duration-500 hover:border-accent/25 hover:bg-[var(--glass-bg-hover)]">
+        <div className="rounded-3xl backdrop-blur-2xl backdrop-saturate-150 bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 shadow-[var(--glass-shadow)] shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset] transition-all duration-300 hover:border-accent/25 hover:bg-[var(--glass-bg-hover)]">
           <div className="mb-8 text-center">
             <div className="flex items-center justify-center mb-6">
               <div className="h-12 w-12 bg-gradient-to-br from-accent to-blue-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-accent/30 backdrop-blur-xl">

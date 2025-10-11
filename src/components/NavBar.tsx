@@ -19,8 +19,8 @@ const NavItem = ({ to, icon, label }: NavItemProps) => {
       to={to}
       className={({ isActive }) => 
         cn(
-          "group relative flex items-center space-x-3 px-4 py-2.5 rounded-2xl transition-all duration-500",
-          "backdrop-blur-xl hover:backdrop-blur-2xl",
+          "group relative flex items-center space-x-3 px-4 py-2.5 rounded-2xl transition-all duration-300",
+          "backdrop-blur-lg hover:backdrop-blur-xl",
           isActive 
             ? "text-white bg-[var(--glass-bg-hover)] border border-accent/30 shadow-lg shadow-accent/10" 
             : "text-gray-300 hover:text-white hover:bg-[var(--glass-bg)]"
@@ -67,10 +67,10 @@ const NavBar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-3xl",
-      "backdrop-blur-[60px] saturate-[180%] border border-[var(--glass-border)]",
+      "fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-3xl",
+      "backdrop-blur-2xl backdrop-saturate-150 border border-[var(--glass-border)]",
       scrolled 
-        ? "bg-[rgba(0,0,0,0.9)] shadow-2xl shadow-black/50" 
+        ? "bg-[rgba(0,0,0,0.7)] shadow-2xl shadow-black/50" 
         : "bg-[var(--glass-bg)] shadow-[var(--glass-shadow)]"
     )}>
       <div className="w-full px-6 lg:px-8">
@@ -95,7 +95,7 @@ const NavBar = () => {
 
           {/* Desktop Navigation - Center */}
           <div className="hidden lg:flex items-center space-x-2 flex-1 justify-center">
-            <div className="flex items-center space-x-1 bg-[var(--glass-bg)] backdrop-blur-2xl saturate-[180%] rounded-2xl p-1.5 border border-[var(--glass-border)]">
+            <div className="flex items-center space-x-1 bg-[var(--glass-bg)] backdrop-blur-xl backdrop-saturate-150 rounded-2xl p-1.5 border border-[var(--glass-border)]">
               {publicNavItems.map((item) => (
                 <NavItem 
                   key={item.label}

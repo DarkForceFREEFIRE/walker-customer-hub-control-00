@@ -98,7 +98,7 @@ const Index = () => {
             title: "Community",
             description: "Join thousands of satisfied gamers worldwide"
           }].map((feature, index) => <div key={index} className="group">
-                <div className="rounded-3xl backdrop-blur-[40px] saturate-[180%] bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 h-full transition-all duration-500 transform hover:-translate-y-2 hover:bg-[var(--glass-bg-hover)] hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10">
+                <div className="rounded-3xl backdrop-blur-xl backdrop-saturate-150 bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 h-full transition-all duration-300 transform hover:-translate-y-2 hover:bg-[var(--glass-bg-hover)] hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10">
                   <div className="mb-4">{feature.icon}</div>
                   <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
                   <p className="text-gray-400 leading-relaxed">{feature.description}</p>
@@ -146,11 +146,11 @@ const Index = () => {
             gradient: "from-indigo-600 to-blue-600"
           }].map((plan, index) => <div key={index} className="relative">
                 {plan.popular && <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-xl shadow-lg">
+                    <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-lg shadow-lg">
                       Most Popular
                     </div>
                   </div>}
-                <div className={`rounded-3xl backdrop-blur-[40px] saturate-[180%] bg-[var(--glass-bg)] border ${plan.popular ? 'border-blue-500/40' : 'border-[var(--glass-border)]'} p-8 h-full transition-all duration-500 transform hover:scale-105 hover:bg-[var(--glass-bg-hover)] hover:border-accent/30 shadow-[var(--glass-shadow)]`}>
+                <div className={`rounded-3xl backdrop-blur-xl backdrop-saturate-150 bg-[var(--glass-bg)] border ${plan.popular ? 'border-blue-500/40' : 'border-[var(--glass-border)]'} p-8 h-full transition-all duration-300 transform hover:scale-105 hover:bg-[var(--glass-bg-hover)] hover:border-accent/30 shadow-[var(--glass-shadow)]`}>
                   <div className="text-center mb-8">
                     <h3 className="text-2xl font-bold mb-4 text-white">{plan.name}</h3>
                     <div className="mb-4">

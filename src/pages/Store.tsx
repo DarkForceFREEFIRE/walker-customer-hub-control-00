@@ -112,7 +112,7 @@ const Store = () => {
         {products.map((product) => (
           <div
             key={product.id}
-            className={`rounded-3xl backdrop-blur-[40px] saturate-[180%] bg-[var(--glass-bg)] border p-8 relative transition-all duration-500 hover:scale-[1.02] hover:bg-[var(--glass-bg-hover)] shadow-[var(--glass-shadow)] ${
+            className={`rounded-3xl backdrop-blur-xl backdrop-saturate-150 bg-[var(--glass-bg)] border p-8 relative transition-all duration-300 hover:scale-[1.02] hover:bg-[var(--glass-bg-hover)] shadow-[var(--glass-shadow)] ${
               product.popular 
                 ? 'border-accent/40 shadow-2xl shadow-accent/30 hover:border-accent/50' 
                 : 'border-[var(--glass-border)] hover:border-accent/30'
