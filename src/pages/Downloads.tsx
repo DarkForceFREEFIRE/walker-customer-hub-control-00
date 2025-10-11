@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Clock, Package, FileText, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress'; // Import Progress
+import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import PageLayout from '@/components/PageLayout';
 import { toast } from 'sonner';
@@ -9,7 +9,7 @@ import { DownloadItem, fetchDownloadItems } from '@/lib/supabase';
 import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/badge';
 
-// Type for tracking download progress, copied from DownloadCenter.tsx
+// Type for tracking download progress
 type DownloadProgress = {
   [key: string]: {
     progress: number;
@@ -34,7 +34,7 @@ const Downloads = () => {
     }
   }, [error]);
 
-  // Direct download logic adapted from DownloadCenter.tsx
+  // Direct download logic for the Main Panel
   const handleDirectDownload = async (item: DownloadItem) => {
     try {
       // Initialize download state
@@ -89,8 +89,9 @@ const Downloads = () => {
       const link = document.createElement('a');
       link.href = url;
       
-      // Extract filename from URL or use item name
-      const filename = item.download_url.split('/').pop() || `${getItemTitle(item)}.file`;
+      // Extract filename from URL, decode it, or use item name as a fallback
+      const extractedFilename = item.download_url.split('/').pop();
+      const filename = extractedFilename ? decodeURIComponent(extractedFilename) : `${getItemTitle(item)}.file`;
       link.download = filename;
       
       // Trigger download
@@ -224,7 +225,7 @@ const Downloads = () => {
             return (
               <div
                 key={item.id}
-                className={`download-card p-6 relative group ${
+                className={`download-card p-6 relative group flex flex-col ${
                   isPanel ? 'border-accent/30 shadow-xl shadow-accent/10' : ''
                 }`}
               >
@@ -276,7 +277,7 @@ const Downloads = () => {
 
                   <Button
                     onClick={() => handleDownloadClick(item)}
-                    disabled={isDownloading} // Disable button only when its specific item is downloading
+                    disabled={isDownloading} // Disable button only when this specific item is downloading
                     className={`w-full mt-auto rounded-2xl py-3 transition-all duration-500 ${
                       isPanel ? 'modern-button' : 'modern-button-secondary'
                     }`}
