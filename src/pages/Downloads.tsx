@@ -1,7 +1,7 @@
-
-import React, { useEffect, useState } from 'react';
-import { Download, Clock, Package, FileText } from 'lucide-react'; 
+import React, { useState, useEffect } from 'react';
+import { Download, Clock, Package, FileText, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress'; // Import Progress
 import { Skeleton } from '@/components/ui/skeleton';
 import PageLayout from '@/components/PageLayout';
 import { toast } from 'sonner';
@@ -9,11 +9,23 @@ import { DownloadItem, fetchDownloadItems } from '@/lib/supabase';
 import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/badge';
 
+// Type for tracking download progress, copied from DownloadCenter.tsx
+type DownloadProgress = {
+  [key: string]: {
+    progress: number;
+    isDownloading: boolean;
+    isComplete: boolean;
+  };
+};
+
 const Downloads = () => {
   const { data: downloadItems, isLoading, error } = useQuery({
     queryKey: ['downloadItems'],
     queryFn: fetchDownloadItems
   });
+
+  // State for tracking in-page download progress
+  const [downloadProgress, setDownloadProgress] = useState<DownloadProgress>({});
 
   useEffect(() => {
     if (error) {
@@ -22,9 +34,111 @@ const Downloads = () => {
     }
   }, [error]);
 
-  const handleDownload = (item: DownloadItem) => {
-    window.open(item.download_url, '_blank');
-    toast.success(`Starting download for ${getItemTitle(item)} ${item.version}`);
+  // Direct download logic adapted from DownloadCenter.tsx
+  const handleDirectDownload = async (item: DownloadItem) => {
+    try {
+      // Initialize download state
+      setDownloadProgress(prev => ({
+        ...prev,
+        [item.id]: { progress: 0, isDownloading: true, isComplete: false }
+      }));
+
+      toast.info(`Starting download: ${getItemTitle(item)}`);
+
+      // Fetch the file with progress tracking
+      const response = await fetch(item.download_url);
+      
+      if (!response.ok) {
+        throw new Error('Download failed');
+      }
+
+      const contentLength = response.headers.get('content-length');
+      const total = contentLength ? parseInt(contentLength, 10) : 0;
+      
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error('Failed to get file reader');
+      }
+
+      const chunks: BlobPart[] = [];
+      let receivedLength = 0;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) break;
+        
+        chunks.push(value as BlobPart);
+        receivedLength += value.length;
+        
+        // Update progress
+        if (total > 0) {
+          const progress = (receivedLength / total) * 100;
+          setDownloadProgress(prev => ({
+            ...prev,
+            [item.id]: { ...prev[item.id], progress }
+          }));
+        }
+      }
+
+      // Combine chunks and create blob
+      const blob = new Blob(chunks);
+      
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      // Extract filename from URL or use item name
+      const filename = item.download_url.split('/').pop() || `${getItemTitle(item)}.file`;
+      link.download = filename;
+      
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+      
+      // Mark as complete
+      setDownloadProgress(prev => ({
+        ...prev,
+        [item.id]: { progress: 100, isDownloading: false, isComplete: true }
+      }));
+
+      toast.success(`Download complete: ${getItemTitle(item)}`);
+
+      // Reset after 3 seconds
+      setTimeout(() => {
+        setDownloadProgress(prev => {
+          const newState = { ...prev };
+          delete newState[item.id];
+          return newState;
+        });
+      }, 3000);
+
+    } catch (error) {
+      console.error('Download error:', error);
+      toast.error('Download failed. Please try again.');
+      
+      setDownloadProgress(prev => {
+        const newState = { ...prev };
+        delete newState[item.id];
+        return newState;
+      });
+    }
+  };
+  
+  // Main handler that decides which download method to use
+  const handleDownloadClick = (item: DownloadItem) => {
+    if (item.item_id === 'Panel') {
+      handleDirectDownload(item);
+    } else {
+      // Original behavior for other items
+      window.open(item.download_url, '_blank');
+      toast.success(`Starting download for ${getItemTitle(item)} ${item.version}`);
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -101,6 +215,11 @@ const Downloads = () => {
         ) : (
           downloadItems.map((item) => {
             const isPanel = item.item_id === 'Panel';
+            
+            // Get progress state for the current item
+            const progress = downloadProgress[item.id];
+            const isDownloading = progress?.isDownloading || false;
+            const isComplete = progress?.isComplete || false;
 
             return (
               <div
@@ -148,14 +267,40 @@ const Downloads = () => {
                     </div>
                   </div>
 
+                  {/* Conditionally render progress bar for the panel */}
+                  {isPanel && isDownloading && progress && (
+                    <div className="mb-4">
+                      <Progress value={progress.progress} showValue size="md" />
+                    </div>
+                  )}
+
                   <Button
-                    onClick={() => handleDownload(item)}
+                    onClick={() => handleDownloadClick(item)}
+                    disabled={isDownloading} // Disable button only when its specific item is downloading
                     className={`w-full mt-auto rounded-2xl py-3 transition-all duration-500 ${
                       isPanel ? 'modern-button' : 'modern-button-secondary'
                     }`}
                   >
-                    <Download size={18} className="mr-2" />
-                    Download Now
+                    {isPanel ? (
+                      isDownloading ? (
+                        <>Downloading...</>
+                      ) : isComplete ? (
+                        <>
+                          <CheckCircle2 size={18} className="mr-2" />
+                          Complete
+                        </>
+                      ) : (
+                        <>
+                          <Download size={18} className="mr-2" />
+                          Download Now
+                        </>
+                      )
+                    ) : (
+                      <>
+                        <Download size={18} className="mr-2" />
+                        Download Now
+                      </>
+                    )}
                   </Button>
 
                    <div className="mt-4 pt-4 border-t border-white/8 flex justify-between items-center text-xs">
