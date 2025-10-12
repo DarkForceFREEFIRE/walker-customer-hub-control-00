@@ -70,7 +70,7 @@ const NavBar = () => {
       "fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-3xl",
       "backdrop-blur-2xl backdrop-saturate-150 border border-[var(--glass-border)]",
       scrolled 
-        ? "bg-[rgba(0,0,0,0.7)] shadow-2xl shadow-black/50" 
+        ? "bg-black/30 shadow-2xl shadow-black/50" 
         : "bg-[var(--glass-bg)] shadow-[var(--glass-shadow)]"
     )}>
       <div className="w-full px-6 lg:px-8">
