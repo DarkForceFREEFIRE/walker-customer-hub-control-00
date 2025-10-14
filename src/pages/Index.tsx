@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
 import { ArrowRight, CheckCircle2, Star, Shield, Zap, Users, Download, Play, Trophy } from 'lucide-react';
 import NewYearGreeting from '@/components/NewYearGreeting';
+import PerformanceComparison from '@/components/PerformanceComparison';
 const Index = () => {
   return <div className="min-h-screen bg-black text-white">
       <NavBar />
@@ -105,6 +106,24 @@ const Index = () => {
                 </div>
               </div>)}
           </div>
+        </div>
+      </section>
+
+      {/* Performance Comparison Section */}
+      <section className="py-24 px-4 relative">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Technical Excellence
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Our optimized memory handling outperforms traditional solutions
+            </p>
+          </div>
+          
+          <PerformanceComparison />
         </div>
       </section>
 
