@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress } from '@/components/ui/progress';
+import { motion } from 'framer-motion'; // Import motion
 import { Activity } from 'lucide-react';
 
 interface PerformanceItem {
@@ -36,11 +36,44 @@ const performanceData: PerformanceItem[] = [
   }
 ];
 
+// Animation variants for the container to orchestrate staggered animations
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Delay between each child's animation
+    },
+  },
+};
+
+// Animation variants for each performance item
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+
 const PerformanceComparison: React.FC = () => {
   return (
-    <div className="rounded-3xl backdrop-blur-2xl backdrop-saturate-150 bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 shadow-[var(--glass-shadow)] hover:border-accent/30 transition-all duration-300">
+    <motion.div 
+      className="rounded-3xl backdrop-blur-2xl backdrop-saturate-150 bg-[var(--glass-bg)] border border-[var(--glass-border)] p-8 shadow-[var(--glass-shadow)] hover:border-accent/30 transition-all duration-300"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible" // Animate when the component is in view
+      viewport={{ once: true, amount: 0.3 }} // Ensures animation runs only once
+    >
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
+      <motion.div 
+        className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10"
+        variants={itemVariants}
+      >
         <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/30">
           <Activity className="w-6 h-6 text-blue-400" />
         </div>
@@ -50,12 +83,16 @@ const PerformanceComparison: React.FC = () => {
           </h3>
           <p className="text-sm text-gray-400">Comparison across different technologies</p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Performance Items */}
       <div className="space-y-6">
         {performanceData.map((item, index) => (
-          <div key={index} className="space-y-2">
+          <motion.div 
+            key={index} 
+            className="space-y-2"
+            variants={itemVariants} // Apply item animation here
+          >
             <div className="flex justify-between items-center">
               <span className="text-sm font-medium text-gray-300">{item.name}</span>
               <span className="text-sm font-semibold text-blue-300">{item.rating}%</span>
@@ -63,24 +100,34 @@ const PerformanceComparison: React.FC = () => {
             
             {/* Progress Bar */}
             <div className="relative h-3 w-full rounded-full overflow-hidden backdrop-blur-xl bg-[rgba(255,255,255,0.03)] border border-white/10">
-              <div 
-                className={`absolute top-0 left-0 h-full bg-gradient-to-r ${item.color} transition-all duration-500 rounded-full shadow-lg`}
-                style={{ width: `${item.rating}%` }}
+              <motion.div 
+                className={`absolute top-0 left-0 h-full bg-gradient-to-r ${item.color} rounded-full shadow-lg`}
+                initial={{ width: '0%' }} // Start at 0% width
+                whileInView={{ width: `${item.rating}%` }} // Animate to the final rating percentage
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 1.5, 
+                  delay: 0.5, // A small delay to let the fade-in happen first
+                  ease: [0.25, 1, 0.5, 1] // A smooth easing function
+                }}
               />
             </div>
             
             <p className="text-xs text-gray-500">{item.description}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
 
       {/* Footer Note */}
-      <div className="mt-6 pt-4 border-t border-white/10">
+      <motion.div 
+        className="mt-6 pt-4 border-t border-white/10"
+        variants={itemVariants}
+      >
         <p className="text-xs text-gray-400 text-center">
           Optimized for maximum efficiency with minimal resource consumption
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
