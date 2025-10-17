@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import StatusBadge from '@/components/StatusBadge';
 import HWIDResetProgress from '@/components/HWIDResetProgress';
+import NotificationCenter from '@/components/NotificationCenter';
 import { toast } from 'sonner';
 import { supabase, ProductSafetyStatus } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
@@ -103,14 +104,17 @@ const Dashboard = () => {
                 <p className="text-gray-400 text-sm sm:text-base mt-1">Here's what's happening with your account</p>
               </div>
             </div>
-            <Button
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-              className={`modern-button-secondary transition-all duration-300 hover:scale-105 ${isMobile ? 'w-full' : ''}`}
-            >
-              <RefreshCw size={16} className={`${isMobile ? 'mr-2' : 'mr-2'} transition-transform duration-300 ${isRefreshing ? 'animate-spin' : ''}`} />
-              {isRefreshing ? 'Refreshing...' : 'Refresh'}
-            </Button>
+            <div className={`flex items-center gap-2 ${isMobile ? 'w-full' : ''}`}>
+              <NotificationCenter />
+              <Button
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+                className={`modern-button-secondary transition-all duration-300 hover:scale-105 ${isMobile ? 'flex-1' : ''}`}
+              >
+                <RefreshCw size={16} className={`${isMobile ? 'mr-2' : 'mr-2'} transition-transform duration-300 ${isRefreshing ? 'animate-spin' : ''}`} />
+                {isRefreshing ? 'Refreshing...' : 'Refresh'}
+              </Button>
+            </div>
           </div>
         </div>
 
