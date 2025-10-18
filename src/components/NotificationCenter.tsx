@@ -1,10 +1,11 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Bell, X, Check, Info, AlertTriangle, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Bell, Check, Info, AlertTriangle, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
@@ -16,31 +17,20 @@ type Notification = {
   type: 'info' | 'warning' | 'success' | 'error';
   created_at: string;
   link?: string;
-  is_read?: boolean; // Computed locally
+  is_read?: boolean; // Computed on client side
 };
 
 const NotificationCenter = () => {
   const queryClient = useQueryClient();
+  const { currentUser } = useAuth();
 
   const { data: notifications = [], isLoading } = useQuery({
-    queryKey: ['notifications'],
+    queryKey: ['notifications', currentUser?.id],
     queryFn: async () => {
-      // Get current user from custom users table
-      const { data: { user: authUser } } = await supabase.auth.getUser();
-      if (!authUser) return [];
-
-      // Get user ID from custom users table (integer ID)
-      const { data: userData } = await supabase
-        .from('users')
-        .select('id')
-        .eq('username', authUser.email?.split('@')[0] || '')
-        .single();
-      
-      if (!userData) return [];
-      const userId = userData.id;
+      if (!currentUser) return [];
 
       // Fetch notifications
-      const { data: notificationsData, error: notifError } = await supabase
+      const { data: notificationData, error: notifError } = await supabase
         .from('notifications')
         .select('*')
         .order('created_at', { ascending: false })
@@ -48,82 +38,60 @@ const NotificationCenter = () => {
 
       if (notifError) throw notifError;
 
-      // Fetch read status for current user
+      // Fetch current user's read status
       const { data: readData, error: readError } = await supabase
         .from('notification_reads')
         .select('notification_id')
-        .eq('user_id', userId);
+        .eq('user_id', currentUser.id);
 
       if (readError) throw readError;
 
       const readNotificationIds = new Set(readData?.map(r => r.notification_id) || []);
 
-      // Combine data
-      return (notificationsData || []).map(notif => ({
-        ...notif,
-        is_read: readNotificationIds.has(notif.id)
+      // Merge read status into notifications
+      return (notificationData || []).map(notification => ({
+        ...notification,
+        is_read: readNotificationIds.has(notification.id)
       })) as Notification[];
     },
+    enabled: !!currentUser,
   });
 
   const markAsReadMutation = useMutation({
     mutationFn: async (id: string) => {
-      const { data: { user: authUser } } = await supabase.auth.getUser();
-      if (!authUser) throw new Error('Not authenticated');
-
-      const { data: userData } = await supabase
-        .from('users')
-        .select('id')
-        .eq('username', authUser.email?.split('@')[0] || '')
-        .single();
-      
-      if (!userData) throw new Error('User not found');
+      if (!currentUser) throw new Error('Not authenticated');
 
       const { error } = await supabase
         .from('notification_reads')
-        .insert({ 
-          notification_id: id, 
-          user_id: userData.id 
-        });
+        .insert({ notification_id: id, user_id: currentUser.id });
 
-      if (error && error.code !== '23505') throw error; // Ignore duplicate key errors
+      if (error && error.code !== '23505') throw error; // Ignore duplicate key error
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notifications'] });
+      queryClient.invalidateQueries({ queryKey: ['notifications', currentUser?.id] });
     },
   });
 
   const markAllAsReadMutation = useMutation({
     mutationFn: async () => {
-      const { data: { user: authUser } } = await supabase.auth.getUser();
-      if (!authUser) throw new Error('Not authenticated');
+      if (!currentUser) throw new Error('Not authenticated');
 
-      const { data: userData } = await supabase
-        .from('users')
-        .select('id')
-        .eq('username', authUser.email?.split('@')[0] || '')
-        .single();
-      
-      if (!userData) throw new Error('User not found');
-
-      // Get all unread notification IDs for this user
       const unreadNotifications = notifications.filter(n => !n.is_read);
-      
-      if (unreadNotifications.length === 0) return;
+      const reads = unreadNotifications.map(n => ({
+        notification_id: n.id,
+        user_id: currentUser.id
+      }));
+
+      if (reads.length === 0) return;
 
       const { error } = await supabase
         .from('notification_reads')
-        .insert(
-          unreadNotifications.map(n => ({
-            notification_id: n.id,
-            user_id: userData.id
-          }))
-        );
+        .insert(reads);
 
-      if (error && error.code !== '23505') throw error;
+      if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notifications'] });
+      queryClient.invalidateQueries({ queryKey: ['notifications', currentUser?.id] });
       toast.success('All notifications marked as read');
     },
   });
@@ -181,9 +149,9 @@ const NotificationCenter = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="relative modern-button-secondary"
+          className="relative w-9 h-9 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300"
         >
-          <Bell className="h-5 w-5" />
+          <Bell size={16} />
           {unreadCount > 0 && (
             <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-gradient-to-r from-accent to-blue-500 flex items-center justify-center text-xs font-bold text-white animate-pulse">
               {unreadCount > 9 ? '9+' : unreadCount}
