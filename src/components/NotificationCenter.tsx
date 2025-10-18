@@ -14,9 +14,9 @@ type Notification = {
   title: string;
   message: string;
   type: 'info' | 'warning' | 'success' | 'error';
-  is_read: boolean;
   created_at: string;
   link?: string;
+  is_read?: boolean; // Computed locally
 };
 
 const NotificationCenter = () => {
@@ -25,25 +25,68 @@ const NotificationCenter = () => {
   const { data: notifications = [], isLoading } = useQuery({
     queryKey: ['notifications'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // Get current user from custom users table
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      if (!authUser) return [];
+
+      // Get user ID from custom users table (integer ID)
+      const { data: userData } = await supabase
+        .from('users')
+        .select('id')
+        .eq('username', authUser.email?.split('@')[0] || '')
+        .single();
+      
+      if (!userData) return [];
+      const userId = userData.id;
+
+      // Fetch notifications
+      const { data: notificationsData, error: notifError } = await supabase
         .from('notifications')
         .select('*')
         .order('created_at', { ascending: false })
         .limit(20);
 
-      if (error) throw error;
-      return data as Notification[];
+      if (notifError) throw notifError;
+
+      // Fetch read status for current user
+      const { data: readData, error: readError } = await supabase
+        .from('notification_reads')
+        .select('notification_id')
+        .eq('user_id', userId);
+
+      if (readError) throw readError;
+
+      const readNotificationIds = new Set(readData?.map(r => r.notification_id) || []);
+
+      // Combine data
+      return (notificationsData || []).map(notif => ({
+        ...notif,
+        is_read: readNotificationIds.has(notif.id)
+      })) as Notification[];
     },
   });
 
   const markAsReadMutation = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase
-        .from('notifications')
-        .update({ is_read: true })
-        .eq('id', id);
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      if (!authUser) throw new Error('Not authenticated');
 
-      if (error) throw error;
+      const { data: userData } = await supabase
+        .from('users')
+        .select('id')
+        .eq('username', authUser.email?.split('@')[0] || '')
+        .single();
+      
+      if (!userData) throw new Error('User not found');
+
+      const { error } = await supabase
+        .from('notification_reads')
+        .insert({ 
+          notification_id: id, 
+          user_id: userData.id 
+        });
+
+      if (error && error.code !== '23505') throw error; // Ignore duplicate key errors
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
@@ -52,12 +95,32 @@ const NotificationCenter = () => {
 
   const markAllAsReadMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from('notifications')
-        .update({ is_read: true })
-        .eq('is_read', false);
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      if (!authUser) throw new Error('Not authenticated');
 
-      if (error) throw error;
+      const { data: userData } = await supabase
+        .from('users')
+        .select('id')
+        .eq('username', authUser.email?.split('@')[0] || '')
+        .single();
+      
+      if (!userData) throw new Error('User not found');
+
+      // Get all unread notification IDs for this user
+      const unreadNotifications = notifications.filter(n => !n.is_read);
+      
+      if (unreadNotifications.length === 0) return;
+
+      const { error } = await supabase
+        .from('notification_reads')
+        .insert(
+          unreadNotifications.map(n => ({
+            notification_id: n.id,
+            user_id: userData.id
+          }))
+        );
+
+      if (error && error.code !== '23505') throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });

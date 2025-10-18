@@ -307,11 +307,39 @@ export type Database = {
           },
         ]
       }
+      notification_reads: {
+        Row: {
+          id: string
+          notification_id: string
+          read_at: string
+          user_id: number
+        }
+        Insert: {
+          id?: string
+          notification_id: string
+          read_at?: string
+          user_id: number
+        }
+        Update: {
+          id?: string
+          notification_id?: string
+          read_at?: string
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_reads_notification_id_fkey"
+            columns: ["notification_id"]
+            isOneToOne: false
+            referencedRelation: "notifications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string
           id: string
-          is_read: boolean
           link: string | null
           message: string
           title: string
@@ -321,7 +349,6 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
-          is_read?: boolean
           link?: string | null
           message: string
           title: string
@@ -331,7 +358,6 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
-          is_read?: boolean
           link?: string | null
           message?: string
           title?: string

@@ -2,9 +2,10 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Search, Bell, LogOut, Settings, Home, Package, BookOpen, Download, LayoutDashboard } from "lucide-react";
+import { Menu, X, Search, LogOut, Settings, Home, Package, BookOpen, Download, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
+import NotificationCenter from "@/components/NotificationCenter";
 
 interface NavItemProps {
   to: string;
@@ -134,14 +135,7 @@ const NavBar = () => {
                 >
                   <Search size={16} />
                 </Button>
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="w-9 h-9 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300 relative"
-                >
-                  <Bell size={16} />
-                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border border-black"></div>
-                </Button>
+                <NotificationCenter />
                 <NavLink to="/settings">
                   <Button 
                     variant="ghost" 
